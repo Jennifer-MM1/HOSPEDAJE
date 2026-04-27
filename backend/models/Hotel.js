@@ -29,7 +29,9 @@ const HotelSchema = new mongoose.Schema({
     direccion: String,
     ciudad: String,
     estado: String,
-    codigoPostal: String
+    codigoPostal: String,
+    lat: Number,
+    lng: Number
   },
   servicios: [{
     type: String,
@@ -44,7 +46,13 @@ const HotelSchema = new mongoose.Schema({
       type: String,
       match: [/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/, 'Email inválido']
     },
-    sitioWeb: String
+    sitioWeb: String,
+    redesSociales: {
+      facebook: String,
+      instagram: String,
+      twitter: String,
+      tiktok: String
+    }
   },
   capacidad: {
     habitaciones: Number,
@@ -62,6 +70,100 @@ const HotelSchema = new mongoose.Schema({
       default: 0
     }
   },
+  // Descripción detallada de habitaciones
+  descripcionHabitaciones: {
+    type: String,
+    maxlength: [1000, 'La descripción de habitaciones no puede tener más de 1000 caracteres']
+  },
+  // Métodos de Reservación
+  reservaciones: {
+    whatsapp: String,
+    telefono: String,
+    url: String, // Link a Booking, Airbnb, o sitio web directo
+    indicaciones: String // Ej: "Mandar mensaje de texto con fechas"
+  },
+  // Políticas del hospedaje
+  politicas: {
+    checkIn: { type: String, default: '15:00' },
+    checkOut: { type: String, default: '12:00' },
+    cancelacion: {
+      type: String,
+      enum: ['flexible', 'moderada', 'estricta'],
+      default: 'moderada'
+    },
+    reglasAdicionales: [String],
+    recepcion: { type: String, default: '24 horas' }
+  },
+  // Instalaciones disponibles
+  instalaciones: [{
+    type: String,
+    enum: ['piscina', 'areas_verdes', 'asadores', 'gimnasio', 'sala_estar', 'terraza', 'jardin', 'area_juegos', 'salon_eventos', 'lavanderia', 'zona_camping']
+  }],
+  // Accesibilidad
+  accesibilidad: {
+    rampas: { type: Boolean, default: false },
+    plantaBaja: { type: Boolean, default: false },
+    banoAdaptado: { type: Boolean, default: false },
+    elevador: { type: Boolean, default: false },
+    senalizacionBraille: { type: Boolean, default: false }
+  },
+  // Comodidades personalizadas dinámicas
+  comodidadesExtra: [{
+    type: String
+  }],
+  // Distancias a puntos clave
+  distancias: {
+    centroHistorico: String,
+    terminalAutobuses: String,
+    aeropuerto: String,
+    zonaTuristica: String,
+    misiones: String,
+    naturaleza: String,
+    puntosExtra: [{
+      nombre: String,
+      distancia: String
+    }]
+  },
+  // Métodos de pago
+  metodosPago: [{
+    type: String,
+    enum: ['efectivo', 'transferencia', 'tarjeta']
+  }],
+  // Reseñas de turistas
+  reviews: [{
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: true
+    },
+    nombreUsuario: {
+      type: String,
+      required: true
+    },
+    rating: {
+      type: Number,
+      required: true,
+      min: 1,
+      max: 5
+    },
+    comentario: {
+      type: String,
+      required: true
+    },
+    fecha: {
+      type: Date,
+      default: Date.now
+    }
+  }],
+  // Promociones y anuncios (carrusel)
+  promociones: [{
+    titulo: { type: String, trim: true },
+    descripcion: { type: String, maxlength: 500 },
+    imagen: String, // URL o string Base64
+    fechaInicio: Date,
+    fechaFin: Date,
+    activo: { type: Boolean, default: true }
+  }],
   // 🌿 NUEVO CAMPO: Etiqueta de alojamiento ecológico
   esEcologico: {
     type: Boolean,

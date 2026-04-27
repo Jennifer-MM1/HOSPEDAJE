@@ -27,6 +27,9 @@ const uploadAirbnbImages = multer({
 
 // ===== RUTAS PÚBLICAS =====
 router.get('/', airbnbController.getAllAirbnb);
+// ⚠️ Regex para que solo coincida con ObjectIds válidos (24 caracteres hex)
+// Evita que rutas como /mis-alojamientos sean capturadas por este handler
+router.get('/:id([0-9a-fA-F]{24})', airbnbController.getAirbnb);
 
 // Todas las rutas siguientes requieren autenticación
 router.use(authMiddleware.protect);
@@ -50,10 +53,9 @@ router.get('/:alojamientoId/images', authMiddleware.restrictTo('admin'), async (
   try {
     const { alojamientoId } = req.params;
 
-    const alojamiento = await Airbnb.findOne({ 
+    const alojamiento = await Airbnb.findOne({
       _id: alojamientoId,
-      propietario: req.user.id,
-      activo: true 
+      propietario: req.user.id
     });
 
     if (!alojamiento) {
@@ -83,71 +85,80 @@ router.get('/:alojamientoId/images', authMiddleware.restrictTo('admin'), async (
   }
 });
 
-// 📤 Subir múltiples imágenes al alojamiento usando Cloudinary
-router.post('/:alojamientoId/upload-images', 
-  authMiddleware.restrictTo('admin'),
-  uploadAirbnbImages.array('images', 10),
-  async (req, res) => {
+// 🏷️ Middleware para cargar el nombre del alojamiento antes de multer
+const loadAirbnbNombre = async (req, res, next) => {
   try {
     const { alojamientoId } = req.params;
-
-    if (!req.files || req.files.length === 0) {
-      return res.status(400).json({
-        status: 'error',
-        message: 'No se enviaron archivos de imagen'
-      });
-    }
-
-    console.log(`📸 Procesando ${req.files.length} imágenes para alojamiento ${alojamientoId}`);
-
-    const alojamiento = await Airbnb.findOne({ 
+    const alojamiento = await Airbnb.findOne({
       _id: alojamientoId,
-      propietario: req.user.id,
-      activo: true 
+      propietario: req.user.id
     });
-
     if (!alojamiento) {
-      return res.status(404).json({
+      return res.status(404).json({ status: 'error', message: 'No se encontró alojamiento asociado o no tienes permisos' });
+    }
+    req.hospedajeNombre = alojamiento.nombre; // ← nombre disponible para CloudinaryStorage
+    req.hospedaje = alojamiento;              // ← guardamos el objeto completo para reusar
+    next();
+  } catch (err) {
+    next(err);
+  }
+};
+
+// 📤 Subir múltiples imágenes al alojamiento usando Cloudinary
+router.post('/:alojamientoId/upload-images',
+  authMiddleware.restrictTo('admin'),
+  loadAirbnbNombre,
+  uploadAirbnbImages.array('images', 10),
+  async (req, res) => {
+    try {
+      const { alojamientoId } = req.params;
+
+      if (!req.files || req.files.length === 0) {
+        return res.status(400).json({
+          status: 'error',
+          message: 'No se enviaron archivos de imagen'
+        });
+      }
+
+      console.log(`📸 Procesando ${req.files.length} imágenes para alojamiento ${alojamientoId}`);
+
+      const alojamiento = req.hospedaje; // ← cargado por el middleware loadAirbnbNombre
+
+      // Obtener URLs de Cloudinary de los archivos subidos
+      const nuevasImagenesUrls = req.files.map(file => file.path);
+
+      // Agregar imágenes al alojamiento
+      if (!alojamiento.imagenes) {
+        alojamiento.imagenes = [];
+      }
+
+      alojamiento.imagenes.push(...nuevasImagenesUrls);
+      alojamiento.updatedAt = new Date();
+
+      await alojamiento.save();
+
+      console.log(`✅ ${nuevasImagenesUrls.length} imágenes subidas para alojamiento ${alojamiento.nombre}`);
+
+      res.json({
+        status: 'success',
+        message: `${nuevasImagenesUrls.length} imagen(es) subida(s) exitosamente`,
+        data: {
+          imagenesAgregadas: nuevasImagenesUrls.length,
+          totalImagenes: alojamiento.imagenes.length,
+          nuevasImagenes: nuevasImagenesUrls
+        }
+      });
+
+    } catch (error) {
+      console.error('❌ Error subiendo imágenes del alojamiento:', error);
+
+      res.status(500).json({
         status: 'error',
-        message: 'No se encontró alojamiento asociado o no tienes permisos'
+        message: 'Error del servidor al subir imágenes',
+        error: error.message
       });
     }
-
-    // Obtener URLs de Cloudinary de los archivos subidos
-    const nuevasImagenesUrls = req.files.map(file => file.path);
-
-    // Agregar imágenes al alojamiento
-    if (!alojamiento.imagenes) {
-      alojamiento.imagenes = [];
-    }
-    
-    alojamiento.imagenes.push(...nuevasImagenesUrls);
-    alojamiento.updatedAt = new Date();
-    
-    await alojamiento.save();
-
-    console.log(`✅ ${nuevasImagenesUrls.length} imágenes subidas para alojamiento ${alojamiento.nombre}`);
-
-    res.json({
-      status: 'success',
-      message: `${nuevasImagenesUrls.length} imagen(es) subida(s) exitosamente`,
-      data: {
-        imagenesAgregadas: nuevasImagenesUrls.length,
-        totalImagenes: alojamiento.imagenes.length,
-        nuevasImagenes: nuevasImagenesUrls
-      }
-    });
-
-  } catch (error) {
-    console.error('❌ Error subiendo imágenes del alojamiento:', error);
-
-    res.status(500).json({
-      status: 'error',
-      message: 'Error del servidor al subir imágenes',
-      error: error.message
-    });
-  }
-});
+  });
 
 // 🗑️ Eliminar imagen específica del alojamiento
 router.delete('/:alojamientoId/images/:imageIndex', authMiddleware.restrictTo('admin'), async (req, res) => {
@@ -155,10 +166,9 @@ router.delete('/:alojamientoId/images/:imageIndex', authMiddleware.restrictTo('a
     const { alojamientoId, imageIndex } = req.params;
     const index = parseInt(imageIndex);
 
-    const alojamiento = await Airbnb.findOne({ 
+    const alojamiento = await Airbnb.findOne({
       _id: alojamientoId,
-      propietario: req.user.id,
-      activo: true 
+      propietario: req.user.id
     });
 
     if (!alojamiento) {
@@ -176,17 +186,20 @@ router.delete('/:alojamientoId/images/:imageIndex', authMiddleware.restrictTo('a
     }
 
     const imagenAEliminar = alojamiento.imagenes[index];
-    
+
     // 🆕 NUEVO: Eliminar imagen de Cloudinary
     try {
-      const cloudinary = require('cloudinary').v2;
-      
-      // Extraer public_id de la URL de Cloudinary
-      const publicId = imagenAEliminar.split('/').pop().split('.')[0];
-      const fullPublicId = `turismo-app/airbnb/${publicId}`;
-      
-      const result = await cloudinary.uploader.destroy(fullPublicId);
-      console.log(`🗑️ Imagen eliminada de Cloudinary:`, result);
+      const cloudinaryLib = require('cloudinary').v2;
+
+      // Extraer public_id completo de la URL de Cloudinary
+      // URL formato: https://res.cloudinary.com/<cloud>/image/upload/v12345/turismo-app/airbnb/<nombre>/<id>.jpg
+      const urlParts = imagenAEliminar.split('/upload/');
+      if (urlParts.length > 1) {
+        const afterUpload = urlParts[1].replace(/^v\d+\//, '');
+        const fullPublicId = afterUpload.replace(/\.[^.]+$/, '');
+        const result = await cloudinaryLib.uploader.destroy(fullPublicId);
+        console.log(`🗑️ Imagen eliminada de Cloudinary (public_id: ${fullPublicId}):`, result);
+      }
     } catch (cloudinaryError) {
       console.warn('⚠️ Error eliminando de Cloudinary (continuando):', cloudinaryError.message);
       // Continuamos aunque falle la eliminación en Cloudinary
@@ -223,10 +236,9 @@ router.patch('/:alojamientoId/images/set-main', authMiddleware.restrictTo('admin
     const { imageIndex } = req.body; // ✅ Ahora toma imageIndex del body
     const index = parseInt(imageIndex);
 
-    const alojamiento = await Airbnb.findOne({ 
+    const alojamiento = await Airbnb.findOne({
       _id: alojamientoId,
-      propietario: req.user.id,
-      activo: true 
+      propietario: req.user.id
     });
 
     if (!alojamiento) {
@@ -257,7 +269,7 @@ router.patch('/:alojamientoId/images/set-main', authMiddleware.restrictTo('admin
     // Mover imagen a primera posición
     const imagenPrincipal = alojamiento.imagenes.splice(index, 1)[0];
     alojamiento.imagenes.unshift(imagenPrincipal);
-    
+
     alojamiento.updatedAt = new Date();
     await alojamiento.save();
 
@@ -286,9 +298,9 @@ router.get('/:alojamientoId/main-image', async (req, res) => {
   try {
     const { alojamientoId } = req.params;
 
-    const alojamiento = await Airbnb.findOne({ 
+    const alojamiento = await Airbnb.findOne({
       _id: alojamientoId,
-      activo: true 
+      activo: true
     });
 
     if (!alojamiento) {
@@ -298,8 +310,8 @@ router.get('/:alojamientoId/main-image', async (req, res) => {
       });
     }
 
-    const mainImage = alojamiento.imagenes && alojamiento.imagenes.length > 0 
-      ? alojamiento.imagenes[0] 
+    const mainImage = alojamiento.imagenes && alojamiento.imagenes.length > 0
+      ? alojamiento.imagenes[0]
       : null;
 
     res.json({
@@ -337,10 +349,10 @@ router
 router.patch('/:id/toggle-status', authMiddleware.restrictTo('admin'), async (req, res) => {
   try {
     // Verificar si es super admin
-    const isSuperAdmin = req.user.email === 'superadmin@turismo.com' || 
-                          req.user.email === 'direcciondeturismojalpan@gmail.com' || 
-                          req.user.isSuperAdmin || 
-                          req.user.role === 'super-admin';
+    const isSuperAdmin = req.user.email === 'superadmin@turismo.com' ||
+      req.user.email === 'direcciondeturismojalpan@gmail.com' ||
+      req.user.isSuperAdmin ||
+      req.user.role === 'super-admin';
 
     if (!isSuperAdmin) {
       return res.status(403).json({
@@ -360,7 +372,7 @@ router.patch('/:id/toggle-status', authMiddleware.restrictTo('admin'), async (re
 
     // Toggle el estado activo
     alojamiento.activo = !alojamiento.activo;
-    
+
     // Agregar información de auditoría
     alojamiento.ultimaModificacion = {
       usuario: req.user.id,
@@ -406,19 +418,19 @@ router.use((error, req, res, next) => {
       });
     }
   }
-  
+
   if (error.message === 'Solo se permiten archivos de imagen') {
     return res.status(400).json({
       status: 'error',
       message: 'Solo se permiten archivos de imagen (JPG, PNG, GIF, WebP)'
     });
   }
-  
+
   next(error);
 });
 
-// IMPORTANTE: Esta ruta debe ir AL FINAL
-router.get('/:id', airbnbController.getAirbnb);
+// 📝 Crear reseña
+router.post('/:id/reviews', authMiddleware.protect, airbnbController.createReview);
 
 module.exports = router;
 

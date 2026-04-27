@@ -1,33 +1,41 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tours - Dirección de Turismo</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/auth-navbar.css">
+    
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: #333;
             background: #f8f9fa;
         }
+
         /* Header y Navegación */
         .navbar {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            padding: 1rem 0;
+            padding: 0.75rem 0;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
         }
+
         .nav-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -36,10 +44,11 @@
             align-items: center;
             padding: 0 2rem;
         }
+
         .logo {
-            font-size: 1.8rem;
+            font-size: 1.4rem;
             font-weight: bold;
-          color: var(--gray-800); 
+            color: var(--gray-800);
             text-decoration: none;
             display: flex;
             align-items: center;
@@ -48,65 +57,75 @@
 
 
         .logo-image {
-    width: 45px;
-    height: 45px;
-    object-fit: contain;
-    border-radius: var(--radius-sm);
-    background: var(--white);
-    padding: 3px;
-    box-shadow: var(--shadow-sm);
-    border: 2px solid var(--gray-200);
-    transition: var(--transition);
-    flex-shrink: 0;
-}
+            width: 45px;
+            height: 45px;
+            object-fit: contain;
+            border-radius: var(--radius-sm);
+            background: var(--white);
+            padding: 3px;
+            box-shadow: var(--shadow-sm);
+            border: none;
+            transition: var(--transition);
+            flex-shrink: 0;
+        }
+
         .nav-menu {
             display: flex;
             list-style: none;
-            gap: 2rem;
+            gap: 1.5rem;
             align-items: center;
         }
+
         .nav-item {
             position: relative;
         }
+
         .nav-link {
             text-decoration: none;
-            color: #333;
+            color: #52525b;
             font-weight: 500;
             padding: 0.5rem 1rem;
-            border-radius: 25px;
-            transition: all 0.3s ease;
+            border-radius: 8px;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            font-size: 0.95rem;
         }
-        .nav-link:hover, .nav-link.active {
-            background: linear-gradient(135deg, #4CAF50, #45a049);
-            color: white;
-            transform: translateY(-2px);
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: #f4f4f5;
+            color: #2563eb;
+            transform: translateY(-1px);
         }
+
         .dropdown {
             position: relative;
         }
+
         .dropdown-menu {
             position: absolute;
             top: 100%;
             left: 0;
             background: white;
             min-width: 200px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
             border-radius: 15px;
             opacity: 0;
             visibility: hidden;
             transform: translateY(-10px);
             transition: all 0.3s ease;
             z-index: 1001;
-            padding: 1rem 0;
+            padding: 0.75rem 0;
         }
+
         .dropdown:hover .dropdown-menu {
             opacity: 1;
             visibility: visible;
             transform: translateY(0);
         }
+
         .dropdown-item {
             display: block;
             padding: 0.7rem 1.5rem;
@@ -115,15 +134,43 @@
             transition: all 0.3s ease;
             border-left: 3px solid transparent;
         }
+
         .dropdown-item:hover {
-            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
-            color: white;
-            border-left: 3px solid #fff;
+            background: #fafafa;
+            color: #2563eb;
+            border-left: 3px solid #2563eb;
         }
+
         .auth-buttons {
             display: flex;
             gap: 1rem;
+            align-items: center;
         }
+
+        /* Boton de cerrar movil */
+        .mobile-close-btn {
+            display: none;
+            justify-content: flex-end;
+            padding: 1rem;
+            border-bottom: 1px solid #e4e4e7;
+        }
+
+        .close-menu-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #3f3f46;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .close-menu-btn:hover {
+            background: #f4f4f5;
+            color: #2563eb;
+        }
+
         .btn {
             padding: 0.7rem 1.5rem;
             border: none;
@@ -133,20 +180,26 @@
             transition: all 0.3s ease;
             cursor: pointer;
         }
+
         .btn-login {
-            background: transparent;
-            color: #4CAF50;
-            border: 2px solid #4CAF50;
+            background: #2563eb;
+            color: white;
+            border: 1px solid #2563eb;
+            border-radius: 8px;
         }
+
         .btn-login:hover {
-            background: #4CAF50;
+            background: #1d4ed8;
             color: white;
             transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.2);
         }
+
         .btn-register {
             background: linear-gradient(135deg, #FF6B35, #F7931E);
             color: white;
         }
+
         .btn-register:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(255, 107, 53, 0.4);
@@ -166,8 +219,8 @@
         }
 
         .mobile-menu-toggle:hover {
-            background: #f0f0f0;
-            color: #4CAF50;
+            background: #f4f4f5;
+            color: #2563eb;
         }
 
         /* ===== OVERLAY PARA MÓVIL ===== */
@@ -199,6 +252,7 @@
             position: relative;
             overflow: hidden;
         }
+
         .page-header::before {
             content: '';
             position: absolute;
@@ -209,29 +263,37 @@
             background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="adventure" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M15 5 L25 15 L15 25 L5 15 Z M15 10 L20 15 L15 20 L10 15 Z" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23adventure)"/></svg>');
             z-index: 1;
         }
+
         .page-header-content {
             position: relative;
             z-index: 2;
         }
+
         .page-header h1 {
             font-size: 3rem;
             margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            /* AOS Override for initial load effect */
+            opacity: 1 !important;
+            transform: translateY(0) !important;
         }
+
         .page-header p {
             font-size: 1.2rem;
             opacity: 0.9;
             max-width: 600px;
             margin: 0 auto;
         }
-        
-        /* Tour Categories Section con Slider de Imágenes */
+
+        /* ====================================================
+           FILTROS DE CATEGORÍAS
+        ==================================================== */
         .categories-section {
             background: white;
             padding: 3rem 2rem;
             margin: -2rem 2rem 2rem;
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             position: relative;
             z-index: 100;
         }
@@ -241,201 +303,174 @@
             margin: 0 auto;
         }
 
-        .categories-title {
+        .carousel-header {
             text-align: center;
+            padding: 0 0 2rem;
+        }
+
+        .carousel-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #fff5f2, #ffede6);
+            border: 1px solid #ffe6d9;
+            color: #FF6B35;
+            padding: 0.35rem 1.1rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .categories-title {
             font-size: 2.2rem;
+            font-weight: 700;
             color: #333;
             margin-bottom: 0.5rem;
-            font-weight: 700;
         }
 
-        .categories-subtitle {
-            text-align: center;
-            color: #666;
-            margin-bottom: 3rem;
-            font-size: 1.1rem;
-        }
-
-        /* Slider de Imágenes */
-        .categories-slider-wrapper {
+        .filter-carousel-wrapper {
             position: relative;
             max-width: 100%;
-            margin: 2rem auto;
-            overflow: hidden;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            margin: 2rem auto 0;
+            padding: 0 1rem;
         }
 
-        .categories-slider {
+        .categories-filter {
             display: flex;
-            transition: transform 0.6s ease-in-out;
-            width: 100%;
+            overflow-x: auto;
+            gap: 1.5rem;
+            padding: 1rem 0.5rem 2rem;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+            /* Firefox */
+            -ms-overflow-style: none;
+            /* IE/Edge */
+            scroll-behavior: smooth;
         }
 
-        .category-slide {
-            min-width: 100%;
+        .categories-filter::-webkit-scrollbar {
+            display: none;
+            /* Chrome/Safari */
+        }
+
+        .filter-card {
+            flex: 0 0 auto;
+            width: 180px;
+            height: 240px;
+            border-radius: 20px;
+            overflow: hidden;
             position: relative;
             cursor: pointer;
-            overflow: hidden;
+            scroll-snap-align: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+            background: #000;
+            padding: 0;
+            display: block;
         }
 
-        .experience-image {
+        .filter-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(255, 107, 53, 0.25);
+        }
+
+        .filter-card.active {
+            border-color: #FF6B35;
+            box-shadow: 0 0 25px rgba(255, 107, 53, 0.4);
+            transform: scale(1.03);
+        }
+
+        .filter-card img {
             width: 100%;
-            height: 400px;
+            height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform 0.6s ease;
+            opacity: 0.85;
+            display: block;
         }
 
-        .category-slide:hover .experience-image {
-            transform: scale(1.05);
+        .filter-card:hover img {
+            transform: scale(1.1);
+            opacity: 1;
         }
 
-        /* Overlay sutil para mejor contraste */
-        .category-slide::after {
+        .filter-card.active img {
+            opacity: 1;
+        }
+
+        .filter-card::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(
-                45deg,
-                rgba(0,0,0,0.1) 0%,
-                transparent 50%,
-                rgba(255,255,255,0.1) 100%
-            );
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0) 100%);
             pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: background 0.3s ease;
         }
 
-        .category-slide:hover::after {
-            opacity: 1;
+        .filter-card:hover::after {
+            background: linear-gradient(to top, rgba(255, 107, 53, 0.8) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0) 100%);
         }
 
-        .category-slide.active::after {
-            background: linear-gradient(
-                45deg,
-                rgba(255, 107, 53, 0.3) 0%,
-                transparent 50%,
-                rgba(247, 147, 30, 0.3) 100%
-            );
-            opacity: 1;
+        .filter-card.active::after {
+            background: linear-gradient(to top, rgba(255, 107, 53, 0.9) 0%, rgba(255, 107, 53, 0.2) 60%, rgba(0, 0, 0, 0) 100%);
         }
 
-        /* Botones de navegación */
-        .slider-nav {
+        .filter-card-content {
             position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255,255,255,0.9);
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            cursor: pointer;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 1rem;
+            z-index: 2;
+            color: white;
+            text-align: center;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
-            color: #333;
-            transition: all 0.3s ease;
-            z-index: 10;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            backdrop-filter: blur(10px);
+            gap: 0.5rem;
         }
 
-        .slider-prev {
-            left: 20px;
+        .filter-card-content i {
+            font-size: 1.4rem;
+            margin-bottom: 0.2rem;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
         }
 
-        .slider-next {
-            right: 20px;
+        .filter-card:hover .filter-card-content i {
+            transform: scale(1.1);
         }
 
-        .slider-nav:hover {
-            background: white;
-            transform: translateY(-50%) scale(1.1);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-            color: #667eea;
+        .filter-card-text {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin: 0;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+            letter-spacing: 0.5px;
+            color: white;
         }
 
-        /* Indicadores del Slider */
-        .slider-indicators {
-            display: flex;
-            justify-content: center;
-            gap: 0.8rem;
-            margin-top: 2rem;
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .indicator {
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.6);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid rgba(255,255,255,0.8);
-            backdrop-filter: blur(5px);
-        }
-
-        .indicator.active {
-            background: white;
-            transform: scale(1.3);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        }
-
-        .indicator:hover {
-            background: rgba(255,255,255,0.9);
-            transform: scale(1.2);
-        }
-
-        /* Responsividad */
-        @media (min-width: 768px) {
-            .experience-image {
-                height: 450px;
+        @media (max-width: 768px) {
+            .filter-card {
+                width: 140px;
+                height: 190px;
+                border-radius: 15px;
             }
-            
-            .categories-slider-wrapper {
-                padding: 0 80px;
-            }
-        }
 
-        @media (min-width: 1024px) {
-            .experience-image {
-                height: 500px;
+            .filter-card-content {
+                padding: 1rem 0.5rem;
             }
-        }
 
-        @media (max-width: 767px) {
-            .slider-nav {
-                width: 40px;
-                height: 40px;
-                font-size: 1rem;
+            .filter-card-content i {
+                font-size: 1.5rem;
             }
-            
-            .slider-prev {
-                left: 10px;
-            }
-            
-            .slider-next {
-                right: 10px;
-            }
-            
-            .experience-image {
-                height: 300px;
-            }
-            
-            .categories-section {
-                padding: 2rem 1rem;
-            }
-            
-            .categories-title {
-                font-size: 1.8rem;
+
+            .filter-card-text {
+                font-size: 0.95rem;
             }
         }
 
@@ -445,16 +480,19 @@
             margin: 0 auto;
             padding: 2rem;
         }
+
         .section-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 2rem;
         }
+
         .results-info {
             font-size: 1.1rem;
             color: #666;
         }
+
         .sort-dropdown {
             padding: 0.5rem 1rem;
             border: 2px solid #e0e0e0;
@@ -462,25 +500,29 @@
             background: white;
             cursor: pointer;
         }
+
         .tours-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
+            gap: 1.5rem;
         }
+
         .operator-card {
             background: white;
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
             transition: all 0.3s ease;
             cursor: pointer;
             border: 2px solid transparent;
         }
+
         .operator-card:hover {
             transform: translateY(-8px);
             box-shadow: 0 15px 40px rgba(255, 107, 53, 0.15);
             border-color: #FF6B35;
         }
+
         .operator-logo {
             height: 200px;
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
@@ -491,15 +533,18 @@
             justify-content: center;
             border-bottom: 1px solid #f0f0f0;
         }
+
         .operator-logo img {
             max-width: 80%;
             max-height: 80%;
             object-fit: contain;
             transition: transform 0.3s ease;
         }
+
         .operator-card:hover .operator-logo img {
             transform: scale(1.05);
         }
+
         .logo-placeholder {
             width: 120px;
             height: 80px;
@@ -514,6 +559,7 @@
             text-transform: uppercase;
             letter-spacing: 2px;
         }
+
         .verified-badge-logo {
             position: absolute;
             top: 15px;
@@ -526,6 +572,7 @@
             font-weight: bold;
             backdrop-filter: blur(10px);
         }
+
         .rating-badge-logo {
             position: absolute;
             top: 15px;
@@ -540,9 +587,11 @@
             align-items: center;
             gap: 0.3rem;
         }
+
         .operator-info {
             padding: 1.5rem;
         }
+
         .operator-name {
             font-size: 1.4rem;
             font-weight: bold;
@@ -551,9 +600,11 @@
             cursor: pointer;
             transition: color 0.3s ease;
         }
+
         .operator-name:hover {
             color: #FF6B35;
         }
+
         .operator-location {
             color: #666;
             margin-bottom: 1rem;
@@ -562,29 +613,35 @@
             gap: 0.5rem;
             font-size: 0.95rem;
         }
+
         .operator-description {
             color: #666;
             margin-bottom: 1.5rem;
             display: -webkit-box;
             -webkit-line-clamp: 3;
+            line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
             line-height: 1.5;
         }
+
         .operator-specialties {
             margin-bottom: 1.5rem;
         }
+
         .specialties-title {
             font-size: 0.9rem;
             font-weight: 600;
             color: #333;
             margin-bottom: 0.8rem;
         }
+
         .specialties-list {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
         }
+
         .specialty-tag {
             background: linear-gradient(135deg, #fff5f2, #ffede6);
             color: #FF6B35;
@@ -594,15 +651,18 @@
             font-weight: 500;
             border: 1px solid #ffe6d9;
         }
+
         .operator-footer {
             padding-top: 1rem;
             border-top: 1px solid #f0f0f0;
         }
+
         .contact-info {
             display: flex;
             flex-direction: column;
             gap: 0.8rem;
         }
+
         .contact-item {
             display: flex;
             align-items: center;
@@ -610,38 +670,45 @@
             color: #666;
             font-size: 0.9rem;
         }
+
         .contact-text {
             font-weight: 500;
             color: #333;
             min-width: 80px;
         }
+
         .contact-link {
             color: #FF6B35;
             text-decoration: none;
             transition: all 0.3s ease;
             word-break: break-all;
         }
+
         .contact-link:hover {
             color: #F7931E;
             text-decoration: underline;
         }
+
         /* Social Media Links */
         .social-media {
             margin-top: 1rem;
             padding-top: 1rem;
             border-top: 1px solid #f0f0f0;
         }
+
         .social-title {
             font-size: 0.9rem;
             font-weight: 600;
             color: #333;
             margin-bottom: 0.8rem;
         }
+
         .social-links {
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
         }
+
         .social-item {
             display: flex;
             align-items: center;
@@ -649,62 +716,82 @@
             color: #666;
             font-size: 0.9rem;
         }
+
         .social-text {
             font-weight: 500;
             color: #333;
             min-width: 80px;
         }
+
         .social-link {
             color: #FF6B35;
             text-decoration: none;
             transition: all 0.3s ease;
             word-break: break-all;
         }
+
         .social-link:hover {
             color: #F7931E;
             text-decoration: underline;
         }
+
         /* Loading and Empty States */
         .loading {
             text-align: center;
             padding: 4rem 2rem;
             color: #666;
         }
+
         .loading i {
             font-size: 3rem;
             margin-bottom: 1rem;
             animation: spin 1s linear infinite;
             color: #FF6B35;
         }
+
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
+
         .empty-state {
             text-align: center;
             padding: 4rem 2rem;
             color: #666;
         }
+
         .empty-state i {
             font-size: 4rem;
             margin-bottom: 1rem;
             color: #ddd;
         }
+
         .empty-state h3 {
             margin-bottom: 1rem;
             color: #333;
         }
+
         /* Responsive */
         @media (max-width: 768px) {
             .mobile-menu-toggle {
                 display: block;
             }
 
+            .mobile-close-btn {
+                display: flex;
+            }
+
             .nav-menu {
                 position: fixed;
                 top: 0;
                 right: -100%;
-                width: 320px;
+                width: 90vw;
+                max-width: 320px;
                 height: 100vh;
                 background: rgba(255, 255, 255, 0.98);
                 backdrop-filter: blur(20px);
@@ -714,7 +801,7 @@
                 padding-top: 4rem;
                 z-index: 1000;
                 transition: all 0.3s ease;
-                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
             }
 
             .nav-menu.active {
@@ -736,8 +823,8 @@
             }
 
             .nav-link:hover {
-                background: linear-gradient(135deg, #4CAF50, #45a049);
-                color: white;
+                background: #f4f4f5;
+                color: #2563eb;
                 transform: none;
             }
 
@@ -768,10 +855,10 @@
             }
 
             .dropdown-item:hover {
-                background: #e9ecef;
-                color: #4CAF50;
+                background: rgba(37, 99, 235, 0.05);
+                color: #2563eb;
                 border-left: none;
-                padding-left: 3rem;
+                padding-left: 3.5rem;
             }
 
             .auth-buttons {
@@ -787,27 +874,193 @@
             .nav-menu.active .auth-buttons {
                 display: flex;
             }
-            
+
             .page-header h1 {
                 font-size: 2rem;
             }
+
             .tours-grid {
                 grid-template-columns: 1fr;
             }
+
             .section-header {
                 flex-direction: column;
                 gap: 1rem;
                 align-items: flex-start;
             }
         }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: #000000;
+            color: #ecf0f1;
+            padding: 3rem 0 1rem 0;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-brand {
+            max-width: 280px;
+        }
+
+        .footer-logo-section {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #ecf0f1;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo-section i {
+            font-size: 1.6rem;
+            color: #2563eb;
+        }
+
+        .footer-description {
+            color: #bdc3c7;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .footer-social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: #2563eb;
+            color: white;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .footer-social-link:hover {
+            background: #3b82f6;
+            transform: translateY(-2px);
+        }
+
+        .footer-section h3 {
+            color: #ecf0f1;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            display: block;
+            padding: 0.25rem 0;
+        }
+
+        .footer-links a:hover {
+            color: #3b82f6;
+            padding-left: 0.5rem;
+        }
+
+        .footer-contact-info {
+            font-size: 0.9rem;
+        }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            color: #bdc3c7;
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-contact-item i {
+            color: #3b82f6;
+            width: 16px;
+            margin-top: 0.1rem;
+            flex-shrink: 0;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #34495e;
+            padding-top: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-copyright {
+            color: #95a5a6;
+            font-size: 0.85rem;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-bottom-links a {
+            color: #95a5a6;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-bottom-links a:hover {
+            color: #3b82f6;
+        }
+
+        @media (max-width: 768px) {
+            .footer-content-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: left;
+            }
+        }
     </style>
 </head>
+
 <body>
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
             <a href="index.html" class="logo">
-                 <img src="/img_jalpan/logo_pueblos_magicos.jpg" alt="Logo Turismo" class="logo-image">
+                <img src="/img_jalpan/logo_pueblos_magicos.jpg" alt="Logo Turismo" class="logo-image">
                 Dirección de Turismo
             </a>
 
@@ -815,64 +1068,64 @@
             <button class="mobile-menu-toggle" id="mobileMenuToggle">
                 <i class="fas fa-bars"></i>
             </button>
-            
+
             <!-- Menú de navegación -->
             <ul class="nav-menu" id="navMenu">
+                <!-- Boton cerrar (solo movil) -->
+                <li class="nav-item mobile-close-btn">
+                    <button class="close-menu-btn" id="closeMenuBtn">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </li>
                 <li class="nav-item">
                     <a href="index.html" class="nav-link">
-                    
+
                         Inicio
                     </a>
                 </li>
-                
-                <li class="nav-item dropdown" id="hospedajeDropdown">
-                    <a href="#" class="nav-link">
-                       
-                        Hospedaje
-                        <i class="fas fa-chevron-down"></i>
+
+                <li class="nav-item">
+                    <a href="mapa.html" class="nav-link">
+
+                        Mapa
                     </a>
-                    <div class="dropdown-menu">
-                        <a href="hoteles.html" class="dropdown-item">
-                       
-                            Hoteles
-                        </a>
-                        <a href="cabanas.html" class="dropdown-item">
-                         
-                            Cabañas
-                        </a>
-                        <a href="airbnb.html" class="dropdown-item">
-                
-                            Airbnb
-                        </a>
-                    </div>
                 </li>
-                
-   <li class="nav-item">
+
+                <li class="nav-item">
+                    <a href="hospedaje.html" class="nav-link">
+                        Hospedaje
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="https://restaurante-web-production-721f.up.railway.app/" class="nav-link">
-       
+
                         Alimentos
                     </a>
                 </li>
 
 
                 <li class="nav-item">
-                    <a href="tourOperadora.html" class="nav-link active">
-                  
-                        Tours
+                    <a href="experiencias.html" class="nav-link">
+
+                        Experiencias
                     </a>
                 </li>
-                
+
+                <!-- Selector de Idiomas -->
                 <li class="nav-item">
-                    <a href="guias.html" class="nav-link">
-                      
-                        Guías
-                    </a>
+                    <select id="lang-select" class="form-control"
+                        style="padding: 0.5rem; border-radius: 5px; border: 1px solid #ccc; font-weight: bold; cursor: pointer; background: white;">
+                        <option value="ES">🇪🇸 ES</option>
+                        <option value="EN">🇺🇸 EN</option>
+                        <option value="FR">🇫🇷 FR</option>
+                    </select>
+                </li>
+
+                <li class="nav-item auth-buttons">
+                    <a href="login.html" class="btn btn-login">Iniciar Sesión</a>
                 </li>
             </ul>
-            
-            <div class="auth-buttons">
-                <a href="login.html" class="btn btn-login">Iniciar Sesión</a>
-            </div>
         </div>
     </nav>
 
@@ -882,72 +1135,100 @@
     <!-- Page Header -->
     <section class="page-header">
         <div class="page-header-content">
-            <h1><i class="fas fa-route"></i> Tours Operadoras</h1>
-            <p>Vive aventuras únicas con nuestras tour operadoras certificadas. Desde expediciones de aventura hasta tours culturales, encuentra la experiencia perfecta para ti.</p>
+            <h1 data-aos="fade-up" data-aos-duration="1000"><i class="fas fa-route"></i> Tours Operadoras</h1>
+            <p data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">Vive aventuras únicas con nuestras tour operadoras certificadas. Desde expediciones de aventura hasta
+                tours culturales, encuentra la experiencia perfecta para ti.</p>
         </div>
     </section>
 
-    <!-- Tour Categories Section con Slider de Imágenes -->
-    <section class="categories-section">
+    <!-- ====== CATEGORÍAS DE EXPERIENCIAS ====== -->
+    <section class="categories-section" data-aos="fade-up" data-aos-delay="400">
         <div class="categories-container">
-            <h2 class="categories-title">Experiencias turísticas</h2>
-            <p class="categories-subtitle">Encuentra el tipo de aventura que más te emocione</p>
-            
-            <!-- Slider Container -->
-            <div class="categories-slider-wrapper">
-                <div class="categories-slider" id="categoriesSlider">
-                    <div class="category-slide" data-type="espeleismo">
-                        <img src="/img_jalpan/1_tour.png" alt="Espeleísmo - Explora cuevas y cavernas subterráneas" class="experience-image">
-                    </div>
-                    
-                    <div class="category-slide" data-type="cultural">
-                        <img src="/img_jalpan/2_tour.png" alt="Tours Culturales - Sitios arqueológicos y patrimonio histórico" class="experience-image">
-                    </div>
-                    
-                    <div class="category-slide" data-type="aviturismo">
-                        <img src="/img_jalpan/3_tour.png" alt="Aviturismo - Observación de aves en su hábitat natural" class="experience-image">
-                    </div>
-                    
-                    <div class="category-slide" data-type="senderismo">
-                        <img src="/img_jalpan/4_tour.png" alt="Senderismo - Caminatas por senderos naturales" class="experience-image">
-                    </div>
-                    
-                    <div class="category-slide" data-type="kayak">
-                        <img src="/img_jalpan/5_tour.png" alt="Kayak - Navegación en ríos y cuerpos de agua" class="experience-image">
-                    </div>
-                    
-                    <div class="category-slide" data-type="rzr">
-                        <img src="/img_jalpan/6_tour.png" alt="RZR - Aventuras todoterreno en vehículos RZR" class="experience-image">
-                    </div>
-                    
-                    <div class="category-slide" data-type="rutas-comunitarias">
-                        <img src="/img_jalpan/7_tour.png" alt="Rutas Comunitarias - Experiencias auténticas con comunidades locales" class="experience-image">
-                    </div>
-                    
-                    <div class="category-slide" data-type="">
-                        <img src="/img_jalpan/8_tour.png" alt="Ver Todos - Explora toda nuestra oferta de tours" class="experience-image">
-                    </div>
+
+            <!-- Encabezado -->
+            <div class="carousel-header">
+                <div class="carousel-eyebrow">
+                    <i class="fas fa-compass"></i> Descubre Jalpan
                 </div>
-                
-                <!-- Navigation Arrows -->
-                <button class="slider-nav slider-prev" id="sliderPrev">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <button class="slider-nav slider-next" id="sliderNext">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-                
-                <!-- Slider Indicators -->
-                <div class="slider-indicators" id="sliderIndicators">
-                    <!-- Puntos indicadores se generan dinámicamente -->
+                <h2 class="categories-title">Experiencias Turísticas</h2>
+                <p style="color: #666; font-size: 1.05rem; margin-bottom: 2rem;">Explora las diferentes aventuras que
+                    tenemos para ti</p>
+
+                <!-- Botón catálogo -->
+                <a href="experiencias.html" class="btn btn-register"
+                    style="display: inline-flex; align-items: center; gap: 0.5rem; font-size: 1.1rem; padding: 0.8rem 2rem; margin-bottom: 2rem;">
+                    Conoce nuestro catálogo de experiencias <i class="fas fa-external-link-alt"></i>
+                </a>
+            </div>
+
+            <!-- Chips de Filtro -->
+            <div class="filter-carousel-wrapper">
+                <div class="categories-filter" id="categoriesFilter">
+                    <button class="filter-card active" data-type="">
+                        <img src="/img_jalpan/8_tour.png" alt="Todos">
+                        <div class="filter-card-content">
+                            <i class="fas fa-star"></i>
+                            <span class="filter-card-text">Todos</span>
+                        </div>
+                    </button>
+                    <button class="filter-card" data-type="espeleismo">
+                        <img src="/img_jalpan/1_tour.png" alt="Espeleísmo">
+                        <div class="filter-card-content">
+                            <i class="fas fa-mountain"></i>
+                            <span class="filter-card-text">Espeleísmo</span>
+                        </div>
+                    </button>
+                    <button class="filter-card" data-type="cultural">
+                        <img src="/img_jalpan/2_tour.png" alt="Cultural">
+                        <div class="filter-card-content">
+                            <i class="fas fa-landmark"></i>
+                            <span class="filter-card-text">Cultural</span>
+                        </div>
+                    </button>
+                    <button class="filter-card" data-type="aviturismo">
+                        <img src="/img_jalpan/3_tour.png" alt="Aviturismo">
+                        <div class="filter-card-content">
+                            <i class="fas fa-feather-alt"></i>
+                            <span class="filter-card-text">Aviturismo</span>
+                        </div>
+                    </button>
+                    <button class="filter-card" data-type="senderismo">
+                        <img src="/img_jalpan/4_tour.png" alt="Senderismo">
+                        <div class="filter-card-content">
+                            <i class="fas fa-hiking"></i>
+                            <span class="filter-card-text">Senderismo</span>
+                        </div>
+                    </button>
+                    <button class="filter-card" data-type="kayak">
+                        <img src="/img_jalpan/5_tour.png" alt="Kayak">
+                        <div class="filter-card-content">
+                            <i class="fas fa-water"></i>
+                            <span class="filter-card-text">Kayak</span>
+                        </div>
+                    </button>
+                    <button class="filter-card" data-type="rzr">
+                        <img src="/img_jalpan/6_tour.png" alt="RZR">
+                        <div class="filter-card-content">
+                            <i class="fas fa-truck-monster"></i>
+                            <span class="filter-card-text">RZR</span>
+                        </div>
+                    </button>
+                    <button class="filter-card" data-type="rutas-comunitarias">
+                        <img src="/img_jalpan/7_tour.png" alt="Comunitario">
+                        <div class="filter-card-content">
+                            <i class="fas fa-users"></i>
+                            <span class="filter-card-text">Comunitario</span>
+                        </div>
+                    </button>
                 </div>
             </div>
-        </div>
+
+        </div><!-- /.categories-container -->
     </section>
 
     <!-- Tours Section -->
     <section class="tours-section">
-        <div class="section-header">
+        <div class="section-header" data-aos="fade-up">
             <div class="results-info" id="resultsInfo">
                 Cargando tours...
             </div>
@@ -958,19 +1239,19 @@
                 <option value="tours-count">Más tours</option>
             </select>
         </div>
-        
+
         <!-- Loading State -->
         <div class="loading" id="loadingState">
             <i class="fas fa-spinner"></i>
             <h3>Cargando tour operadoras...</h3>
             <p>Por favor espera mientras obtenemos la información</p>
         </div>
-        
+
         <!-- Tours Grid -->
-        <div class="tours-grid" id="toursGrid" style="display: none;">
+        <div class="tours-grid" id="toursGrid" data-aos="fade-up" data-aos-delay="200" style="display: none;">
             <!-- Las tour operadoras se cargarán aquí dinámicamente -->
         </div>
-        
+
         <!-- Empty State -->
         <div class="empty-state" id="emptyState" style="display: none;">
             <i class="fas fa-route"></i>
@@ -993,144 +1274,30 @@
         const resultsInfo = document.getElementById('resultsInfo');
         const sortBy = document.getElementById('sortBy');
 
-        // Clase del Slider de Categorías con Imágenes
-        class CategoriesSlider {
-            constructor() {
-                this.slider = document.getElementById('categoriesSlider');
-                this.slides = this.slider.querySelectorAll('.category-slide');
-                this.prevBtn = document.getElementById('sliderPrev');
-                this.nextBtn = document.getElementById('sliderNext');
-                this.indicatorsContainer = document.getElementById('sliderIndicators');
-                
-                this.currentIndex = 0;
-                this.autoSlideInterval = null;
-                this.totalSlides = this.slides.length;
-                
-                this.init();
-            }
-            
-            init() {
-                this.createIndicators();
-                this.setupEventListeners();
-                this.startAutoSlide();
-                this.updateSlider();
-            }
-            
-            createIndicators() {
-                this.indicatorsContainer.innerHTML = '';
-                
-                for (let i = 0; i < this.totalSlides; i++) {
-                    const indicator = document.createElement('div');
-                    indicator.classList.add('indicator');
-                    if (i === 0) indicator.classList.add('active');
-                    indicator.addEventListener('click', () => this.goToSlide(i));
-                    this.indicatorsContainer.appendChild(indicator);
-                }
-            }
-            
-            setupEventListeners() {
-                this.prevBtn.addEventListener('click', () => this.prevSlide());
-                this.nextBtn.addEventListener('click', () => this.nextSlide());
-                
-                // Pausar auto-slide en hover
-                const sliderWrapper = this.slider.parentElement;
-                sliderWrapper.addEventListener('mouseenter', () => this.stopAutoSlide());
-                sliderWrapper.addEventListener('mouseleave', () => this.startAutoSlide());
-                
-                // Funcionalidad de click en las imágenes
-                this.slides.forEach(slide => {
-                    slide.addEventListener('click', () => {
-                        const type = slide.getAttribute('data-type');
-                        this.selectCategory(type, slide);
-                    });
-                });
-                
-                // Soporte para navegación por teclado
-                document.addEventListener('keydown', (e) => {
-                    if (e.key === 'ArrowLeft') this.prevSlide();
-                    if (e.key === 'ArrowRight') this.nextSlide();
-                });
-                
-                // Touch/Swipe support para móviles
-                let startX = 0;
-                let endX = 0;
-                
-                sliderWrapper.addEventListener('touchstart', (e) => {
-                    startX = e.touches[0].clientX;
-                });
-                
-                sliderWrapper.addEventListener('touchend', (e) => {
-                    endX = e.changedTouches[0].clientX;
-                    const diff = startX - endX;
-                    
-                    if (Math.abs(diff) > 50) { // Umbral mínimo para swipe
-                        if (diff > 0) {
-                            this.nextSlide(); // Swipe izquierda = siguiente
-                        } else {
-                            this.prevSlide(); // Swipe derecha = anterior
-                        }
-                    }
-                });
-            }
-            
-            updateSlider() {
-                const translateX = -this.currentIndex * 100;
-                this.slider.style.transform = `translateX(${translateX}%)`;
-                
-                // Actualizar indicadores
-                const indicators = this.indicatorsContainer.querySelectorAll('.indicator');
-                indicators.forEach((indicator, index) => {
-                    indicator.classList.toggle('active', index === this.currentIndex);
-                });
-            }
-            
-            nextSlide() {
-                this.currentIndex = (this.currentIndex + 1) % this.totalSlides;
-                this.updateSlider();
-            }
-            
-            prevSlide() {
-                this.currentIndex = (this.currentIndex - 1 + this.totalSlides) % this.totalSlides;
-                this.updateSlider();
-            }
-            
-            goToSlide(index) {
-                this.currentIndex = index;
-                this.updateSlider();
-            }
-            
-            startAutoSlide() {
-                this.stopAutoSlide();
-                this.autoSlideInterval = setInterval(() => {
-                    this.nextSlide();
-                }, 5000); // Cambia cada 5 segundos
-            }
-            
-            stopAutoSlide() {
-                if (this.autoSlideInterval) {
-                    clearInterval(this.autoSlideInterval);
-                    this.autoSlideInterval = null;
-                }
-            }
-            
-            selectCategory(type, slide) {
-                // Remover clase active de todas las slides
-                this.slides.forEach(s => s.classList.remove('active'));
-                
-                // Agregar clase active a la slide seleccionada
-                slide.classList.add('active');
-                
-                // Llamar función de filtrado
-                filterByCategory(type);
-            }
-        }
-
         // Cargar tours al iniciar la página
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             loadOperators();
             setupEventListeners();
-            // Inicializar el slider
-            new CategoriesSlider();
+            // Configurar event listener de los chips
+            const filterCards = document.querySelectorAll('.filter-card');
+            filterCards.forEach(chip => {
+                chip.addEventListener('click', function () {
+                    // Update active styling
+                    filterCards.forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                    this.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+
+                    // Filter tours
+                    const type = this.getAttribute('data-type');
+                    filterByCategory(type);
+
+                    // Scroll down to tours briefly
+                    const toursSection = document.querySelector('.tours-section');
+                    if (toursSection) {
+                        setTimeout(() => toursSection.scrollIntoView({ behavior: 'smooth', block: 'start' }), 200);
+                    }
+                });
+            });
 
             // ===== CONFIGURAR MENÚ MÓVIL RESPONSIVO =====
             const mobileMenuToggle = document.getElementById('mobileMenuToggle');
@@ -1143,7 +1310,7 @@
                 mobileMenuToggle.addEventListener('click', () => {
                     navMenu.classList.toggle('active');
                     mobileOverlay.classList.toggle('active');
-                    
+
                     // Cambiar icono
                     const icon = mobileMenuToggle.querySelector('i');
                     if (navMenu.classList.contains('active')) {
@@ -1161,12 +1328,18 @@
                 mobileOverlay.addEventListener('click', closeMenu);
             }
 
+            // Cerrar menú con botón X
+            const closeMenuBtn = document.getElementById('closeMenuBtn');
+            if (closeMenuBtn) {
+                closeMenuBtn.addEventListener('click', closeMenu);
+            }
+
             // Función para cerrar el menú
             function closeMenu() {
                 if (navMenu) navMenu.classList.remove('active');
                 if (mobileOverlay) mobileOverlay.classList.remove('active');
                 if (hospedajeDropdown) hospedajeDropdown.classList.remove('active');
-                
+
                 const icon = mobileMenuToggle?.querySelector('i');
                 if (icon) {
                     icon.classList.remove('fa-times');
@@ -1226,16 +1399,16 @@
         async function loadOperators() {
             try {
                 showLoading();
-                
+
                 const response = await fetch(`${baseURL}/tours`);
                 const data = await response.json();
-                
+
                 if (data.status === 'success') {
                     allOperators = data.data.tourOperadoras;
                     // Expandir tours para conteos
                     expandToursForCounting();
                     filteredOperators = [...allOperators];
-                    
+
                     displayOperators();
                     updateResultsInfo();
                 } else {
@@ -1269,12 +1442,12 @@
             } else {
                 // Filtrar operadoras que tengan tours del tipo seleccionado
                 filteredOperators = allOperators.filter(operadora => {
-                    return operadora.tours && operadora.tours.some(tour => 
+                    return operadora.tours && operadora.tours.some(tour =>
                         tour.tipoTour === type && tour.activo !== false
                     );
                 });
             }
-            
+
             displayOperators();
             updateResultsInfo();
         }
@@ -1282,7 +1455,7 @@
         // Manejar ordenamiento
         function handleSort() {
             const sortValue = sortBy.value;
-            
+
             switch (sortValue) {
                 case 'name':
                     filteredOperators.sort((a, b) => a.nombre.localeCompare(b.nombre));
@@ -1298,7 +1471,7 @@
                     filteredOperators.sort((a, b) => a.nombre.localeCompare(b.nombre));
                     break;
             }
-            
+
             displayOperators();
         }
 
@@ -1308,24 +1481,24 @@
                 showEmpty();
                 return;
             }
-            
+
             showOperators();
-            
-            const operatorsHTML = filteredOperators.map(operadora => createOperatorCard(operadora)).join('');
+
+            const operatorsHTML = filteredOperators.map((operadora, index) => createOperatorCard(operadora, index)).join('');
             toursGrid.innerHTML = operatorsHTML;
         }
 
         // Crear tarjeta de tour operadora (MODIFICADA)
-        function createOperatorCard(operadora) {
+        function createOperatorCard(operadora, index) {
             const rating = operadora.calificacion?.promedio || 0;
             const toursCount = operadora.tours?.filter(tour => tour.activo !== false).length || 0;
-            
+
             // Crear iniciales para el placeholder del logo
             const initials = operadora.nombre.split(' ').map(word => word.charAt(0)).join('').substring(0, 3);
-            
+
             // Obtener especialidades únicas
             const specialties = [...new Set(operadora.tours?.map(tour => tour.tipoTour).filter(Boolean))];
-            
+
             // Función para crear contacto item
             const createContactItem = (text, value, link) => {
                 if (!value) return '';
@@ -1341,7 +1514,7 @@
             const createSocialItems = () => {
                 let socialHTML = '';
                 const redesSociales = operadora.contacto?.redesSociales || {};
-                
+
                 if (redesSociales.facebook) {
                     socialHTML += `
                         <div class="social-item">
@@ -1350,7 +1523,7 @@
                         </div>
                     `;
                 }
-                
+
                 if (redesSociales.instagram) {
                     socialHTML += `
                         <div class="social-item">
@@ -1359,7 +1532,7 @@
                         </div>
                     `;
                 }
-                
+
                 if (redesSociales.twitter) {
                     socialHTML += `
                         <div class="social-item">
@@ -1368,20 +1541,21 @@
                         </div>
                     `;
                 }
-                
+
                 return socialHTML;
             };
 
             const socialItemsHTML = createSocialItems();
-            
+            const delay = (index % 4) * 100 + 100;
+
             return `
-                <div class="operator-card" onclick="viewOperatorDetails('${operadora._id}')">
+                <div class="operator-card" onclick="viewOperatorDetails('${operadora._id}')" data-aos="fade-up" data-aos-delay="${delay}">
                     <div class="operator-logo">
-                        ${operadora.imagenes && operadora.imagenes[0] ? 
-                            `<img src="${operadora.imagenes[0]}" alt="Logo ${operadora.nombre}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        ${operadora.imagenes && operadora.imagenes[0] ?
+                    `<img src="${operadora.imagenes[0]}" alt="Logo ${operadora.nombre}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                              <div class="logo-placeholder" style="display: none;">${initials}</div>` :
-                            `<div class="logo-placeholder">${initials}</div>`
-                        }
+                    `<div class="logo-placeholder">${initials}</div>`
+                }
                         
                         ${rating > 0 ? `<div class="rating-badge-logo"><i class="fas fa-star"></i> ${rating.toFixed(1)}</div>` : ''}
                         ${operadora.verificada ? '<div class="verified-badge-logo"><i class="fas fa-shield-check"></i> Verificada</div>' : ''}
@@ -1403,9 +1577,9 @@
                         <div class="operator-specialties">
                             <div class="specialties-title">Especialidades:</div>
                             <div class="specialties-list">
-                                ${specialties.slice(0, 4).map(specialty => 
-                                    `<span class="specialty-tag">${formatTourType(specialty)}</span>`
-                                ).join('')}
+                                ${specialties.slice(0, 4).map(specialty =>
+                    `<span class="specialty-tag">${formatTourType(specialty)}</span>`
+                ).join('')}
                             </div>
                         </div>
                         ` : ''}
@@ -1457,16 +1631,16 @@
         function showOperatorInfo(operadoraId) {
             const operadora = allOperators.find(op => op._id === operadoraId);
             if (operadora) {
-                const toursInfo = operadora.tours?.map(tour => 
+                const toursInfo = operadora.tours?.map(tour =>
                     `• ${tour.nombre} - ${tour.precio?.toLocaleString('es-MX') || 'Consultar'} MXN`
                 ).join('\n') || 'No hay tours disponibles';
-                
+
                 alert(`${operadora.nombre}\n\n` +
-                      `📍 ${operadora.ubicacion?.ciudad || ''}, ${operadora.ubicacion?.estado || ''}\n` +
-                      `⭐ Calificación: ${operadora.calificacion?.promedio?.toFixed(1) || 'N/A'}\n` +
-                      `📧 ${operadora.contacto?.email || 'No disponible'}\n` +
-                      `📞 ${operadora.contacto?.telefono || 'No disponible'}\n\n` +
-                      `Tours disponibles:\n${toursInfo}`);
+                    `📍 ${operadora.ubicacion?.ciudad || ''}, ${operadora.ubicacion?.estado || ''}\n` +
+                    `⭐ Calificación: ${operadora.calificacion?.promedio?.toFixed(1) || 'N/A'}\n` +
+                    `📧 ${operadora.contacto?.email || 'No disponible'}\n` +
+                    `📞 ${operadora.contacto?.telefono || 'No disponible'}\n\n` +
+                    `Tours disponibles:\n${toursInfo}`);
             }
         }
 
@@ -1474,7 +1648,7 @@
         function updateResultsInfo() {
             const count = filteredOperators.length;
             const total = allOperators.length;
-            
+
             if (count === total) {
                 resultsInfo.textContent = `Mostrando ${count} tour operadora${count !== 1 ? 's' : ''}`;
             } else {
@@ -1509,5 +1683,108 @@
             `;
         }
     </script>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content-grid">
+                <!-- Sección principal -->
+                <div class="footer-brand">
+                    <div class="footer-logo-section">
+                        <img src="/img_jalpan/logo_fondo_negro.png" alt="Logo Turismo" class="logo-image"
+                            style="width: 40px; height: 40px; background: black;">
+                        Dirección de Turismo
+                    </div>
+                    <p class="footer-description">
+                        Conectamos a las personas con los mejores destinos, alojamientos y experiencias gastronómicas de
+                        Jalpan de Serra, Pueblo Mágico.
+                    </p>
+                    <div class="footer-social">
+                        <a href="https://www.facebook.com/profile.php?id=61573849871475" class="footer-social-link"
+                            title="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.instagram.com/jalpan_pueblomagico?igsh=MWpmdDVnMndpbnB1dQ=="
+                            class="footer-social-link" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Navegación -->
+                <div class="footer-section">
+                    <h3>Navegación</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://restaurante-web-production-721f.up.railway.app/">Alimentos</a></li>
+                        <li><a href="hospedaje.html">Hospedaje</a></li>
+                        <li><a href="experiencias.html">Experiencias</a></li>
+                        <li><a href="mapa.html">Mapa</a></li>
+                    </ul>
+                </div>
+
+                <!-- Soporte: Política -->
+                <div class="footer-section">
+                    <h3>Soporte: Política</h3>
+                    <ul class="footer-links">
+                        <li><a href="#gastronomia">Gastronomía Local</a></li>
+                        <li><a href="#atractivos">Atractivos Naturales</a></li>
+                        <li><a href="#misiones">Misiones Franciscanas</a></li>
+                        <li><a href="#cultura">Historia y Cultura</a></li>
+                        <li><a href="#eventos">Eventos Especiales</a></li>
+                        <li><a href="#tradiciones">Tradiciones</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contacto -->
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <div class="footer-contact-info">
+                        <div class="footer-contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>direcciondeturismojalpan@gmail.com</span>
+                        </div>
+                        <div class="footer-contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+52 441-296-0285</span>
+                        </div>
+                        <div class="footer-contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Plaza Principal, Jalpan de Serra, Querétaro</span>
+                        </div>
+                        <div class="footer-contact-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Lun - Vie: 8:00 AM - 3:30 PM</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Línea inferior -->
+            <div class="footer-bottom">
+                <p class="footer-copyright">
+                    © 2024 Dirección de Turismo - Jalpan de Serra. Todos los derechos reservados.
+                </p>
+                <div class="footer-bottom-links">
+                    <a href="https://www.facebook.com/jenni.munoz.5011">Desarrollado por</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="js/translation.js"></script>
+    <script src="js/auth-navbar.js"></script>
+
+    <!-- AOS Script -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                once: true, // Animates only once
+                offset: 50, // Trigger offset
+                duration: 800, // Animation duration
+                easing: 'ease-out-cubic' // Easing curve
+            });
+        });
+    </script>
 </body>
+
 </html>

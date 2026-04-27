@@ -3,9 +3,9 @@ const hotelController = require('../controllers/hotelController');
 const authMiddleware = require('../middlewares/authMiddleware');
 const Hotel = require('../models/Hotel');
 
-// 🆕 NUEVO: Imports para gestión de imágenes con Cloudinary
+// 🆕 NUEVO: Imports para gestión de imágenes
 const multer = require('multer');
-const { hotelStorage } = require('../config/cloudinary');
+const { hotelStorage, hasCloudinaryCredentials } = require('../config/cloudinary');
 
 const router = express.Router();
 
@@ -27,11 +27,20 @@ const uploadHotelImages = multer({
 
 // ===== RUTAS PÚBLICAS =====
 router.get('/', hotelController.getAllHoteles);
+// ⚠️ Usar regex para que solo coincida con ObjectIds válidos (24 caracteres hex)
+// Esto evita que rutas como /mis-hoteles sean capturadas por este handler
+router.get('/:id([0-9a-fA-F]{24})', hotelController.getHotel);
 
-// Todas las rutas siguientes requieren autenticación
+// ===== RUTAS QUE REQUIEREN AUTENTICACIÓN =====
+// ⚠️ IMPORTANTE: Las rutas con nombre específico (como /mis-hoteles)
+// DEBEN definirse ANTES que las rutas con parámetro /:id
+// para evitar que Express confunda el nombre con un ID
 router.use(authMiddleware.protect);
 
+
 // ===== RUTAS PARA ADMINISTRADORES =====
+// ⚠️ IMPORTANTE: /mis-hoteles DEBE definirse ANTES que /:id
+// para que Express no confunda "mis-hoteles" con un parámetro :id
 router
   .route('/mis-hoteles')
   .get(authMiddleware.restrictTo('admin'), hotelController.getMisHoteles);
@@ -50,11 +59,13 @@ router.get('/:hotelId/images', authMiddleware.restrictTo('admin'), async (req, r
   try {
     const { hotelId } = req.params;
 
-    const hotel = await Hotel.findOne({ 
-      _id: hotelId,
-      propietario: req.user.id,
-      activo: true 
-    });
+    // ✅ Super admin puede ver imágenes de cualquier hotel
+    const isSuperAdmin = req.user.email === 'direcciondeturismojalpan@gmail.com' || req.user.isSuperAdmin;
+    const query = isSuperAdmin
+      ? { _id: hotelId }
+      : { _id: hotelId, propietario: req.user.id };
+
+    const hotel = await Hotel.findOne(query);
 
     if (!hotel) {
       return res.status(404).json({
@@ -63,7 +74,6 @@ router.get('/:hotelId/images', authMiddleware.restrictTo('admin'), async (req, r
       });
     }
 
-    // Con Cloudinary, las URLs ya están validadas por la plataforma
     res.json({
       status: 'success',
       message: 'Imágenes obtenidas correctamente',
@@ -80,8 +90,26 @@ router.get('/:hotelId/images', authMiddleware.restrictTo('admin'), async (req, r
   }
 });
 
-// 📤 Subir nuevas imágenes al hotel usando Cloudinary
-router.post('/:hotelId/images/upload', authMiddleware.restrictTo('admin'), uploadHotelImages.array('images', 10), async (req, res) => {
+// 🏷️ Middleware para cargar el nombre del hotel antes de multer
+const loadHotelNombre = async (req, res, next) => {
+  try {
+    const { hotelId } = req.params;
+    const isSuperAdmin = req.user.email === 'direcciondeturismojalpan@gmail.com' || req.user.isSuperAdmin;
+    const query = isSuperAdmin ? { _id: hotelId } : { _id: hotelId, propietario: req.user.id };
+    const hotel = await Hotel.findOne(query);
+    if (!hotel) {
+      return res.status(404).json({ status: 'error', message: 'No se encontró el hotel o no tienes permisos' });
+    }
+    req.hospedajeNombre = hotel.nombre; // ← nombre disponible para CloudinaryStorage
+    req.hospedaje = hotel;              // ← guardamos el objeto completo para reusar
+    next();
+  } catch (err) {
+    next(err);
+  }
+};
+
+// 📤 Subir nuevas imágenes al hotel (Cloudinary o disco local)
+router.post('/:hotelId/images/upload', authMiddleware.restrictTo('admin'), loadHotelNombre, uploadHotelImages.array('images', 10), async (req, res) => {
   try {
     const { hotelId } = req.params;
 
@@ -92,33 +120,31 @@ router.post('/:hotelId/images/upload', authMiddleware.restrictTo('admin'), uploa
       });
     }
 
-    const hotel = await Hotel.findOne({ 
-      _id: hotelId,
-      propietario: req.user.id,
-      activo: true 
+    // ✅ El hotel ya fue cargado por el middleware loadHotelNombre
+    const hotel = req.hospedaje;
+
+    // ✅ Construir URLs según el storage usado
+    // - Cloudinary: file.path ya trae la URL https://res.cloudinary.com/...
+    // - Disco local: file.filename tiene solo el nombre, construir ruta relativa
+    const nuevasImagenesUrls = req.files.map(file => {
+      if (hasCloudinaryCredentials) {
+        return file.path; // URL completa de Cloudinary
+      } else {
+        return `/uploads/hoteles/${file.filename}`; // Ruta local
+      }
     });
-
-    if (!hotel) {
-      return res.status(404).json({
-        status: 'error',
-        message: 'No se encontró hotel asociado o no tienes permisos'
-      });
-    }
-
-    // Obtener URLs de Cloudinary de los archivos subidos
-    const nuevasImagenesUrls = req.files.map(file => file.path);
 
     // Agregar imágenes al hotel
     if (!hotel.imagenes) {
       hotel.imagenes = [];
     }
-    
+
     hotel.imagenes.push(...nuevasImagenesUrls);
     hotel.updatedAt = new Date();
-    
+
     await hotel.save();
 
-    console.log(`✅ ${nuevasImagenesUrls.length} imágenes subidas para hotel ${hotel.nombre}`);
+    console.log(`✅ ${nuevasImagenesUrls.length} imágenes subidas para hotel ${hotel.nombre} en carpeta 'turismo-app/hoteles/${hotel.nombre}' (${hasCloudinaryCredentials ? 'Cloudinary' : 'disco local'})`);
 
     res.json({
       status: 'success',
@@ -132,7 +158,6 @@ router.post('/:hotelId/images/upload', authMiddleware.restrictTo('admin'), uploa
 
   } catch (error) {
     console.error('❌ Error subiendo imágenes del hotel:', error);
-
     res.status(500).json({
       status: 'error',
       message: 'Error del servidor al subir imágenes',
@@ -147,10 +172,10 @@ router.delete('/:hotelId/images/:imageIndex', authMiddleware.restrictTo('admin')
     const { hotelId, imageIndex } = req.params;
     const index = parseInt(imageIndex);
 
-    const hotel = await Hotel.findOne({ 
+    const hotel = await Hotel.findOne({
       _id: hotelId,
       propietario: req.user.id,
-      activo: true 
+      activo: true
     });
 
     if (!hotel) {
@@ -175,17 +200,21 @@ router.delete('/:hotelId/images/:imageIndex', authMiddleware.restrictTo('admin')
     }
 
     const imagenAEliminar = hotel.imagenes[index];
-    
+
     // 🆕 NUEVO: Eliminar imagen de Cloudinary
     try {
-      const cloudinary = require('cloudinary').v2;
-      
-      // Extraer public_id de la URL de Cloudinary
-      const publicId = imagenAEliminar.split('/').pop().split('.')[0];
-      const fullPublicId = `turismo-app/hoteles/${publicId}`;
-      
-      const result = await cloudinary.uploader.destroy(fullPublicId);
-      console.log(`🗑️ Imagen eliminada de Cloudinary:`, result);
+      const cloudinaryLib = require('cloudinary').v2;
+
+      // Extraer public_id completo de la URL de Cloudinary
+      // URL formato: https://res.cloudinary.com/<cloud>/image/upload/v12345/turismo-app/hoteles/<nombre>/<id>.jpg
+      const urlParts = imagenAEliminar.split('/upload/');
+      if (urlParts.length > 1) {
+        // Quitar la versión (v12345) si existe y la extensión
+        const afterUpload = urlParts[1].replace(/^v\d+\//, '');
+        const fullPublicId = afterUpload.replace(/\.[^.]+$/, ''); // quitar extensión
+        const result = await cloudinaryLib.uploader.destroy(fullPublicId);
+        console.log(`🗑️ Imagen eliminada de Cloudinary (public_id: ${fullPublicId}):`, result);
+      }
     } catch (cloudinaryError) {
       console.warn('⚠️ Error eliminando de Cloudinary (continuando):', cloudinaryError.message);
       // Continuamos aunque falle la eliminación en Cloudinary
@@ -194,7 +223,7 @@ router.delete('/:hotelId/images/:imageIndex', authMiddleware.restrictTo('admin')
     // Eliminar de la base de datos
     hotel.imagenes.splice(index, 1);
     hotel.updatedAt = new Date();
-    
+
     await hotel.save();
 
     console.log(`✅ Imagen eliminada del hotel ${hotel.nombre}`);
@@ -228,10 +257,10 @@ router.patch('/:hotelId/images/set-main', authMiddleware.restrictTo('admin'), as
     const { imageIndex } = req.body;
     const index = parseInt(imageIndex);
 
-    const hotel = await Hotel.findOne({ 
+    const hotel = await Hotel.findOne({
       _id: hotelId,
       propietario: req.user.id,
-      activo: true 
+      activo: true
     });
 
     if (!hotel) {
@@ -269,7 +298,7 @@ router.patch('/:hotelId/images/set-main', authMiddleware.restrictTo('admin'), as
     const imagenPrincipal = hotel.imagenes.splice(index, 1)[0];
     hotel.imagenes.unshift(imagenPrincipal);
     hotel.updatedAt = new Date();
-    
+
     await hotel.save();
 
     console.log(`✅ Imagen principal actualizada para hotel ${hotel.nombre}`);
@@ -298,9 +327,9 @@ router.get('/:id/main-image', async (req, res) => {
   try {
     const { id } = req.params;
 
-    const hotel = await Hotel.findOne({ 
-      _id: id, 
-      activo: true 
+    const hotel = await Hotel.findOne({
+      _id: id,
+      activo: true
     });
 
     if (!hotel) {
@@ -310,8 +339,8 @@ router.get('/:id/main-image', async (req, res) => {
       });
     }
 
-    const mainImage = hotel.imagenes && hotel.imagenes.length > 0 
-      ? hotel.imagenes[0] 
+    const mainImage = hotel.imagenes && hotel.imagenes.length > 0
+      ? hotel.imagenes[0]
       : null;
 
     res.json({
@@ -349,9 +378,9 @@ router
 router.patch('/:id/toggle-status', authMiddleware.restrictTo('admin'), async (req, res) => {
   try {
     // Verificar si es super admin
-    const isSuperAdmin = req.user.email === 'direcciondeturismojalpan@gmail.com' || 
-                          req.user.isSuperAdmin || 
-                          req.user.role === 'super-admin';
+    const isSuperAdmin = req.user.email === 'direcciondeturismojalpan@gmail.com' ||
+      req.user.isSuperAdmin ||
+      req.user.role === 'super-admin';
 
     if (!isSuperAdmin) {
       return res.status(403).json({
@@ -371,7 +400,7 @@ router.patch('/:id/toggle-status', authMiddleware.restrictTo('admin'), async (re
 
     // Toggle el estado activo
     hotel.activo = !hotel.activo;
-    
+
     // Agregar información de auditoría
     hotel.ultimaModificacion = {
       usuario: req.user.id,
@@ -426,16 +455,19 @@ router.use((error, req, res, next) => {
       });
     }
   }
-  
+
   if (error.message === 'Solo se permiten archivos de imagen') {
     return res.status(400).json({
       status: 'error',
       message: 'Solo se permiten archivos de imagen (JPG, PNG, GIF, WebP)'
     });
   }
-  
+
   next(error);
 });
+
+// 📝 Crear reseña
+router.post('/:id/reviews', authMiddleware.protect, hotelController.createReview);
 
 module.exports = router;
 

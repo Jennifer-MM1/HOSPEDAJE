@@ -71,6 +71,9 @@ router.delete('/guias/:id', superAdminController.eliminarGuiaTuristica);
 // 📊 Obtener todos los establecimientos (para el dashboard)
 router.get('/todos-los-datos', superAdminController.obtenerTodosLosDatos);
 
+// 📜 Obtener historial de actualizaciones
+router.get('/update-history', superAdminController.obtenerHistorialActualizaciones);
+
 // 📈 Obtener estadísticas generales
 router.get('/estadisticas', superAdminController.obtenerEstadisticas);
 

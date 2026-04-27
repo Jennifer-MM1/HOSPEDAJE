@@ -1,0 +1,2 @@
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\super-admin-dashboard.html - Found <table> that might not be wrapped in a responsive container.
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\super-admin-dashboard.html - Found <table> that might not be wrapped in a responsive container.

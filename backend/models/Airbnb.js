@@ -35,28 +35,28 @@ const AirbnbSchema = new mongoose.Schema({
       longitud: Number
     }
   },
- tipoPropiedad: {
-  type: String,
-  // ✅ CORRECCIÓN: Solo las 3 opciones que quieres
-  enum: ['cabaña', 'casa', 'zona_camping'],
-  required: true
-},
+  tipoPropiedad: {
+    type: String,
+    // ✅ CORRECCIÓN: Solo las 3 opciones que quieres
+    enum: ['cabaña', 'casa', 'zona_camping'],
+    required: true
+  },
   servicios: [{
     type: String,
     enum: [
-      'wifi', 
-      'cocina', 
-      'lavadora', 
-      'aire_acondicionado', 
+      'wifi',
+      'cocina',
+      'lavadora',
+      'aire_acondicionado',
       'calefaccion',
-      'tv', 
-      'estacionamiento', 
-      'piscina', 
-      'gym', 
+      'tv',
+      'estacionamiento',
+      'piscina',
+      'gym',
       'balcon_terraza',
-      'jardin', 
-      'bbq', 
-      'chimenea', 
+      'jardin',
+      'bbq',
+      'chimenea',
       'jacuzzi',
       'mascotas_permitidas',
       'acceso_discapacitados',
@@ -70,11 +70,11 @@ const AirbnbSchema = new mongoose.Schema({
     ]
   }],
 
-    metodosPago: [{
+  metodosPago: [{
     type: String,
-  enum: ['efectivo', 'transferencia', 'tarjeta'],
-  required: false
-}],
+    enum: ['efectivo', 'transferencia', 'tarjeta'],
+    required: false
+  }],
 
 
   contacto: {
@@ -85,6 +85,13 @@ const AirbnbSchema = new mongoose.Schema({
     email: {
       type: String,
       match: [/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/, 'Email inválido']
+    },
+    sitioWeb: String,
+    redesSociales: {
+      facebook: String,
+      instagram: String,
+      twitter: String,
+      tiktok: String
     }
   },
   capacidad: {
@@ -107,12 +114,24 @@ const AirbnbSchema = new mongoose.Schema({
     },
     nuevaConstruccion: Boolean
   },
+
+  // Descripción detallada de habitaciones
+  descripcionHabitaciones: {
+    type: String,
+    maxlength: [1000, 'La descripción de habitaciones no puede tener más de 1000 caracteres']
+  },
+
+  // Métodos de Reservación
+  reservaciones: {
+    whatsapp: String,
+    telefono: String,
+    url: String, // Link a Booking, Airbnb, o sitio web directo
+    indicaciones: String // Ej: "Mandar mensaje de texto con fechas"
+  },
+
   politicas: {
-    checkIn: {
-      desde: String, // "14:00"
-      hasta: String  // "22:00"
-    },
-    checkOut: String, // "11:00"
+    checkIn: mongoose.Schema.Types.Mixed, // Can be string "15:00" or {desde, hasta}
+    checkOut: String, // "12:00"
     estanciaMinima: {
       type: Number,
       default: 1
@@ -123,7 +142,31 @@ const AirbnbSchema = new mongoose.Schema({
       enum: ['flexible', 'moderada', 'estricta'],
       default: 'moderada'
     },
+    recepcion: String,
     reglasAdicionales: [String]
+  },
+  instalaciones: [String],
+  accesibilidad: {
+    rampas: { type: Boolean, default: false },
+    plantaBaja: { type: Boolean, default: false },
+    banoAdaptado: { type: Boolean, default: false },
+    elevador: { type: Boolean, default: false },
+    senalizacionBraille: { type: Boolean, default: false }
+  },
+  comodidadesExtra: [{
+    type: String
+  }],
+  distancias: {
+    centroHistorico: String,
+    terminalAutobuses: String,
+    aeropuerto: String,
+    zonaTuristica: String,
+    misiones: String,
+    naturaleza: String,
+    puntosExtra: [{
+      nombre: String,
+      distancia: String
+    }]
   },
   disponibilidad: {
     fechaInicio: Date,
@@ -158,6 +201,41 @@ const AirbnbSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
+  // Reseñas de turistas
+  reviews: [{
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: true
+    },
+    nombreUsuario: {
+      type: String,
+      required: true
+    },
+    rating: {
+      type: Number,
+      required: true,
+      min: 1,
+      max: 5
+    },
+    comentario: {
+      type: String,
+      required: true
+    },
+    fecha: {
+      type: Date,
+      default: Date.now
+    }
+  }],
+  // Promociones y anuncios (carrusel)
+  promociones: [{
+    titulo: { type: String, trim: true },
+    descripcion: { type: String, maxlength: 500 },
+    imagen: String, // URL o string Base64
+    fechaInicio: Date,
+    fechaFin: Date,
+    activo: { type: Boolean, default: true }
+  }],
   // 🌿 NUEVO CAMPO: Etiqueta de alojamiento ecológico
   esEcologico: {
     type: Boolean,

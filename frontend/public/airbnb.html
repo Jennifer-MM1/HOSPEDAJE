@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Airbnb - Dirección de Turismo</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/auth-navbar.css">
+    
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
     <style>
         * {
             margin: 0;
@@ -23,12 +28,12 @@
         .navbar {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            padding: 1rem 0;
+            padding: 0.75rem 0;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
         }
 
         .nav-container {
@@ -41,9 +46,9 @@
         }
 
         .logo {
-            font-size: 1.8rem;
+            font-size: 1.4rem;
             font-weight: bold;
-           color: var(--gray-800); 
+            color: var(--gray-800);
             text-decoration: none;
             display: flex;
             align-items: center;
@@ -51,17 +56,17 @@
         }
 
         .logo-image {
-    width: 45px;
-    height: 45px;
-    object-fit: contain;
-    border-radius: var(--radius-sm);
-    background: var(--white);
-    padding: 3px;
-    box-shadow: var(--shadow-sm);
-    border: 2px solid var(--gray-200);
-    transition: var(--transition);
-    flex-shrink: 0;
-}
+            width: 45px;
+            height: 45px;
+            object-fit: contain;
+            border-radius: var(--radius-sm);
+            background: var(--white);
+            padding: 3px;
+            box-shadow: var(--shadow-sm);
+            border: none;
+            transition: var(--transition);
+            flex-shrink: 0;
+        }
 
         .mobile-menu-toggle {
             display: none;
@@ -76,14 +81,14 @@
         }
 
         .mobile-menu-toggle:hover {
-            background: rgba(76, 175, 80, 0.1);
-            color: #4CAF50;
+            background: #f4f4f5;
+            color: #2563eb;
         }
 
         .nav-menu {
             display: flex;
             list-style: none;
-            gap: 2rem;
+            gap: 1.5rem;
             align-items: center;
         }
 
@@ -93,20 +98,22 @@
 
         .nav-link {
             text-decoration: none;
-            color: #333;
+            color: #52525b;
             font-weight: 500;
             padding: 0.5rem 1rem;
-            border-radius: 25px;
-            transition: all 0.3s ease;
+            border-radius: 8px;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            font-size: 0.95rem;
         }
 
-        .nav-link:hover, .nav-link.active {
-            background: linear-gradient(135deg, #4CAF50, #45a049);
-            color: white;
-            transform: translateY(-2px);
+        .nav-link:hover,
+        .nav-link.active {
+            background: #f4f4f5;
+            color: #2563eb;
+            transform: translateY(-1px);
         }
 
         .dropdown {
@@ -119,14 +126,14 @@
             left: 0;
             background: white;
             min-width: 200px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
             border-radius: 15px;
             opacity: 0;
             visibility: hidden;
             transform: translateY(-10px);
             transition: all 0.3s ease;
             z-index: 1001;
-            padding: 1rem 0;
+            padding: 0.75rem 0;
         }
 
         .dropdown:hover .dropdown-menu {
@@ -144,15 +151,41 @@
             border-left: 3px solid transparent;
         }
 
-        .dropdown-item:hover, .dropdown-item.active {
-            background: linear-gradient(135deg, #4CAF50, #45a049);
-            color: white;
-            border-left: 3px solid #fff;
+        .dropdown-item:hover,
+        .dropdown-item.active {
+            background: #fafafa;
+            color: #2563eb;
+            border-left: 3px solid #2563eb;
         }
 
         .auth-buttons {
             display: flex;
             gap: 1rem;
+            align-items: center;
+        }
+
+        /* Boton de cerrar movil */
+        .mobile-close-btn {
+            display: none;
+            justify-content: flex-end;
+            padding: 1rem;
+            border-bottom: 1px solid #e4e4e7;
+        }
+
+        .close-menu-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #3f3f46;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .close-menu-btn:hover {
+            background: #f4f4f5;
+            color: #2563eb;
         }
 
         .btn {
@@ -166,15 +199,17 @@
         }
 
         .btn-login {
-            background: transparent;
-            color: #4CAF50;
-            border: 2px solid #4CAF50;
+            background: #2563eb;
+            color: white;
+            border: 1px solid #2563eb;
+            border-radius: 8px;
         }
 
         .btn-login:hover {
-            background: #4CAF50;
+            background: #1d4ed8;
             color: white;
             transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.2);
         }
 
         .mobile-overlay {
@@ -231,6 +266,9 @@
             align-items: center;
             justify-content: center;
             gap: 1rem;
+            /* AOS Override for initial load effect */
+            opacity: 1 !important;
+            transform: translateY(0) !important;
         }
 
         .page-header p {
@@ -242,7 +280,7 @@
         .search-section {
             background: white;
             padding: 3rem 2rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
 
         .search-container {
@@ -348,14 +386,16 @@
         }
 
         @keyframes spin {
-            to { transform: rotate(360deg); }
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         /* Airbnb Grid */
         .airbnb-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
+            gap: 1.5rem;
             margin-top: 2rem;
         }
 
@@ -364,14 +404,14 @@
             background: white;
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
             position: relative;
         }
 
         .airbnb-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
         }
 
         /* Slider de imágenes para las tarjetas */
@@ -624,7 +664,7 @@
             pointer-events: none;
         }
 
-        .airbnb-badges > * {
+        .airbnb-badges>* {
             pointer-events: auto;
         }
 
@@ -657,10 +697,13 @@
         }
 
         @keyframes pulse-eco {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: scale(1);
                 box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
             }
+
             50% {
                 transform: scale(1.05);
                 box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
@@ -679,7 +722,7 @@
         }
 
         .rating-badge {
-            background: rgba(0,0,0,0.7);
+            background: rgba(0, 0, 0, 0.7);
             color: white;
             padding: 6px 10px;
             border-radius: 15px;
@@ -723,6 +766,7 @@
             line-height: 1.5;
             display: -webkit-box;
             -webkit-line-clamp: 3;
+            line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
@@ -1292,20 +1336,29 @@
                 display: block;
             }
 
+            .mobile-close-btn {
+                display: flex;
+            }
+
             .nav-menu {
                 position: fixed;
                 top: 0;
                 right: -100%;
-                width: 320px;
+                width: 90vw;
+                max-width: 320px;
                 height: 100vh;
                 background: rgba(255, 255, 255, 0.98);
                 backdrop-filter: blur(20px);
                 flex-direction: column;
                 align-items: flex-start;
-                padding: 2rem 1rem;
-                transition: all 0.3s ease;
+                justify-content: flex-start;
+                gap: 0;
+                padding: 0;
+                transition: all 0.4s ease;
+                overflow-y: auto;
                 z-index: 1000;
-                box-shadow: -5px 0 20px rgba(0,0,0,0.1);
+                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+                border-left: 1px solid #e4e4e7;
             }
 
             .nav-menu.active {
@@ -1347,39 +1400,41 @@
 
             .auth-buttons {
                 width: 100%;
-                margin-top: 1rem;
-                padding-top: 1rem;
-                border-top: 1px solid rgba(0,0,0,0.1);
+                padding: 1.5rem 2rem;
+                margin-top: auto;
+                border-top: 2px solid #e4e4e7;
+                background: #fafafa;
             }
 
-            .btn {
+            .btn-login {
                 width: 100%;
+                text-align: center;
                 justify-content: center;
             }
 
             .modal-grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .airbnb-grid {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
                 margin-top: 1.5rem;
             }
-            
+
             .search-form {
                 grid-template-columns: 1fr;
             }
-            
+
             .section-header {
                 flex-direction: column;
                 align-items: stretch;
             }
-            
+
             .services-grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .payment-methods {
                 grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
             }
@@ -1387,7 +1442,7 @@
             .airbnb-image-slider {
                 height: 220px;
             }
-            
+
             .airbnb-content {
                 padding: 1.25rem;
             }
@@ -1402,13 +1457,13 @@
             .page-header h1 {
                 font-size: 2rem;
             }
-            
+
             .airbnb-footer {
                 flex-direction: column;
                 gap: 1rem;
                 align-items: stretch;
             }
-            
+
             .capacity-info {
                 justify-content: center;
             }
@@ -1417,15 +1472,15 @@
                 margin: 10px;
                 max-height: 95vh;
             }
-            
+
             .modal-header {
                 padding: 20px;
             }
-            
+
             .modal-airbnb-name {
                 font-size: 20px;
             }
-            
+
             .modal-content {
                 padding: 20px;
             }
@@ -1440,19 +1495,183 @@
             .airbnb-image-slider {
                 height: 200px;
             }
-            
+
             .airbnb-content {
                 padding: 1rem;
             }
         }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: #000000;
+            color: #ecf0f1;
+            padding: 3rem 0 1rem 0;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-brand {
+            max-width: 280px;
+        }
+
+        .footer-logo-section {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #ecf0f1;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo-section i {
+            font-size: 1.6rem;
+            color: #2563eb;
+        }
+
+        .footer-description {
+            color: #bdc3c7;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .footer-social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: #2563eb;
+            color: white;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .footer-social-link:hover {
+            background: #3b82f6;
+            transform: translateY(-2px);
+        }
+
+        .footer-section h3 {
+            color: #ecf0f1;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            display: block;
+            padding: 0.25rem 0;
+        }
+
+        .footer-links a:hover {
+            color: #3b82f6;
+            padding-left: 0.5rem;
+        }
+
+        .footer-contact-info {
+            font-size: 0.9rem;
+        }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            color: #bdc3c7;
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-contact-item i {
+            color: #3b82f6;
+            width: 16px;
+            margin-top: 0.1rem;
+            flex-shrink: 0;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #34495e;
+            padding-top: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-copyright {
+            color: #95a5a6;
+            font-size: 0.85rem;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-bottom-links a {
+            color: #95a5a6;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-bottom-links a:hover {
+            color: #3b82f6;
+        }
+
+        @media (max-width: 768px) {
+            .footer-content-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: left;
+            }
+        }
     </style>
 </head>
+
 <body>
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
             <a href="index.html" class="logo">
-             <img src="/img_jalpan/logo_pueblos_magicos.jpg" alt="Logo Turismo" class="logo-image">
+                <img src="/img_jalpan/logo_pueblos_magicos.jpg" alt="Logo Turismo" class="logo-image">
                 Dirección de Turismo
             </a>
 
@@ -1460,63 +1679,63 @@
             <button class="mobile-menu-toggle" id="mobileMenuToggle">
                 <i class="fas fa-bars"></i>
             </button>
-            
+
             <!-- Menú de navegación -->
             <ul class="nav-menu" id="navMenu">
+                <!-- Boton cerrar (solo movil) -->
+                <li class="nav-item mobile-close-btn">
+                    <button class="close-menu-btn" id="closeMenuBtn">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </li>
                 <li class="nav-item">
                     <a href="index.html" class="nav-link">
-                      
+
                         Inicio
                     </a>
                 </li>
-                
-                <li class="nav-item dropdown" id="hospedajeDropdown">
-                    <a href="#" class="nav-link active">
-                       
-                        Hospedaje
-                        <i class="fas fa-chevron-down"></i>
+
+                <li class="nav-item">
+                    <a href="mapa.html" class="nav-link">
+
+                        Mapa
                     </a>
-                    <div class="dropdown-menu">
-                        <a href="hoteles.html" class="dropdown-item">
-                         
-                            Hoteles
-                        </a>
-                        <a href="cabanas.html" class="dropdown-item">
-                         
-                            Cabañas
-                        </a>
-                        <a href="airbnb.html" class="dropdown-item active">
-                         
-                            Airbnb
-                        </a>
-                    </div>
                 </li>
-                
+
+                <li class="nav-item">
+                    <a href="hospedaje.html" class="nav-link">
+                        Hospedaje
+                    </a>
+                </li>
+
                 <li class="nav-item">
                     <a href="https://restaurante-web-production-721f.up.railway.app/" class="nav-link">
-                    
+
                         Alimentos
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="tourOperadora.html" class="nav-link">
-                       
-                        Tours
+                    <a href="experiencias.html" class="nav-link">
+
+                        Experiencias
                     </a>
                 </li>
-                
+
+                <!-- Selector de Idiomas -->
                 <li class="nav-item">
-                    <a href="guias.html" class="nav-link">
-                 
-                        Guías
-                    </a>
+                    <select id="lang-select" class="form-control"
+                        style="padding: 0.5rem; border-radius: 5px; border: 1px solid #ccc; font-weight: bold; cursor: pointer; background: white;">
+                        <option value="ES">🇪🇸 ES</option>
+                        <option value="EN">🇺🇸 EN</option>
+                        <option value="FR">🇫🇷 FR</option>
+                    </select>
+                </li>
+
+                <li class="nav-item auth-buttons">
+                    <a href="login.html" class="btn btn-login">Iniciar Sesión</a>
                 </li>
             </ul>
-            
-            <div class="auth-buttons">
-                <a href="login.html" class="btn btn-login">Iniciar Sesión</a>
-            </div>
         </div>
     </nav>
 
@@ -1526,20 +1745,20 @@
     <!-- Page Header -->
     <section class="page-header">
         <div class="page-header-content">
-            <h1><i class="fas fa-home"></i> Airbnb</h1>
-            <p>Descubre alojamientos únicos y auténticos. Vive como un local en cada destino.</p>
+            <h1 data-aos="fade-up" data-aos-duration="1000"><i class="fas fa-home"></i> Airbnb</h1>
+            <p data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">Descubre alojamientos únicos y auténticos. Vive como un local en cada destino.</p>
         </div>
     </section>
 
     <!-- Search and Filters -->
-    <section class="search-section">
+    <section class="search-section" data-aos="fade-up" data-aos-delay="400">
         <div class="search-container">
             <form class="search-form" id="searchForm">
                 <div class="form-group">
                     <label for="searchQuery">Buscar alojamiento</label>
                     <input type="text" id="searchQuery" class="form-control" placeholder="Nombre del lugar o ciudad...">
                 </div>
-                
+
                 <div class="form-group">
                     <label for="priceRange">Precio máximo</label>
                     <select id="priceRange" class="form-control">
@@ -1551,7 +1770,7 @@
                         <option value="3000">Hasta $3,000</option>
                     </select>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="guestFilter">Huéspedes</label>
                     <select id="guestFilter" class="form-control">
@@ -1563,7 +1782,7 @@
                         <option value="8">8 o más huéspedes</option>
                     </select>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="propertyType">Tipo de propiedad</label>
                     <select id="propertyType" class="form-control">
@@ -1577,7 +1796,7 @@
                         <option value="zona_camping">Zona de Camping</option>
                     </select>
                 </div>
-                
+
                 <button type="submit" class="btn-search">
                     <i class="fas fa-search"></i>
                     Buscar
@@ -1588,7 +1807,7 @@
 
     <!-- Airbnb Section -->
     <section class="airbnb-section">
-        <div class="section-header">
+        <div class="section-header" data-aos="fade-up">
             <div class="results-info" id="resultsInfo">
                 Cargando alojamientos...
             </div>
@@ -1620,20 +1839,94 @@
         </div>
 
         <!-- Airbnb Grid -->
-        <div class="airbnb-grid" id="airbnbGrid">
+        <div class="airbnb-grid" id="airbnbGrid" data-aos="fade-up" data-aos-delay="200">
             <!-- Los alojamientos se cargarán aquí dinámicamente -->
         </div>
     </section>
-
     <!-- Footer -->
     <footer class="footer">
-        <div class="footer-content">
-            <div class="logo">
-                <i class="fas fa-compass"></i>
-                Dirección de Turismo
+        <div class="footer-container">
+            <div class="footer-content-grid">
+                <!-- Sección principal -->
+                <div class="footer-brand">
+                    <div class="footer-logo-section">
+                        <img src="/img_jalpan/logo_fondo_negro.png" alt="Logo Turismo" class="logo-image"
+                            style="width: 40px; height: 40px; background: black;">
+                        Dirección de Turismo
+                    </div>
+                    <p class="footer-description">
+                        Conectamos a las personas con los mejores destinos, alojamientos y experiencias gastronómicas de
+                        Jalpan de Serra, Pueblo Mágico.
+                    </p>
+                    <div class="footer-social">
+                        <a href="https://www.facebook.com/profile.php?id=61573849871475" class="footer-social-link"
+                            title="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.instagram.com/jalpan_pueblomagico?igsh=MWpmdDVnMndpbnB1dQ=="
+                            class="footer-social-link" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Navegación -->
+                <div class="footer-section">
+                    <h3>Navegación</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://restaurante-web-production-721f.up.railway.app/">Alimentos</a></li>
+                        <li><a href="hospedaje.html">Hospedaje</a></li>
+                        <li><a href="experiencias.html">Experiencias</a></li>
+                        <li><a href="mapa.html">Mapa</a></li>
+                    </ul>
+                </div>
+
+                <!-- Soporte: Política -->
+                <div class="footer-section">
+                    <h3>Soporte: Política</h3>
+                    <ul class="footer-links">
+                        <li><a href="#gastronomia">Gastronomía Local</a></li>
+                        <li><a href="#atractivos">Atractivos Naturales</a></li>
+                        <li><a href="#misiones">Misiones Franciscanas</a></li>
+                        <li><a href="#cultura">Historia y Cultura</a></li>
+                        <li><a href="#eventos">Eventos Especiales</a></li>
+                        <li><a href="#tradiciones">Tradiciones</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contacto -->
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <div class="footer-contact-info">
+                        <div class="footer-contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>direcciondeturismojalpan@gmail.com</span>
+                        </div>
+                        <div class="footer-contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+52 441-296-0285</span>
+                        </div>
+                        <div class="footer-contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Plaza Principal, Jalpan de Serra, Querétaro</span>
+                        </div>
+                        <div class="footer-contact-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Lun - Vie: 8:00 AM - 3:30 PM</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <p>&copy; 2024 Dirección de Turismo de Jalpan de Serra. Todos los derechos reservados.</p>
-            <p>Promoviendo el desarrollo turístico de nuestra región</p>
+
+            <!-- Línea inferior -->
+            <div class="footer-bottom">
+                <p class="footer-copyright">
+                    © 2024 Dirección de Turismo - Jalpan de Serra. Todos los derechos reservados.
+                </p>
+                <div class="footer-bottom-links">
+                    <a href="https://www.facebook.com/jenni.munoz.5011">Desarrollado por</a>
+                </div>
+            </div>
         </div>
     </footer>
 
@@ -1641,31 +1934,31 @@
         // Variables globales
         let allAirbnb = [];
         let filteredAirbnb = [];
-        
+
         // Variables para los sliders
         let cardSliders = {};
         let currentModalImages = [];
         let currentModalImageIndex = 0;
 
         // URL base dinámica
-        const baseURL = window.location.hostname === 'localhost' 
-            ? 'http://localhost:5000/api' 
+        const baseURL = window.location.hostname === 'localhost'
+            ? 'http://localhost:5000/api'
             : '/api';
 
         // Función para construir URLs de imágenes
         function getImageUrl(imagePath) {
             console.log('🔍 getImageUrl recibió:', imagePath);
-            
+
             if (!imagePath) {
                 console.log('⚠️ No hay imagen, usando por defecto');
                 return 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
             }
-            
+
             if (imagePath.startsWith('http')) {
                 console.log('✅ URL completa:', imagePath);
                 return imagePath;
             }
-            
+
             const finalUrl = `${baseURL.replace('/api', '')}${imagePath}`;
             console.log('✅ URL construida:', finalUrl);
             return finalUrl;
@@ -1673,7 +1966,7 @@
 
         // Manejo global de errores de imágenes
         function addImageErrorHandling() {
-            document.addEventListener('error', function(e) {
+            document.addEventListener('error', function (e) {
                 if (e.target.tagName === 'IMG') {
                     console.warn('Error cargando imagen:', e.target.src);
                     e.target.src = 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
@@ -1690,13 +1983,13 @@
         const sortBy = document.getElementById('sortBy');
 
         // Cargar datos al iniciar la página
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             console.log('🚀 Iniciando airbnb.html con menú corregido...');
-            
+
             addImageErrorHandling();
             loadAirbnbData();
             setupEventListeners();
-            
+
             // Configuración del menú móvil
             const mobileMenuToggle = document.getElementById('mobileMenuToggle');
             const navMenu = document.getElementById('navMenu');
@@ -1707,7 +2000,7 @@
             mobileMenuToggle.addEventListener('click', () => {
                 navMenu.classList.toggle('active');
                 mobileOverlay.classList.toggle('active');
-                
+
                 // Cambiar icono
                 const icon = mobileMenuToggle.querySelector('i');
                 if (navMenu.classList.contains('active')) {
@@ -1722,12 +2015,18 @@
             // Cerrar menú al hacer click en overlay
             mobileOverlay.addEventListener('click', closeMenu);
 
+            // Cerrar menú con botón X
+            const closeMenuBtn = document.getElementById('closeMenuBtn');
+            if (closeMenuBtn) {
+                closeMenuBtn.addEventListener('click', closeMenu);
+            }
+
             // Función para cerrar el menú
             function closeMenu() {
                 navMenu.classList.remove('active');
                 mobileOverlay.classList.remove('active');
                 hospedajeDropdown.classList.remove('active');
-                
+
                 const icon = mobileMenuToggle.querySelector('i');
                 icon.classList.remove('fa-times');
                 icon.classList.add('fa-bars');
@@ -1758,8 +2057,8 @@
             // Cerrar menú al hacer click en enlaces principales
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.addEventListener('click', (e) => {
-                    if (window.innerWidth <= 768 && 
-                        !e.target.closest('#hospedajeDropdown') && 
+                    if (window.innerWidth <= 768 &&
+                        !e.target.closest('#hospedajeDropdown') &&
                         !e.target.closest('.dropdown-item')) {
                         closeMenu();
                     }
@@ -1776,7 +2075,7 @@
 
         // Configurar event listeners
         function setupEventListeners() {
-            searchForm.addEventListener('submit', function(e) {
+            searchForm.addEventListener('submit', function (e) {
                 e.preventDefault();
                 filterAirbnb();
             });
@@ -1806,14 +2105,14 @@
             try {
                 showLoading();
                 const response = await fetch(`${baseURL}/airbnb`);
-                
+
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
-                
+
                 const data = await response.json();
                 console.log('Datos recibidos:', data);
-                
+
                 if (data.status === 'success' && data.data && data.data.alojamientos) {
                     allAirbnb = data.data.alojamientos;
                     filteredAirbnb = [...allAirbnb];
@@ -1852,15 +2151,15 @@
             const propertyType = document.getElementById('propertyType').value;
 
             filteredAirbnb = allAirbnb.filter(alojamiento => {
-                const matchesSearch = !searchQuery || 
+                const matchesSearch = !searchQuery ||
                     alojamiento.nombre?.toLowerCase().includes(searchQuery) ||
                     alojamiento.ubicacion?.ciudad?.toLowerCase().includes(searchQuery) ||
                     alojamiento.ubicacion?.direccion?.toLowerCase().includes(searchQuery);
 
-                const matchesPrice = !priceRange || 
+                const matchesPrice = !priceRange ||
                     (alojamiento.precioPorNoche && alojamiento.precioPorNoche <= parseInt(priceRange));
 
-                const matchesGuests = !guestFilter || 
+                const matchesGuests = !guestFilter ||
                     (alojamiento.capacidad?.huespedes && alojamiento.capacidad.huespedes >= parseInt(guestFilter));
 
                 const matchesType = !propertyType || alojamiento.tipoPropiedad === propertyType;
@@ -1903,10 +2202,10 @@
                     </div>
                 `;
             } else {
-                airbnbGrid.innerHTML = filteredAirbnb.map(createAirbnbCard).join('');
+                airbnbGrid.innerHTML = filteredAirbnb.map((alojamiento, index) => createAirbnbCard(alojamiento, index)).join('');
                 initializeCardSliders();
             }
-            
+
             updateResultsInfo();
         }
 
@@ -1923,14 +2222,14 @@
         }
 
         // Crear tarjeta de Airbnb con slider
-        function createAirbnbCard(alojamiento) {
+        function createAirbnbCard(alojamiento, index) {
             const precio = alojamiento.precioPorNoche || 0;
             const rating = alojamiento.rating || 0;
             const ciudad = alojamiento.ubicacion?.ciudad || 'Ciudad no especificada';
             const servicios = alojamiento.servicios?.slice(0, 3) || [];
             const tipo = formatTipoPropiedad(alojamiento.tipoPropiedad);
             const images = alojamiento.imagenes || [];
-            
+
             let capacidadInfo = '';
             if (alojamiento.tipoPropiedad === 'zona_camping') {
                 capacidadInfo = `<span><i class="fas fa-users"></i> Máx. ${alojamiento.capacidad?.maxPersonas || alojamiento.capacidad?.huespedes || 'N/A'} personas</span>`;
@@ -1940,9 +2239,12 @@
                     <span><i class="fas fa-users"></i> ${alojamiento.capacidad?.huespedes || 0} huéspedes</span>
                 `;
             }
+            
+            // Calculate delay based on index for cascade effect
+            const delay = (index % 4) * 100 + 100;
 
             return `
-                <div class="airbnb-card">
+                <div class="airbnb-card" data-aos="fade-up" data-aos-delay="${delay}">
                     <div class="airbnb-image-slider">
                         <img class="airbnb-main-image" 
                              src="${getImageUrl(images[0])}" 
@@ -2013,10 +2315,15 @@
                                 ${alojamiento.contacto?.email ? `<a href="mailto:${alojamiento.contacto.email}" class="contact-btn" title="Email"><i class="fas fa-envelope"></i></a>` : ''}
                             </div>
                             
-                            <button class="view-details-btn" onclick="event.stopPropagation(); openAirbnbModal('${alojamiento._id}')">
-                                <i class="fas fa-info-circle"></i>
-                                Ver detalles
-                            </button>
+                            <div style="display:flex;gap:8px;align-items:center;">
+                                <a href="hospedaje-detalle.html?tipo=airbnb&id=${alojamiento._id}" class="view-details-btn" onclick="event.stopPropagation();" style="text-decoration:none;">
+                                    <i class="fas fa-eye"></i>
+                                    Ver detalles
+                                </a>
+                                <button class="view-details-btn" onclick="event.stopPropagation(); openAirbnbModal('${alojamiento._id}')" style="padding:10px 12px;border-radius:50%;background:#f0f0f0;color:#555;box-shadow:none;min-width:auto;">
+                                    <i class="fas fa-info-circle" style="margin:0;"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2027,22 +2334,22 @@
         function changeCardImage(alojamientoId, direction) {
             const slider = cardSliders[alojamientoId];
             if (!slider || slider.images.length <= 1) return;
-            
+
             slider.currentIndex += direction;
-            
+
             if (slider.currentIndex >= slider.images.length) {
                 slider.currentIndex = 0;
             } else if (slider.currentIndex < 0) {
                 slider.currentIndex = slider.images.length - 1;
             }
-            
+
             const img = document.getElementById(`cardImage_${alojamientoId}`);
             const counter = document.getElementById(`cardCounter_${alojamientoId}`);
-            
+
             if (img) {
                 img.src = getImageUrl(slider.images[slider.currentIndex]);
             }
-            
+
             if (counter) {
                 counter.textContent = `${slider.currentIndex + 1} / ${slider.images.length}`;
             }
@@ -2052,11 +2359,11 @@
         function initializeModalImageSlider(images) {
             currentModalImages = images || [];
             currentModalImageIndex = 0;
-            
+
             if (currentModalImages.length === 0) {
                 return;
             }
-            
+
             updateModalMainImage();
             updateModalNavigationButtons();
         }
@@ -2065,16 +2372,16 @@
         function updateModalMainImage() {
             const mainImage = document.getElementById('modalMainImage');
             const counter = document.getElementById('modalImageCounter');
-            
+
             if (mainImage && currentModalImages.length > 0) {
                 const currentImageUrl = getImageUrl(currentModalImages[currentModalImageIndex]);
                 mainImage.src = currentImageUrl;
                 mainImage.alt = `Imagen ${currentModalImageIndex + 1} del alojamiento`;
-                
+
                 if (counter) {
                     counter.textContent = `${currentModalImageIndex + 1} / ${currentModalImages.length}`;
                 }
-                
+
                 updateModalActiveThumbnail();
             }
         }
@@ -2085,7 +2392,7 @@
             thumbnails.forEach((thumb, index) => {
                 thumb.classList.toggle('active', index === currentModalImageIndex);
             });
-            
+
             const activeThumb = document.querySelector('.modal-thumbnail.active');
             if (activeThumb) {
                 activeThumb.scrollIntoView({
@@ -2100,7 +2407,7 @@
         function updateModalNavigationButtons() {
             const prevBtn = document.getElementById('modalPrevBtn');
             const nextBtn = document.getElementById('modalNextBtn');
-            
+
             if (prevBtn) {
                 prevBtn.disabled = currentModalImages.length <= 1;
             }
@@ -2112,15 +2419,15 @@
         // Cambiar imagen en modal
         function changeModalImage(direction) {
             if (currentModalImages.length <= 1) return;
-            
+
             currentModalImageIndex += direction;
-            
+
             if (currentModalImageIndex >= currentModalImages.length) {
                 currentModalImageIndex = 0;
             } else if (currentModalImageIndex < 0) {
                 currentModalImageIndex = currentModalImages.length - 1;
             }
-            
+
             updateModalMainImage();
         }
 
@@ -2148,7 +2455,7 @@
                     </div>
                 `;
             }
-            
+
             return `
                 <div class="modal-gallery-section">
                     <h3 class="gallery-title">
@@ -2197,13 +2504,13 @@
         // Formatear tipo de propiedad
         function formatTipoPropiedad(tipo) {
             if (!tipo) return 'No especificado';
-            
+
             const tipos = {
                 'cabaña': 'Cabaña',
-                'casa': 'Casa', 
+                'casa': 'Casa',
                 'zona_camping': 'Zona de Camping'
             };
-            
+
             return tipos[tipo] || tipo.charAt(0).toUpperCase() + tipo.slice(1);
         }
 
@@ -2251,19 +2558,19 @@
                     </div>
                 `;
             }
-            
+
             const iconosMetodos = {
                 'efectivo': 'fas fa-money-bill-wave',
                 'transferencia': 'fas fa-university',
                 'tarjeta': 'fas fa-credit-card'
             };
-            
+
             const nombresMetodos = {
                 'efectivo': 'Efectivo',
                 'transferencia': 'Transferencia',
                 'tarjeta': 'Tarjeta'
             };
-            
+
             return metodos.map(metodo => `
                 <div class="payment-method">
                     <div class="payment-icon">
@@ -2278,7 +2585,7 @@
         function openAirbnbModal(alojamientoId) {
             const alojamiento = allAirbnb.find(a => a._id === alojamientoId);
             if (!alojamiento) return;
-            
+
             const telefono = alojamiento.contacto?.telefono || 'No disponible';
             const email = alojamiento.contacto?.email || 'No disponible';
             const horario = alojamiento.contacto?.horario || 'No especificado';
@@ -2286,9 +2593,9 @@
             const todosServicios = alojamiento.servicios || [];
             const metodosPago = alojamiento.metodosPago || [];
             const images = alojamiento.imagenes || [];
-            
+
             const disponible = alojamiento.disponible !== false;
-            
+
             const practicasEcologicas = alojamiento.esEcologico ? [
                 'Uso de energías renovables',
                 'Reciclaje y separación de residuos',
@@ -2505,11 +2812,11 @@
                     </div>
                 </div>
             `;
-            
+
             document.body.insertAdjacentHTML('beforeend', modalHTML);
-            
+
             initializeModalImageSlider(images);
-            
+
             setTimeout(() => {
                 document.getElementById('airbnbModalOverlay').classList.add('show');
             }, 10);
@@ -2535,7 +2842,7 @@
         function updateResultsInfo() {
             const count = filteredAirbnb.length;
             const total = allAirbnb.length;
-            
+
             if (count === total) {
                 resultsInfo.textContent = `Mostrando ${count} alojamiento${count !== 1 ? 's' : ''}`;
             } else {
@@ -2544,7 +2851,7 @@
         }
 
         // Cerrar modal al presionar Escape
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape') {
                 closeAirbnbModal();
             }
@@ -2552,5 +2859,21 @@
 
         console.log('✅ Airbnb cargado con menú y slider funcionando correctamente');
     </script>
+    <script src="js/translation.js"></script>
+    <script src="js/auth-navbar.js"></script>
+
+    <!-- AOS Script -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                once: true, // Animates only once
+                offset: 50, // Trigger offset
+                duration: 800, // Animation duration
+                easing: 'ease-out-cubic' // Easing curve
+            });
+        });
+    </script>
 </body>
+
 </html>

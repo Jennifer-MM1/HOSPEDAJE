@@ -1636,15 +1636,16 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(5px);
+    overflow-y: auto; /* Permite scroll a todo el contenedor modal */
+    padding: 5vh 0; /* Agrega espaciado arriba y abajo de la ventana modal */
 }
 .modal-content {
     background-color: white;
-    margin: 2% auto;
+    margin: 0 auto;
     border-radius: 15px;
     width: 90%;
     max-width: 600px;
-    max-height: 90vh;
-    overflow-y: auto;
+    /* Se elimina max-height y overflow-y para que crezca y haga scroll en .modal */
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 }
 .modal-header {

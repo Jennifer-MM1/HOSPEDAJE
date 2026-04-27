@@ -36,8 +36,8 @@ app.use('/img_jalpan', express.static(path.join(__dirname, '../img_jalpan')));
 
 // ✅ Test API súper directo
 app.get('/api/test', (req, res) => {
-  res.json({ 
-    message: 'API test directo funcionando', 
+  res.json({
+    message: 'API test directo funcionando',
     status: 'success',
     timestamp: new Date().toISOString()
   });
@@ -52,6 +52,24 @@ app.use('/api/tours', require('./routes/tourOperadoraRoutes'));
 app.use('/api/guias', require('./routes/guiaTuristicaRoutes'));
 app.use('/api/cuestionarios', require('./routes/cuestionarioRoutes'));
 app.use('/api/super-admin', require('./routes/superAdminRoutes'));
+app.use('/api/translate', require('./routes/translateRoutes'));
+app.use('/api/ignored-words', require('./routes/ignoredWordRoutes'));
+app.use('/api/user', require('./routes/touristRoutes'));
+
+// ✅ Experiencias del compañero (acceso público)
+app.get('/api/experiencias-partner', async (req, res) => {
+    try {
+        const PartnerTour = require('./models/PartnerTour');
+        const limit = parseInt(req.query.limit) || 6;
+        const tours = await PartnerTour.find({ activo: true })
+            .select('nombre categoria tipo imagenPrincipal imagenes slug')
+            .limit(limit);
+        res.json({ success: true, data: tours });
+    } catch (error) {
+        console.error('Error fetching partner tours:', error);
+        res.status(500).json({ success: false, message: 'Error al obtener experiencias' });
+    }
+});
 
 // ✅ Ruta principal
 app.get('/', (req, res) => {

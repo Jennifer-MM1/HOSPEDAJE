@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const cabanaController = require('../controllers/cabanaController');
 const authMiddleware = require('../middlewares/authMiddleware');
 const Cabana = require('../models/Cabana');
@@ -27,6 +28,9 @@ const uploadCabanaImages = multer({
 
 // ===== RUTAS PÚBLICAS =====
 router.get('/', cabanaController.getAllCabanas);
+// ⚠️ Regex para que solo coincida con ObjectIds válidos (24 caracteres hex)
+// Evita que rutas como /mis-cabanas sean capturadas por este handler
+router.get('/:id([0-9a-fA-F]{24})', cabanaController.getCabana);
 
 // ===== RUTAS PROTEGIDAS =====
 router.use(authMiddleware.protect);
@@ -59,10 +63,10 @@ router.get('/:cabanaId/images', authMiddleware.restrictTo('admin'), async (req, 
   try {
     const { cabanaId } = req.params;
 
-    const cabana = await Cabana.findOne({ 
+    const cabana = await Cabana.findOne({
       _id: cabanaId,
       propietario: req.user.id,
-      activo: true 
+      activo: true
     });
 
     if (!cabana) {
@@ -91,65 +95,83 @@ router.get('/:cabanaId/images', authMiddleware.restrictTo('admin'), async (req, 
   }
 });
 
-// 📤 Subir nuevas imágenes usando Cloudinary
-router.post('/:cabanaId/images/upload', authMiddleware.restrictTo('admin'), 
-  uploadCabanaImages.array('images'), async (req, res) => {
+// 🏷️ Middleware para cargar el nombre de la cabaña antes de multer
+const loadCabanaNombre = async (req, res, next) => {
   try {
     const { cabanaId } = req.params;
-    const files = req.files;
-
-    if (!files || files.length === 0) {
-      return res.status(400).json({
-        status: 'error',
-        message: 'No se recibieron archivos'
-      });
-    }
-
-    const cabana = await Cabana.findOne({ 
+    const cabana = await Cabana.findOne({
       _id: cabanaId,
       propietario: req.user.id,
-      activo: true 
+      activo: true
     });
-
     if (!cabana) {
-      return res.status(404).json({
+      return res.status(404).json({ status: 'error', message: 'No se encontró cabaña asociada o no tienes permisos' });
+    }
+    req.hospedajeNombre = cabana.nombre; // ← nombre disponible para CloudinaryStorage
+    req.hospedaje = cabana;              // ← guardamos el objeto completo para reusar
+    next();
+  } catch (err) {
+    next(err);
+  }
+};
+
+// 📤 Subir nuevas imágenes usando Cloudinary
+router.post('/:cabanaId/images/upload', authMiddleware.restrictTo('admin'),
+  loadCabanaNombre,
+  uploadCabanaImages.array('images'), async (req, res) => {
+    try {
+      const { cabanaId } = req.params;
+      const files = req.files;
+
+      if (!files || files.length === 0) {
+        return res.status(400).json({
+          status: 'error',
+          message: 'No se recibieron archivos'
+        });
+      }
+
+      const cabana = req.hospedaje; // ← cargado por el middleware loadCabanaNombre
+
+      // Obtener URLs de Cloudinary de los archivos subidos
+      // Con Cloudinary: file.secure_url tiene la URL https://res.cloudinary.com/...
+      // Con almacenamiento local (fallback): file.path es ruta absoluta, se convierte a relativa
+      const imageUrls = files.map(file => {
+        if (file.secure_url) return file.secure_url;
+        if (file.path && (file.path.match(/^[A-Za-z]:\\/i) || file.path.includes('\\'))) {
+          return '/uploads/cabanas/' + path.basename(file.path);
+        }
+        return file.path;
+      });
+
+      // Agregar a la base de datos
+      if (!cabana.imagenes) {
+        cabana.imagenes = [];
+      }
+      cabana.imagenes.push(...imageUrls);
+      cabana.updatedAt = new Date();
+
+      await cabana.save();
+
+      console.log(`✅ ${files.length} imágenes agregadas a cabaña ${cabana.nombre}`);
+
+      res.json({
+        status: 'success',
+        message: `${files.length} imagen(es) subida(s) exitosamente`,
+        data: {
+          totalImagenes: cabana.imagenes.length,
+          nuevasImagenes: imageUrls
+        }
+      });
+
+    } catch (error) {
+      console.error('❌ Error subiendo imágenes de cabaña:', error);
+      res.status(500).json({
         status: 'error',
-        message: 'No se encontró cabaña asociada o no tienes permisos'
+        message: 'Error del servidor al subir imágenes',
+        error: error.message
       });
     }
-
-    // Obtener URLs de Cloudinary de los archivos subidos
-    const imageUrls = files.map(file => file.path);
-
-    // Agregar a la base de datos
-    if (!cabana.imagenes) {
-      cabana.imagenes = [];
-    }
-    cabana.imagenes.push(...imageUrls);
-    cabana.updatedAt = new Date();
-    
-    await cabana.save();
-
-    console.log(`✅ ${files.length} imágenes agregadas a cabaña ${cabana.nombre}`);
-
-    res.json({
-      status: 'success',
-      message: `${files.length} imagen(es) subida(s) exitosamente`,
-      data: {
-        totalImagenes: cabana.imagenes.length,
-        nuevasImagenes: imageUrls
-      }
-    });
-
-  } catch (error) {
-    console.error('❌ Error subiendo imágenes de cabaña:', error);
-    res.status(500).json({
-      status: 'error',
-      message: 'Error del servidor al subir imágenes',
-      error: error.message
-    });
-  }
-});
+  });
 
 // 🗑️ Eliminar una imagen específica
 router.delete('/:cabanaId/images/:index', authMiddleware.restrictTo('admin'), async (req, res) => {
@@ -157,10 +179,10 @@ router.delete('/:cabanaId/images/:index', authMiddleware.restrictTo('admin'), as
     const { cabanaId, index } = req.params;
     const imageIndex = parseInt(index);
 
-    const cabana = await Cabana.findOne({ 
+    const cabana = await Cabana.findOne({
       _id: cabanaId,
       propietario: req.user.id,
-      activo: true 
+      activo: true
     });
 
     if (!cabana) {
@@ -185,17 +207,20 @@ router.delete('/:cabanaId/images/:index', authMiddleware.restrictTo('admin'), as
     }
 
     const imagenAEliminar = cabana.imagenes[imageIndex];
-    
+
     // 🆕 NUEVO: Eliminar imagen de Cloudinary
     try {
-      const cloudinary = require('cloudinary').v2;
-      
-      // Extraer public_id de la URL de Cloudinary
-      const publicId = imagenAEliminar.split('/').pop().split('.')[0];
-      const fullPublicId = `turismo-app/cabanas/${publicId}`;
-      
-      const result = await cloudinary.uploader.destroy(fullPublicId);
-      console.log(`🗑️ Imagen eliminada de Cloudinary:`, result);
+      const cloudinaryLib = require('cloudinary').v2;
+
+      // Extraer public_id completo de la URL de Cloudinary
+      // URL formato: https://res.cloudinary.com/<cloud>/image/upload/v12345/turismo-app/cabanas/<nombre>/<id>.jpg
+      const urlParts = imagenAEliminar.split('/upload/');
+      if (urlParts.length > 1) {
+        const afterUpload = urlParts[1].replace(/^v\d+\//, '');
+        const fullPublicId = afterUpload.replace(/\.[^.]+$/, '');
+        const result = await cloudinaryLib.uploader.destroy(fullPublicId);
+        console.log(`🗑️ Imagen eliminada de Cloudinary (public_id: ${fullPublicId}):`, result);
+      }
     } catch (cloudinaryError) {
       console.warn('⚠️ Error eliminando de Cloudinary (continuando):', cloudinaryError.message);
       // Continuamos aunque falle la eliminación en Cloudinary
@@ -204,7 +229,7 @@ router.delete('/:cabanaId/images/:index', authMiddleware.restrictTo('admin'), as
     // Eliminar de la base de datos
     cabana.imagenes.splice(imageIndex, 1);
     cabana.updatedAt = new Date();
-    
+
     await cabana.save();
 
     console.log(`✅ Imagen eliminada de cabaña ${cabana.nombre}`);
@@ -238,10 +263,10 @@ router.patch('/:cabanaId/images/set-main', authMiddleware.restrictTo('admin'), a
     const { imageIndex } = req.body;
     const index = parseInt(imageIndex);
 
-    const cabana = await Cabana.findOne({ 
+    const cabana = await Cabana.findOne({
       _id: cabanaId,
       propietario: req.user.id,
-      activo: true 
+      activo: true
     });
 
     if (!cabana) {
@@ -280,7 +305,7 @@ router.patch('/:cabanaId/images/set-main', authMiddleware.restrictTo('admin'), a
     cabana.imagenes.splice(index, 1);
     cabana.imagenes.unshift(selectedImage);
     cabana.updatedAt = new Date();
-    
+
     await cabana.save();
 
     console.log(`⭐ Imagen principal actualizada para cabaña ${cabana.nombre}`);
@@ -308,18 +333,24 @@ router.patch('/:cabanaId/images/set-main', authMiddleware.restrictTo('admin'), a
 router.get('/migrate-image-urls', authMiddleware.restrictTo('admin'), async (req, res) => {
   try {
     console.log('🔄 Iniciando migración de URLs de imágenes de cabañas...');
-    
+
     // Buscar todas las cabañas que tengan imágenes
-    const cabanas = await Cabana.find({ 
+    const cabanas = await Cabana.find({
       imagenes: { $exists: true, $ne: [] }
     });
-    
+
     let migrated = 0;
     let totalCabanas = cabanas.length;
-    
+
     for (const cabana of cabanas) {
       let needsUpdate = false;
       const updatedImages = cabana.imagenes.map(img => {
+        // Detectar ruta absoluta de Windows (C:\... o D:\...) o paths con backslash
+        if (img.match(/^[A-Za-z]:\\/i) || img.includes('\\')) {
+          needsUpdate = true;
+          const filename = img.replace(/\\/g, '/').split('/').pop();
+          return '/uploads/cabanas/' + filename;
+        }
         // Si la imagen no empieza con '/' y tampoco es URL completa
         if (!img.startsWith('/') && !img.startsWith('http')) {
           needsUpdate = true;
@@ -327,7 +358,7 @@ router.get('/migrate-image-urls', authMiddleware.restrictTo('admin'), async (req
         }
         return img;
       });
-      
+
       if (needsUpdate) {
         cabana.imagenes = updatedImages;
         await cabana.save();
@@ -335,7 +366,7 @@ router.get('/migrate-image-urls', authMiddleware.restrictTo('admin'), async (req
         console.log(`✅ Migrada cabaña: ${cabana.nombre}`);
       }
     }
-    
+
     res.json({
       status: 'success',
       message: 'Migración completada',
@@ -345,7 +376,7 @@ router.get('/migrate-image-urls', authMiddleware.restrictTo('admin'), async (req
         noMigration: totalCabanas - migrated
       }
     });
-    
+
   } catch (error) {
     console.error('❌ Error en migración:', error);
     res.status(500).json({
@@ -360,10 +391,10 @@ router.get('/migrate-image-urls', authMiddleware.restrictTo('admin'), async (req
 router.patch('/:id/toggle-status', authMiddleware.restrictTo('admin'), async (req, res) => {
   try {
     // Verificar si es super admin
-    const isSuperAdmin = req.user.email === 'superadmin@turismo.com' || 
-                          req.user.email === 'direcciondeturismojalpan@gmail.com' || 
-                          req.user.isSuperAdmin || 
-                          req.user.role === 'super-admin';
+    const isSuperAdmin = req.user.email === 'superadmin@turismo.com' ||
+      req.user.email === 'direcciondeturismojalpan@gmail.com' ||
+      req.user.isSuperAdmin ||
+      req.user.role === 'super-admin';
 
     if (!isSuperAdmin) {
       return res.status(403).json({
@@ -383,7 +414,7 @@ router.patch('/:id/toggle-status', authMiddleware.restrictTo('admin'), async (re
 
     // Toggle el estado activo
     cabana.activo = !cabana.activo;
-    
+
     // Agregar información de auditoría
     cabana.ultimaModificacion = {
       usuario: req.user.id,
@@ -429,19 +460,19 @@ router.use((error, req, res, next) => {
       });
     }
   }
-  
+
   if (error.message === 'Solo se permiten archivos de imagen') {
     return res.status(400).json({
       status: 'error',
       message: 'Solo se permiten archivos de imagen (JPG, PNG, GIF, WebP)'
     });
   }
-  
+
   next(error);
 });
 
-// IMPORTANTE: Esta ruta debe ir AL FINAL
-router.get('/:id', cabanaController.getCabana);
+// 📝 Crear reseña
+router.post('/:id/reviews', authMiddleware.protect, cabanaController.createReview);
 
 module.exports = router;
 

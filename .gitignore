@@ -1,0 +1,31 @@
+# Carpeta con repositorio git propio (evitar repo anidado)
+Hospedaje/
+
+# Variables de entorno (¡NUNCA subir!)
+.env
+.env.local
+.env.development
+.env.production
+.env.*
+
+# Dependencias de Node.js
+node_modules/
+
+# Archivos temporales y de scripts
+tmp_*.js
+fix_script_utf8.js
+getHistory.js
+output.txt
+history_list.txt
+vscode_history.txt
+
+# Archivos de configuración del editor
+.vscode/
+
+# Archivos del sistema operativo
+Thumbs.db
+.DS_Store
+
+# Logs
+*.log
+npm-debug.log*

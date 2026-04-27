@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jalpan de Serra - Pueblo Mágico</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
     <style>
         /* ===== VARIABLES CSS ===== */
         :root {
@@ -75,8 +78,8 @@
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .nav {
@@ -119,7 +122,7 @@
             background: var(--white);
             padding: 3px;
             box-shadow: var(--shadow-sm);
-            border: 2px solid var(--gray-200);
+            border: none;
             transition: var(--transition);
             flex-shrink: 0;
         }
@@ -328,7 +331,8 @@
                 position: fixed;
                 top: 0;
                 right: -100%;
-                width: 320px;
+                width: 90vw;
+                max-width: 320px;
                 height: 100vh;
                 background: rgba(255, 255, 255, 0.98);
                 backdrop-filter: blur(20px);
@@ -339,7 +343,7 @@
                 padding: 0;
                 transition: all 0.4s ease;
                 overflow-y: auto;
-                box-shadow: -5px 0 20px rgba(0,0,0,0.1);
+                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
                 border-left: 1px solid var(--gray-200);
             }
 
@@ -395,20 +399,21 @@
                     opacity: 0;
                     max-height: 0;
                 }
+
                 to {
                     opacity: 1;
                     max-height: 200px;
                 }
             }
 
-            .dropdown > .nav-link {
+            .dropdown>.nav-link {
                 background: var(--gray-50);
                 font-weight: 600;
                 color: var(--primary);
                 position: relative;
             }
 
-            .dropdown > .nav-link::after {
+            .dropdown>.nav-link::after {
                 content: '\f107';
                 font-family: 'Font Awesome 6 Free';
                 font-weight: 900;
@@ -421,7 +426,7 @@
                 height: auto;
             }
 
-            .dropdown.active > .nav-link::after {
+            .dropdown.active>.nav-link::after {
                 transform: rotate(180deg);
             }
 
@@ -495,12 +500,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(
-                135deg, 
-                rgba(37, 99, 235, 0.8) 0%, 
-                rgba(29, 78, 216, 0.6) 50%,
-                rgba(245, 158, 11, 0.7) 100%
-            );
+            background: rgba(0, 0, 0, 0.2);
+            /* Oscurecimiento ligero neutro */
             z-index: 2;
         }
 
@@ -518,8 +519,11 @@
             font-size: clamp(3rem, 6vw, 5rem);
             font-weight: 700;
             margin-bottom: 1.5rem;
-            text-shadow: 2px 4px 8px rgba(0,0,0,0.3);
+            text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.3);
             line-height: 1.1;
+            /* AOS Override for initial load effect */
+            opacity: 1 !important;
+            transform: translateY(0) !important;
         }
 
         .hero-content p {
@@ -527,7 +531,7 @@
             margin-bottom: 2rem;
             opacity: 0.95;
             font-weight: 300;
-            text-shadow: 1px 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.3);
             line-height: 1.6;
         }
 
@@ -680,7 +684,7 @@
 
         .floating-badge {
             position: absolute;
-            background: rgba(0,0,0,0.8);
+            background: rgba(0, 0, 0, 0.8);
             color: white;
             padding: 0.75rem 1.25rem;
             border-radius: var(--radius-lg);
@@ -930,7 +934,7 @@
             font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 600;
             margin-bottom: 2rem;
-            text-shadow: 2px 4px 8px rgba(0,0,0,0.3);
+            text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.3);
         }
 
         .gastronomy-description {
@@ -970,7 +974,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
             transition: left 0.5s;
         }
 
@@ -1060,7 +1064,7 @@
 
         /* ===== FOOTER ===== */
         .footer {
-            background: #090f22;
+            background: #000000;
             color: #ecf0f1;
             padding: 3rem 0 1rem 0;
         }
@@ -1213,11 +1217,11 @@
                 grid-template-columns: 1fr;
                 text-align: center;
             }
-            
+
             .map-content {
                 grid-template-columns: 1fr;
             }
-            
+
             .category-slide {
                 min-width: calc(50% - 0.75rem);
             }
@@ -1232,51 +1236,239 @@
             .hero-content h1 {
                 font-size: 2.5rem;
             }
-            
+
             .jalpan-content {
                 gap: var(--spacing-xl);
             }
-            
+
             .location-features {
                 grid-template-columns: 1fr;
             }
-            
+
             .category-slide {
                 min-width: 100%;
             }
-            
+
             .achievements-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-            
+
             .footer-content {
                 grid-template-columns: 1fr;
                 gap: 2rem;
-                text-align: center;
+                text-align: left;
             }
-            
+
             .footer-social {
-                justify-content: center;
+                justify-content: flex-start;
             }
-            
+
             .footer-bottom {
                 flex-direction: column;
-                text-align: center;
+                text-align: left;
                 gap: 1rem;
             }
         }
 
         @media (max-width: 480px) {
-            .jalpan-container, .categories-container, .map-container, .footer-container {
+
+            .jalpan-container,
+            .categories-container,
+            .map-container,
+            .footer-container {
                 padding: 0 1rem;
             }
-            
+
             .achievements-grid {
                 grid-template-columns: 1fr;
             }
         }
+        /* ===== USER PROFILE DROPDOWN ===== */
+        .user-profile-dropdown {
+            position: relative;
+        }
+
+        .user-profile-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem 0.5rem 0.5rem;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: var(--font-primary);
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .user-profile-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-colored);
+        }
+
+        .user-profile-btn.active {
+            background: var(--primary-dark);
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .user-name {
+            max-width: 120px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .user-chevron {
+            font-size: 0.7rem;
+            transition: transform 0.2s ease;
+        }
+
+        .user-profile-btn.active .user-chevron {
+            transform: rotate(180deg);
+        }
+
+        .user-dropdown-menu {
+            position: absolute;
+            top: calc(100% + 0.5rem);
+            right: 0;
+            background: white;
+            min-width: 240px;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            border: 1px solid var(--gray-200);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-8px);
+            transition: all 0.2s ease;
+            z-index: 1001;
+            overflow: hidden;
+        }
+
+        .user-dropdown-menu.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .user-dropdown-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 1.25rem;
+            background: var(--gray-50);
+        }
+
+        .user-avatar-lg {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .user-dropdown-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-dropdown-name {
+            font-weight: 600;
+            color: var(--gray-900);
+            font-size: 0.95rem;
+        }
+
+        .user-dropdown-role {
+            font-size: 0.8rem;
+            color: var(--gray-500);
+        }
+
+        .user-dropdown-divider {
+            height: 1px;
+            background: var(--gray-200);
+        }
+
+        .user-dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1.25rem;
+            color: var(--gray-700);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            border: none;
+            background: none;
+            width: 100%;
+            cursor: pointer;
+            font-family: var(--font-primary);
+        }
+
+        .user-dropdown-item:hover {
+            background: var(--gray-50);
+            color: var(--primary);
+        }
+
+        .user-dropdown-item i {
+            width: 18px;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        .user-dropdown-logout {
+            color: #ef4444;
+        }
+
+        .user-dropdown-logout:hover {
+            background: #fef2f2;
+            color: #dc2626;
+        }
+
+        @media (max-width: 768px) {
+            .user-profile-btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .user-dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                border: 1px solid var(--gray-200);
+                margin-top: 0.5rem;
+                width: 100%;
+            }
+
+            .user-dropdown-menu:not(.show) {
+                display: none;
+            }
+        }
     </style>
 </head>
+
 <body>
     <!-- Overlay para móvil -->
     <div class="mobile-overlay" id="mobileOverlay"></div>
@@ -1305,18 +1497,18 @@
                         <i class="fas fa-times"></i>
                     </button>
                 </li>
-                
+
                 <li class="nav-item">
                     <a href="index.html" class="nav-link">Inicio</a>
                 </li>
+                <li class="nav-item">
+                    <a href="mapa.html" class="nav-link">Mapa</a>
+                </li>
 
-                <li class="nav-item dropdown" id="hospedajeDropdown">
-                    <a href="#" class="nav-link">Hospedaje</a>
-                    <div class="dropdown-menu">
-                        <a href="hoteles.html" class="dropdown-item">Hoteles</a>
-                        <a href="cabanas.html" class="dropdown-item">Cabañas</a>
-                        <a href="airbnb.html" class="dropdown-item">Airbnb</a>
-                    </div>
+                <li class="nav-item">
+                    <a href="hospedaje.html" class="nav-link">
+                        Hospedaje
+                    </a>
                 </li>
 
                 <li class="nav-item">
@@ -1324,16 +1516,21 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="tourOperadora.html" class="nav-link">Tours</a>
+                    <a href="experiencias.html" class="nav-link">Experiencias</a>
                 </li>
 
+                <!-- Selector de Idiomas -->
                 <li class="nav-item">
-                    <a href="guias.html" class="nav-link">Guías</a>
+                    <select id="lang-select" class="form-control"
+                        style="padding: 0.5rem; border-radius: 5px; border: 1px solid #ccc; font-weight: bold; cursor: pointer; background: white;">
+                        <option value="ES">🇪🇸 ES</option>
+                        <option value="EN">🇺🇸 EN</option>
+                        <option value="FR">🇫🇷 FR</option>
+                    </select>
                 </li>
 
                 <li class="nav-item auth-buttons">
                     <a href="login.html" class="btn btn-login">
-                    
                         Iniciar Sesión
                     </a>
                 </li>
@@ -1354,12 +1551,31 @@
         <div class="hero-content">
             <h1>Jalpan de Serra</h1>
             <p>Pueblo mágico</p>
-            <p>Donde cada amanecer promete nuevas aventuras y cada atardecer, el descanso perfecto, este el corazón de la sierra</p>
-            <a href="#services" class="cta-button">
-                <i class="fas fa-search"></i>
-                Explorar Servicios
-            </a>
-        </div>
+            <p>Donde cada amanecer promete nuevas aventuras y cada atardecer, el descanso perfecto, este el corazón de
+                la sierra</p>
+            <div class="hero-search-container"
+                style="margin-top: 2rem; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto;">
+                <div class="category-pills" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="hospedaje.html" class="pill-btn"
+                        style="background: white; color: var(--gray-600); padding: 0.5rem 1.2rem; border-radius: 50px; text-decoration: none; font-size: 0.9rem; font-weight: 500; display: flex; align-items: center; gap: 0.5rem; transition: background 0.2s, color 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+                        <i class="fas fa-bed"></i> Hospedaje
+                    </a>
+                    <a href="https://restaurante-web-production-721f.up.railway.app/" class="pill-btn"
+                        style="background: white; color: var(--gray-600); padding: 0.5rem 1.2rem; border-radius: 50px; text-decoration: none; font-size: 0.9rem; font-weight: 500; display: flex; align-items: center; gap: 0.5rem; transition: background 0.2s, color 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+                        <i class="fas fa-utensils"></i> Alimentos
+                    </a>
+                    <a href="tourOperadora.html" class="pill-btn"
+                        style="background: white; color: var(--gray-600); padding: 0.5rem 1.2rem; border-radius: 50px; text-decoration: none; font-size: 0.9rem; font-weight: 500; display: flex; align-items: center; gap: 0.5rem; transition: background 0.2s, color 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+                        <i class="fas fa-map-marked-alt"></i> Experiencias
+                    </a>
+                </div>
+            </div>
+            <style>
+                .pill-btn:hover {
+                    background: var(--gray-50) !important;
+                    color: var(--primary) !important;
+                }
+            </style>
     </section>
 
     <!-- Sección Jalpan -->
@@ -1371,47 +1587,48 @@
                     Pueblo Mágico desde 2010
                 </div>
                 <h2 class="jalpan-title">Conoce un poco sobre Jalpan</h2>
-                <p class="jalpan-subtitle">Un lugar donde convergen la historia, la naturaleza y la cultura, ofreciendo experiencias únicas e inolvidables</p>
+                <p class="jalpan-subtitle">Un lugar donde convergen la historia, la naturaleza y la cultura, ofreciendo
+                    experiencias únicas e inolvidables</p>
             </div>
-            
+
             <div class="jalpan-content">
                 <div class="jalpan-info-cards">
-                    <div class="info-card">
+                    <div class="info-card" data-aos="fade-right" data-aos-delay="100">
                         <div class="card-icon">
                             <i class="fas fa-church"></i>
                         </div>
                         <h3 class="card-title">Patrimonio de la Humanidad</h3>
                         <p class="card-description">
-                            Las misiones franciscanas del siglo XVIII representan una arquitectura barroca única, 
+                            Las misiones franciscanas del siglo XVIII representan una arquitectura barroca única,
                             reconocida por la UNESCO como Patrimonio Cultural de la Humanidad.
                         </p>
                     </div>
 
-                    <div class="info-card">
+                    <div class="info-card" data-aos="fade-right" data-aos-delay="200">
                         <div class="card-icon">
                             <i class="fas fa-leaf"></i>
                         </div>
                         <h3 class="card-title">Reserva de la Biosfera</h3>
                         <p class="card-description">
-                            Ubicado en el corazón de la Sierra Gorda, hogar de una extraordinaria biodiversidad 
+                            Ubicado en el corazón de la Sierra Gorda, hogar de una extraordinaria biodiversidad
                             con ecosistemas únicos y especies endémicas.
                         </p>
                     </div>
 
-                    <div class="info-card">
+                    <div class="info-card" data-aos="fade-right" data-aos-delay="300">
                         <div class="card-icon">
                             <i class="fas fa-mountain"></i>
                         </div>
                         <h3 class="card-title">Aventura y Naturaleza</h3>
                         <p class="card-description">
-                            Desde cascadas y grutas hasta senderos de montaña, Jalpan ofrece aventuras 
+                            Desde cascadas y grutas hasta senderos de montaña, Jalpan ofrece aventuras
                             para todos los niveles en un entorno natural privilegiado.
                         </p>
                     </div>
                 </div>
 
-                <div class="jalpan-visual">
-                    <img src="/img_jalpan/portada.jpeg" alt="Misión de Jalpan" class="main-image">
+                <div class="jalpan-visual" data-aos="fade-left">
+                    <img src="/img_jalpan/jalpan_1.jpg" alt="Misión de Jalpan" class="main-image">
                     <div class="floating-elements">
                         <div class="floating-badge badge-1">
                             <i class="fas fa-star"></i>
@@ -1431,19 +1648,19 @@
 
             <!-- Logros y reconocimientos -->
             <div class="achievements-grid">
-                <div class="achievement-item">
+                <div class="achievement-item" data-aos="fade-up" data-aos-delay="100">
                     <div class="achievement-year">2003</div>
                     <div class="achievement-title">Patrimonio Mundial UNESCO</div>
                 </div>
-                <div class="achievement-item">
+                <div class="achievement-item" data-aos="fade-up" data-aos-delay="200">
                     <div class="achievement-year">2010</div>
                     <div class="achievement-title">Pueblo Mágico</div>
                 </div>
-                <div class="achievement-item">
+                <div class="achievement-item" data-aos="fade-up" data-aos-delay="300">
                     <div class="achievement-year">1997</div>
                     <div class="achievement-title">Reserva de la Biosfera</div>
                 </div>
-                <div class="achievement-item">
+                <div class="achievement-item" data-aos="fade-up" data-aos-delay="400">
                     <div class="achievement-year">2004</div>
                     <div class="achievement-title">Sitio Ramsar</div>
                 </div>
@@ -1451,100 +1668,321 @@
         </div>
     </section>
 
-    <!-- Sección Actividades Turísticas -->
-    <section class="categories-section" id="activities">
+    <!-- Sección Rincones Locales -->
+    <section class="rincones-section" id="rincones">
         <div class="categories-container">
-            <h2 class="categories-title">Experiencias Turísticas</h2>
-            <p class="categories-subtitle">Descubre las aventuras que Jalpan tiene para ofrecerte</p>
-            
-            <div class="categories-slider">
-                <button class="slider-nav slider-prev" id="sliderPrev">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <button class="slider-nav slider-next" id="sliderNext">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-                
-                <div class="categories-track" id="categoriesTrack">
-                    <div class="category-slide">
-                        <div class="category-card" onclick="window.location.href='tourOperadora.html'">
-                            <div class="category-icon">
-                                <i class="fas fa-mountain"></i>
-                            </div>
-                            <h3 class="category-name">Espeleísmo</h3>
-                            <p class="category-description">Explora cuevas y cavernas subterráneas en aventuras únicas</p>
-                        </div>
-                    </div>
-                    
-                    <div class="category-slide">
-                        <div class="category-card" onclick="window.location.href='tourOperadora.html'">
-                            <div class="category-icon">
-                                <i class="fas fa-landmark"></i>
-                            </div>
-                            <h3 class="category-name">Turismo Cultural</h3>
-                            <p class="category-description">Descubre sitios arqueológicos y patrimonio histórico</p>
-                        </div>
-                    </div>
-                    
-                    <div class="category-slide">
-                        <div class="category-card" onclick="window.location.href='tourOperadora.html'">
-                            <div class="category-icon">
-                                <i class="fas fa-dove"></i>
-                            </div>
-                            <h3 class="category-name">Aviturismo</h3>
-                            <p class="category-description">Observación de aves en su hábitat natural</p>
-                        </div>
-                    </div>
-                    
-                    <div class="category-slide">
-                        <div class="category-card" onclick="window.location.href='tourOperadora.html'">
-                            <div class="category-icon">
-                                <i class="fas fa-hiking"></i>
-                            </div>
-                            <h3 class="category-name">Senderismo</h3>
-                            <p class="category-description">Caminatas por senderos naturales y rutas de montaña</p>
-                        </div>
-                    </div>
-                    
-                    <div class="category-slide">
-                        <div class="category-card" onclick="window.location.href='tourOperadora.html'">
-                            <div class="category-icon">
-                                <i class="fas fa-water"></i>
-                            </div>
-                            <h3 class="category-name">Kayak</h3>
-                            <p class="category-description">Navegación en ríos y cuerpos de agua cristalina</p>
-                        </div>
-                    </div>
-                    
-                    <div class="category-slide">
-                        <div class="category-card" onclick="window.location.href='tourOperadora.html'">
-                            <div class="category-icon">
-                                <i class="fas fa-car"></i>
-                            </div>
-                            <h3 class="category-name">RZR</h3>
-                            <p class="category-description">Aventuras todoterreno en vehículos especializados</p>
-                        </div>
-                    </div>
-                    
-                    <div class="category-slide">
-                        <div class="category-card" onclick="window.location.href='tourOperadora.html'">
-                            <div class="category-icon">
-                                <i class="fas fa-users"></i>
-                            </div>
-                            <h3 class="category-name">Rutas Comunitarias</h3>
-                            <p class="category-description">Experiencias auténticas con comunidades locales</p>
-                        </div>
+            <div class="jalpan-header" style="margin-bottom: 2rem;">
+                <div class="jalpan-badge">
+                    <i class="fas fa-camera-retro"></i>
+                    El Auténtico Jalpan
+                </div>
+                <h2 class="categories-title" data-aos="fade-up">Rincones Locales</h2>
+                <p class="categories-subtitle" data-aos="fade-up" data-aos-delay="100">Descubre los lugares favoritos de nuestra gente: calles llenas de vida, ríos cristalinos y nuestro hermoso centro decorado.</p>
+            </div>
+
+            <div class="bento-grid" data-aos="fade-up" data-aos-delay="200">
+                <div class="bento-item bento-large" onclick="window.location.href='rincones-locales.html#corazon'">
+                    <img src="/img_jalpan/6 Plazoleta.jpg" alt="Plazoleta" loading="lazy">
+                    <div class="bento-overlay">
+                        <h3>El Corazón Decorado</h3>
+                        <p>Nuestra plazoleta llena de color y tradición</p>
                     </div>
                 </div>
-                
-                <div class="slider-indicators">
-                    <span class="indicator active" data-slide="0"></span>
-                    <span class="indicator" data-slide="1"></span>
-                    <span class="indicator" data-slide="2"></span>
+                <div class="bento-item bento-small" onclick="window.location.href='rincones-locales.html#rios'">
+                    <img src="/img_jalpan/rio.jpeg" alt="Ríos Cristalinos" loading="lazy">
+                    <div class="bento-overlay">
+                        <h3>Ríos Cristalinos</h3>
+                        <p>Naturaleza pura al alcance</p>
+                    </div>
+                </div>
+                <div class="bento-item bento-small" onclick="window.location.href='rincones-locales.html#misticismo'">
+                    <img src="/img_jalpan/adentro.jpg" alt="Vida Local" loading="lazy">
+                    <div class="bento-overlay">
+                        <h3>Misticismo</h3>
+                        <p>Descubre los secretos locales</p>
+                    </div>
+                </div>
+                <div class="bento-item bento-small" onclick="window.location.href='rincones-locales.html#calles'">
+                    <img src="/img_jalpan/principal.jpeg" alt="Calles Principales" loading="lazy">
+                    <div class="bento-overlay">
+                        <h3>Calles Pintorescas</h3>
+                        <p>Caminos con historia</p>
+                    </div>
+                </div>
+                <div class="bento-item bento-small" onclick="window.location.href='rincones-locales.html#iconicos'">
+                    <img src="/img_jalpan/mision.jpg" alt="Misión" loading="lazy">
+                    <div class="bento-overlay">
+                        <h3>Sitios Icónicos</h3>
+                        <p>Belleza y fe atemporal</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Sección Experiencias - Collage / Carrusel -->
+    <section class="categories-section" id="activities">
+        <div class="categories-container">
+            <h2 class="categories-title" data-aos="fade-up">Experiencias Turísticas</h2>
+            <p class="categories-subtitle" data-aos="fade-up" data-aos-delay="100">Descubre las aventuras que Jalpan tiene para ofrecerte</p>
+
+            <!-- Collage Desktop / Carrusel Móvil -->
+            <div class="exp-collage" id="expCollage" data-aos="fade-up" data-aos-delay="200">
+                <div class="exp-collage-item" onclick="window.location.href='experiencias.html'">
+                    <img src="/img_jalpan/tour_1.png" alt="Experiencia 1" loading="lazy">
+                    <div class="exp-collage-overlay"><span>Espeleísmo</span></div>
+                </div>
+                <div class="exp-collage-item" onclick="window.location.href='experiencias.html'">
+                    <img src="/img_jalpan/tour_2.png" alt="Experiencia 2" loading="lazy">
+                    <div class="exp-collage-overlay"><span>Turismo Cultural</span></div>
+                </div>
+                <div class="exp-collage-item" onclick="window.location.href='experiencias.html'">
+                    <img src="/img_jalpan/tour_3.png" alt="Experiencia 3" loading="lazy">
+                    <div class="exp-collage-overlay"><span>Aviturismo</span></div>
+                </div>
+                <div class="exp-collage-item" onclick="window.location.href='experiencias.html'">
+                    <img src="/img_jalpan/tour_4.png" alt="Experiencia 4" loading="lazy">
+                    <div class="exp-collage-overlay"><span>Senderismo</span></div>
+                </div>
+                <div class="exp-collage-item" onclick="window.location.href='experiencias.html'">
+                    <img src="/img_jalpan/tour_5.png" alt="Experiencia 5" loading="lazy">
+                    <div class="exp-collage-overlay"><span>Kayak</span></div>
+                </div>
+                <div class="exp-collage-item" onclick="window.location.href='experiencias.html'">
+                    <img src="/img_jalpan/tour_6.png" alt="Experiencia 6" loading="lazy">
+                    <div class="exp-collage-overlay"><span>Ciclismo</span></div>
+                </div>
+                <div class="exp-collage-item" onclick="window.location.href='experiencias.html'">
+                    <img src="/img_jalpan/tour_7.png" alt="Experiencia 7" loading="lazy">
+                    <div class="exp-collage-overlay"><span>RZR</span></div>
+                </div>
+                <div class="exp-collage-item" onclick="window.location.href='experiencias.html'">
+                    <img src="/img_jalpan/tour_8.png" alt="Experiencia 8" loading="lazy">
+                    <div class="exp-collage-overlay"><span>Rutas Comunitarias</span></div>
+                </div>
+                <div class="exp-collage-item" onclick="window.location.href='experiencias.html'">
+                    <img src="/img_jalpan/tour_9.png" alt="Experiencia 9" loading="lazy">
+                    <div class="exp-collage-overlay"><span>Rappel</span></div>
+                </div>
+                <div class="exp-collage-item" onclick="window.location.href='experiencias.html'">
+                    <img src="/img_jalpan/tour_10.png" alt="Experiencia 10" loading="lazy">
+                    <div class="exp-collage-overlay"><span>Camping</span></div>
+                </div>
+            </div>
+
+            <!-- Botón CTA -->
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="experiencias.html" class="exp-explore-btn">
+                    <i class="fas fa-compass"></i> Explorar Experiencias
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        /* ===== RINCONES BENTO GRID ===== */
+        .rincones-section {
+            padding: var(--spacing-4xl) 0;
+            background: var(--gray-50);
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, 250px);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .bento-item {
+            position: relative;
+            border-radius: var(--radius-2xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .bento-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .bento-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .bento-item:hover img {
+            transform: scale(1.08);
+        }
+
+        .bento-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem 1.5rem;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8) 80%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            transition: var(--transition);
+        }
+
+        .bento-overlay h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .bento-overlay p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            transform: translateY(10px);
+            transition: transform 0.4s ease, opacity 0.4s ease;
+        }
+
+        .bento-item:hover .bento-overlay p {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Bento Grid Sizes */
+        .bento-large { grid-column: span 2; grid-row: span 2; }
+        .bento-small { grid-column: span 1; grid-row: span 1; }
+
+        @media (max-width: 992px) {
+            .bento-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: auto;
+                grid-auto-rows: 250px;
+            }
+            .bento-large { grid-column: span 2; grid-row: span 2; }
+            .bento-small { grid-column: span 1; grid-row: span 1; }
+        }
+
+        @media (max-width: 576px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+            .bento-large, .bento-small {
+                grid-column: span 1;
+                grid-row: span 1;
+                height: 250px;
+            }
+        }
+
+        /* ===== COLLAGE EXPERIENCIAS ===== */
+        .exp-collage {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(2, 160px);
+            gap: 8px;
+            margin-top: 2rem;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .exp-collage-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        .exp-collage-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease, filter 0.4s ease;
+        }
+
+        .exp-collage-item:hover img {
+            transform: scale(1.1);
+            filter: brightness(0.75);
+        }
+
+        .exp-collage-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 10px 12px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .exp-collage-overlay span {
+            color: white;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .exp-collage-item:hover .exp-collage-overlay span {
+            text-shadow: 0 2px 6px rgba(0,0,0,0.8);
+        }
+
+        .exp-explore-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: linear-gradient(135deg, #2e8b57, #1a6b3c);
+            color: white;
+            padding: 0.9rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(46, 139, 87, 0.35);
+        }
+
+        .exp-explore-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(46, 139, 87, 0.45);
+            background: linear-gradient(135deg, #34a065, #1f7d47);
+        }
+
+        /* ===== CARRUSEL MÓVIL ===== */
+        @media (max-width: 768px) {
+            .exp-collage {
+                display: flex;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                gap: 12px;
+                padding-bottom: 12px;
+                grid-template-columns: unset;
+                grid-template-rows: unset;
+                border-radius: 12px;
+                scrollbar-width: none;
+            }
+
+            .exp-collage::-webkit-scrollbar {
+                display: none;
+            }
+
+            .exp-collage-item {
+                flex: 0 0 75%;
+                height: 200px;
+                scroll-snap-align: center;
+                border-radius: 12px;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .exp-collage {
+                grid-template-columns: repeat(5, 1fr);
+                grid-template-rows: repeat(2, 140px);
+            }
+        }
+    </style>
 
     <!-- Sección Gastronomía -->
     <section class="stats">
@@ -1552,7 +1990,7 @@
             <div class="gastronomy-section">
                 <h2 class="gastronomy-title">Gastronomía de Jalpan</h2>
                 <p class="gastronomy-description">
-                    Descubre los sabores auténticos de la Sierra Gorda. Desde platillos tradicionales 
+                    Descubre los sabores auténticos de la Sierra Gorda. Desde platillos tradicionales
                     hasta propuestas gastronómicas innovadoras que honran nuestras raíces culinarias.
                 </p>
                 <a href="https://restaurante-web-production-721f.up.railway.app/" class="gastronomy-button">
@@ -1570,14 +2008,14 @@
                 <div class="map-info">
                     <h2>Ubicación</h2>
                     <p>
-                        Jalpan de Serra se encuentra estratégicamente ubicado en el corazón de la Sierra Gorda, 
+                        Jalpan de Serra se encuentra estratégicamente ubicado en el corazón de la Sierra Gorda,
                         ofreciendo fácil acceso a diversos atractivos naturales y culturales.
                     </p>
                     <p>
-                        Su posición central lo convierte en el punto de partida ideal para explorar las maravillas 
+                        Su posición central lo convierte en el punto de partida ideal para explorar las maravillas
                         de la región, desde las misiones franciscanas hasta las impresionantes formaciones naturales.
                     </p>
-                    
+
                     <div class="location-features">
                         <div class="feature-item">
                             <i class="fas fa-map-marker-alt feature-icon"></i>
@@ -1597,13 +2035,11 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="map-embed">
-                    <iframe 
+                    <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3633.8967891234567!2d-99.47123456789012!3d21.217890123456789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjHCsDEzJzA0LjQiTiA5OcKwMjgnMTYuNCJX!5e0!3m2!1ses!2smx!4v1234567890123!5m2!1ses!2smx"
-                        allowfullscreen="" 
-                        loading="lazy" 
-                        referrerpolicy="no-referrer-when-downgrade">
+                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
                     </iframe>
                 </div>
             </div>
@@ -1617,17 +2053,21 @@
                 <!-- Sección principal -->
                 <div class="footer-brand">
                     <div class="footer-logo">
-                        <i class="fas fa-compass"></i>
+                        <img src="/img_jalpan/logo_fondo_negro.png" alt="Logo Turismo" class="logo-image"
+                            style="width: 40px; height: 40px; background: black;">
                         Dirección de Turismo
                     </div>
                     <p class="footer-description">
-                        Conectamos a las personas con los mejores destinos, alojamientos y experiencias gastronómicas de Jalpan de Serra, Pueblo Mágico.
+                        Conectamos a las personas con los mejores destinos, alojamientos y experiencias gastronómicas de
+                        Jalpan de Serra, Pueblo Mágico.
                     </p>
                     <div class="footer-social">
-                        <a href="https://www.facebook.com/profile.php?id=61573849871475" class="social-link" title="Facebook">
+                        <a href="https://www.facebook.com/profile.php?id=61573849871475" class="social-link"
+                            title="Facebook">
                             <i class="fab fa-facebook-f"></i>
                         </a>
-                        <a href="https://www.instagram.com/jalpan_pueblomagico?igsh=MWpmdDVnMndpbnB1dQ==" class="social-link" title="Instagram">
+                        <a href="https://www.instagram.com/jalpan_pueblomagico?igsh=MWpmdDVnMndpbnB1dQ=="
+                            class="social-link" title="Instagram">
                             <i class="fab fa-instagram"></i>
                         </a>
                     </div>
@@ -1638,17 +2078,15 @@
                     <h3>Navegación</h3>
                     <ul class="footer-links">
                         <li><a href="https://restaurante-web-production-721f.up.railway.app/">Alimentos</a></li>
-                        <li><a href="hoteles.html">Hoteles</a></li>
-                        <li><a href="cabanas.html">Cabañas</a></li>
-                        <li><a href="airbnb.html">Airbnb</a></li>
-                        <li><a href="tourOperadora.html">Tours</a></li>
-                        <li><a href="guias.html">Guías</a></li>
+                        <li><a href="hospedaje.html">Hospedaje</a></li>
+                        <li><a href="experiencias.html">Experiencias</a></li>
+                        <li><a href="mapa.html">Mapa</a></li>
                     </ul>
                 </div>
 
-                <!-- Turismo Serrano -->
+                <!-- Soporte: Política -->
                 <div class="footer-section">
-                    <h3>Turismo Serrano</h3>
+                    <h3>Soporte: Política</h3>
                     <ul class="footer-links">
                         <li><a href="#gastronomia">Gastronomía Local</a></li>
                         <li><a href="#atractivos">Atractivos Naturales</a></li>
@@ -1707,7 +2145,7 @@
         mobileMenuToggle.addEventListener('click', () => {
             navMenu.classList.toggle('active');
             mobileOverlay.classList.toggle('active');
-            
+
             const icon = mobileMenuToggle.querySelector('i');
             if (navMenu.classList.contains('active')) {
                 icon.classList.remove('fa-bars');
@@ -1729,7 +2167,7 @@
             navMenu.classList.remove('active');
             mobileOverlay.classList.remove('active');
             hospedajeDropdown.classList.remove('active');
-            
+
             const icon = mobileMenuToggle.querySelector('i');
             icon.classList.remove('fa-times');
             icon.classList.add('fa-bars');
@@ -1760,8 +2198,8 @@
         // Cerrar enlaces principales en móvil
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', (e) => {
-                if (window.innerWidth <= 768 && 
-                    !e.target.closest('#hospedajeDropdown') && 
+                if (window.innerWidth <= 768 &&
+                    !e.target.closest('#hospedajeDropdown') &&
                     !e.target.closest('.dropdown-item')) {
                     closeMenu();
                 }
@@ -1803,7 +2241,7 @@
         function updateSlider() {
             const slideWidth = 100 / totalSlides;
             categoriesTrack.style.transform = `translateX(-${currentSlide * slideWidth}%)`;
-            
+
             indicators.forEach((indicator, index) => {
                 indicator.classList.toggle('active', index === currentSlide);
             });
@@ -1885,7 +2323,7 @@
             heroContent.style.opacity = '0';
             heroContent.style.transform = 'translateY(50px)';
             heroContent.style.transition = 'all 1s ease';
-            
+
             setTimeout(() => {
                 heroContent.style.opacity = '1';
                 heroContent.style.transform = 'translateY(0)';
@@ -1915,5 +2353,25 @@
         window.addEventListener('load', adjustSliderForMobile);
         window.addEventListener('resize', adjustSliderForMobile);
     </script>
+
+    <!-- Script de Traducción -->
+    <script src="js/translation.js"></script>
+
+    <!-- Script de Auth Navbar -->
+    <script src="js/auth-navbar.js"></script>
+
+    <!-- AOS Script -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                once: true, // Animates only once
+                offset: 50, // Trigger offset
+                duration: 800, // Animation duration
+                easing: 'ease-out-cubic' // Easing curve
+            });
+        });
+    </script>
 </body>
+
 </html>

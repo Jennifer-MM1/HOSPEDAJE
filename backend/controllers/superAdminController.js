@@ -915,3 +915,29 @@ exports.obtenerEstadisticas = async (req, res) => {
     });
   }
 };
+
+// 📜 OBTENER HISTORIAL DE ACTUALIZACIONES
+exports.obtenerHistorialActualizaciones = async (req, res) => {
+  try {
+    const UpdateHistory = require('../models/UpdateHistory');
+    
+    // Obtener los últimos 100 registros ordenados por fecha descendente
+    const historial = await UpdateHistory.find({})
+      .sort({ fecha: -1 })
+      .limit(100);
+      
+    res.status(200).json({
+      status: 'success',
+      results: historial.length,
+      data: {
+        historial
+      }
+    });
+  } catch (error) {
+    console.error('Error obteniendo historial de actualizaciones:', error);
+    res.status(500).json({
+      status: 'error',
+      message: error.message
+    });
+  }
+};

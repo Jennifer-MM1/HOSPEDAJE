@@ -835,6 +835,11 @@
         .overlay.active {
             display: block;
         }
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
     </style>
 </head>
 <body>
@@ -991,22 +996,24 @@
 
             <!-- List View -->
             <div class="anuncios-list" id="anunciosList">
-                <table class="anuncios-table">
-                    <thead>
-                        <tr>
-                            <th>Imagen</th>
-                            <th>Nombre</th>
-                            <th>Ubicación</th>
-                            <th>Precio</th>
-                            <th>Estado</th>
-                            <th>Vistas</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody id="anunciosTableBody">
-                        <!-- Las filas se cargarán aquí dinámicamente -->
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="anuncios-table">
+                        <thead>
+                            <tr>
+                                <th>Imagen</th>
+                                <th>Nombre</th>
+                                <th>Ubicación</th>
+                                <th>Precio</th>
+                                <th>Estado</th>
+                                <th>Vistas</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="anunciosTableBody">
+                            <!-- Las filas se cargarán aquí dinámicamente -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <!-- Empty State -->

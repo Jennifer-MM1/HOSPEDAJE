@@ -1,0 +1,194 @@
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\actualizar-airbnb.html:491 - Found fixed width > 300px (768px): @media (max-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\actualizar-airbnb.html:715 - Found fixed width > 300px (768px): @media (max-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\actualizar-cabanas.html:695 - Found fixed width > 300px (768px): @media (max-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\actualizar-cabanas.html:750 - Found fixed width > 300px (480px): @media (max-width: 480px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\actualizar-detalles.html:652 - Found fixed width > 300px (768px): @media (max-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\actualizar-guias.html:301 - Found fixed width > 300px (800px): max-width: 800px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\actualizar-guias.html:528 - Found fixed width > 300px (1024px): @media (min-width: 1024px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\actualizar-guias.html:528 - Found min-width > 300px (1024px): @media (min-width: 1024px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\actualizar-guias.html:543 - Found fixed width > 300px (768px): @media (max-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\actualizar-habitaciones.html:523 - Found fixed width > 300px (500px): max-width: 500px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\actualizar-habitaciones.html:749 - Found fixed width > 300px (1024px): @media (max-width: 1024px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\actualizar-habitaciones.html:780 - Found fixed width > 300px (768px): @media (max-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\actualizar-tourOperadora.html:301 - Found fixed width > 300px (800px): max-width: 800px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\actualizar-tourOperadora.html:475 - Found fixed width > 300px (1024px): @media (min-width: 1024px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\actualizar-tourOperadora.html:475 - Found min-width > 300px (1024px): @media (min-width: 1024px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\actualizar-tourOperadora.html:490 - Found fixed width > 300px (768px): @media (max-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\airbnb-admin.html:382 - Found fixed width > 300px (400px): max-width: 400px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\airbnb-admin.html:726 - Found fixed width > 300px (400px): max-width: 400px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\airbnb-admin.html:792 - Found fixed width > 300px (1024px): @media (max-width: 1024px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\airbnb-admin.html:803 - Found fixed width > 300px (768px): @media (max-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\cabanas-admin.html:395 - Found fixed width > 300px (400px): max-width: 400px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\cabanas-admin.html:710 - Found fixed width > 300px (400px): max-width: 400px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\cabanas-admin.html:792 - Found fixed width > 300px (1024px): @media (max-width: 1024px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\cabanas-admin.html:803 - Found fixed width > 300px (768px): @media (max-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\crear-anuncio.html:655 - Found fixed width > 300px (1024px): @media (max-width: 1024px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\crear-anuncio.html:673 - Found fixed width > 300px (768px): @media (max-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\crear-anuncio.html:802 - Found fixed width > 300px (768px): @media (max-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\crear-anuncio.html:967 - Found fixed width > 300px (768px): @media (max-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\dashboard.html:481 - Found fixed width > 300px (1024px): @media (max-width: 1024px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\dashboard.html:501 - Found fixed width > 300px (768px): @media (max-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\guias-admin.html:677 - Found fixed width > 300px (600px): max-width: 600px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\guias-admin.html:683 - Found fixed width > 300px (700px): max-width: 700px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\guias-admin.html:800 - Found fixed width > 300px (1024px): @media (min-width: 1024px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\guias-admin.html:800 - Found min-width > 300px (1024px): @media (min-width: 1024px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\guias-admin.html:815 - Found fixed width > 300px (768px): @media (max-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\hoteles-admin.html:657 - Found fixed width > 300px (1024px): @media (max-width: 1024px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\hoteles-admin.html:675 - Found fixed width > 300px (768px): @media (max-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\hoteles-admin.html:726 - Found fixed width > 300px (1200px): max-width: 1200px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\hoteles-admin.html:911 - Found fixed width > 300px (768px): @media (max-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\hoteles-admin.html:2215 - Found fixed width > 300px (400px): max-width: 400px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\manage-images-airbnb.html:60 - Found fixed width > 300px (1400px): max-width: 1400px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\manage-images-airbnb.html:130 - Found fixed width > 300px (1400px): max-width: 1400px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\manage-images-airbnb.html:158 - Found fixed width > 300px (600px): max-width: 600px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\manage-images-airbnb.html:574 - Found fixed width > 300px (400px): max-width: 400px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\manage-images-airbnb.html:608 - Found fixed width > 300px (768px): @media (max-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\manage-images-cabana.html:59 - Found fixed width > 300px (1200px): max-width: 1200px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\manage-images-cabana.html:143 - Found fixed width > 300px (1200px): max-width: 1200px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\manage-images-cabana.html:508 - Found fixed width > 300px (400px): max-width: 400px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\manage-images-cabana.html:532 - Found fixed width > 300px (768px): @media (max-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\manage-images-hotel.html:55 - Found fixed width > 300px (1200px): max-width: 1200px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\manage-images-hotel.html:131 - Found fixed width > 300px (1200px): max-width: 1200px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\manage-images-hotel.html:452 - Found fixed width > 300px (400px): max-width: 400px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\manage-images-hotel.html:531 - Found fixed width > 300px (768px): @media (max-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\mis-anuncions.html:679 - Found fixed width > 300px (400px): max-width: 400px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\mis-anuncions.html:770 - Found fixed width > 300px (1024px): @media (max-width: 1024px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\mis-anuncions.html:796 - Found fixed width > 300px (768px): @media (max-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\perfil.html:598 - Found fixed width > 300px (1024px): @media (max-width: 1024px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\perfil.html:624 - Found fixed width > 300px (768px): @media (max-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\super-admin-dashboard.html:1185 - Found fixed width > 300px (1200px): @media (max-width: 1200px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\super-admin-dashboard.html:1211 - Found fixed width > 300px (992px): @media (max-width: 992px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\super-admin-dashboard.html:1240 - Found fixed width > 300px (768px): @media (max-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\super-admin-dashboard.html:1294 - Found fixed width > 300px (480px): @media (max-width: 480px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\super-admin-dashboard.html:1504 - Found fixed width > 300px (800px): max-width: 800px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\super-admin-dashboard.html:1512 - Found fixed width > 300px (1000px): width: 1000px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\super-admin-dashboard.html:1911 - Found fixed width > 300px (600px): max-width: 600px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\super-admin-dashboard.html:2174 - Found fixed width > 300px (768px): @media (max-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\super-admin-dashboard.html:2453 - Found fixed width > 300px (768px): @media (max-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\super-admin-dashboard.html:4115 - Found fixed width > 300px (500px): <div class="modal-content" style="max-width: 500px;">
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\tourOperadora-admin.html:654 - Found fixed width > 300px (600px): max-width: 600px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\tourOperadora-admin.html:660 - Found fixed width > 300px (700px): max-width: 700px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\tourOperadora-admin.html:751 - Found fixed width > 300px (1024px): @media (min-width: 1024px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\tourOperadora-admin.html:751 - Found min-width > 300px (1024px): @media (min-width: 1024px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\admin\tourOperadora-admin.html:766 - Found fixed width > 300px (768px): @media (max-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\airbnb.html:40 - Found fixed width > 300px (1200px): max-width: 1200px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\airbnb.html:258 - Found fixed width > 300px (800px): max-width: 800px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\airbnb.html:287 - Found fixed width > 300px (1200px): max-width: 1200px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\airbnb.html:347 - Found fixed width > 300px (1200px): max-width: 1200px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\airbnb.html:899 - Found fixed width > 300px (900px): max-width: 900px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\airbnb.html:1334 - Found fixed width > 300px (768px): @media (max-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\airbnb.html:1347 - Found fixed width > 300px (320px): width: 320px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\airbnb.html:1488 - Found fixed width > 300px (480px): @media (max-width: 480px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\airbnb.html:1511 - Found fixed width > 300px (1200px): max-width: 1200px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\airbnb.html:1654 - Found fixed width > 300px (768px): @media (max-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\cabanas.html:40 - Found fixed width > 300px (1200px): max-width: 1200px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\cabanas.html:272 - Found fixed width > 300px (600px): max-width: 600px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\cabanas.html:288 - Found fixed width > 300px (1200px): max-width: 1200px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\cabanas.html:346 - Found fixed width > 300px (1200px): max-width: 1200px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\cabanas.html:649 - Found fixed width > 300px (900px): max-width: 900px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\cabanas.html:1239 - Found fixed width > 300px (768px): @media (max-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\cabanas.html:1252 - Found fixed width > 300px (320px): width: 320px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\cabanas.html:1465 - Found fixed width > 300px (1200px): max-width: 1200px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\cabanas.html:1608 - Found fixed width > 300px (768px): @media (max-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\css\auth-navbar.css:163 - Found fixed width > 300px (768px): @media (max-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\css\favorite-heart.css:146 - Found fixed width > 300px (768px): @media (max-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\css\hospedaje-detalle.css:27 - Found fixed width > 300px (1200px): max-width: 1200px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\css\hospedaje-detalle.css:309 - Found fixed width > 300px (420px): max-width: 420px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\css\hospedaje-detalle.css:388 - Found fixed width > 300px (1200px): max-width: 1200px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\css\hospedaje-detalle.css:896 - Found fixed width > 300px (1200px): max-width: 1200px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\css\hospedaje-detalle.css:962 - Found fixed width > 300px (1200px): max-width: 1200px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\css\hospedaje-detalle.css:1106 - Found fixed width > 300px (968px): @media(max-width:968px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\css\hospedaje-detalle.css:1133 - Found fixed width > 300px (768px): @media(max-width:768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\css\hospedaje-detalle.css:1269 - Found fixed width > 300px (768px): @media (min-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\css\hospedaje-detalle.css:1269 - Found min-width > 300px (768px): @media (min-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\css\hospedaje-detalle.css:1282 - Found fixed width > 300px (768px): @media (min-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\css\hospedaje-detalle.css:1282 - Found min-width > 300px (768px): @media (min-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\css\hospedaje-detalle.css:1394 - Found fixed width > 300px (767px): @media (max-width: 767px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\guias.html:40 - Found fixed width > 300px (1200px): max-width: 1200px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\guias.html:274 - Found fixed width > 300px (600px): max-width: 600px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\guias.html:290 - Found fixed width > 300px (1200px): max-width: 1200px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\guias.html:366 - Found fixed width > 300px (1200px): max-width: 1200px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\guias.html:610 - Found fixed width > 300px (768px): @media (max-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\guias.html:623 - Found fixed width > 300px (320px): width: 320px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\guias.html:736 - Found fixed width > 300px (1200px): max-width: 1200px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\guias.html:879 - Found fixed width > 300px (768px): @media (max-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\hospedaje.html:40 - Found fixed width > 300px (1200px): max-width: 1200px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\hospedaje.html:264 - Found fixed width > 300px (800px): max-width: 800px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\hospedaje.html:280 - Found fixed width > 300px (700px): max-width: 700px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\hospedaje.html:299 - Found fixed width > 300px (1200px): max-width: 1200px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\hospedaje.html:434 - Found fixed width > 300px (1200px): max-width: 1200px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\hospedaje.html:737 - Found fixed width > 300px (900px): max-width: 900px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\hospedaje.html:1327 - Found fixed width > 300px (768px): @media (max-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\hospedaje.html:1340 - Found fixed width > 300px (320px): width: 320px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\hospedaje.html:1553 - Found fixed width > 300px (1200px): max-width: 1200px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\hospedaje.html:1696 - Found fixed width > 300px (768px): @media (max-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\hospedaje.html:1792 - Found fixed width > 300px (600px): <div class="hero-search-container" style="width: 100%; max-width: 600px; margin: 2rem auto 0 auto;">
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\hospedaje.html:1814 - Found fixed width > 300px (1200px): <section class="filters-section" style="max-width: 1200px; margin: 0 auto; padding: 0 2rem 1rem;">
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\hoteles.html:40 - Found fixed width > 300px (1200px): max-width: 1200px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\hoteles.html:271 - Found fixed width > 300px (600px): max-width: 600px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\hoteles.html:347 - Found fixed width > 300px (1200px): max-width: 1200px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\hoteles.html:708 - Found fixed width > 300px (900px): max-width: 900px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\hoteles.html:1345 - Found fixed width > 300px (768px): @media (max-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\hoteles.html:1358 - Found fixed width > 300px (320px): width: 320px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\hoteles.html:1591 - Found fixed width > 300px (1200px): max-width: 1200px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\hoteles.html:1734 - Found fixed width > 300px (768px): @media (max-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\index.html:86 - Found fixed width > 300px (1200px): max-width: 1200px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\index.html:321 - Found fixed width > 300px (768px): @media (max-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\index.html:334 - Found fixed width > 300px (320px): width: 320px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\index.html:512 - Found fixed width > 300px (800px): max-width: 800px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\index.html:568 - Found fixed width > 300px (1200px): max-width: 1200px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\index.html:604 - Found fixed width > 300px (800px): max-width: 800px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\index.html:756 - Found fixed width > 300px (1200px): max-width: 1200px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\index.html:776 - Found fixed width > 300px (800px): max-width: 800px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\index.html:919 - Found fixed width > 300px (1200px): max-width: 1200px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\index.html:943 - Found fixed width > 300px (800px): max-width: 800px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\index.html:997 - Found fixed width > 300px (1200px): max-width: 1200px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\index.html:1072 - Found fixed width > 300px (1200px): max-width: 1200px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\index.html:1214 - Found fixed width > 300px (1024px): @media (max-width: 1024px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\index.html:1234 - Found fixed width > 300px (768px): @media (max-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\index.html:1272 - Found fixed width > 300px (480px): @media (max-width: 480px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\index.html:1447 - Found fixed width > 300px (768px): @media (max-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\index.html:1556 - Found fixed width > 300px (600px): style="margin-top: 2rem; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto;">
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\index.html:1857 - Found fixed width > 300px (992px): @media (max-width: 992px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\index.html:1867 - Found fixed width > 300px (576px): @media (max-width: 576px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\index.html:1952 - Found fixed width > 300px (768px): @media (max-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\index.html:1978 - Found fixed width > 300px (769px): @media (min-width: 769px) and (max-width: 1024px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\index.html:1978 - Found min-width > 300px (769px): @media (min-width: 769px) and (max-width: 1024px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\login.html:47 - Found fixed width > 300px (380px): width: 380px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\login.html:115 - Found fixed width > 300px (320px): max-width: 320px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\login.html:188 - Found fixed width > 300px (420px): max-width: 420px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\login.html:419 - Found fixed width > 300px (900px): @media (max-width: 900px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\login.html:437 - Found fixed width > 300px (500px): @media (max-width: 500px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\panel-turista.html:39 - Found fixed width > 300px (1400px): max-width: 1400px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\panel-turista.html:110 - Found fixed width > 300px (1400px): max-width: 1400px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\panel-turista.html:130 - Found fixed width > 300px (600px): max-width: 600px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\panel-turista.html:308 - Found fixed width > 300px (380px): max-width: 380px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\panel-turista.html:431 - Found fixed width > 300px (768px): @media (max-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\rincones-locales.html:86 - Found fixed width > 300px (1200px): max-width: 1200px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\rincones-locales.html:321 - Found fixed width > 300px (768px): @media (max-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\rincones-locales.html:334 - Found fixed width > 300px (320px): width: 320px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\rincones-locales.html:512 - Found fixed width > 300px (800px): max-width: 800px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\rincones-locales.html:568 - Found fixed width > 300px (1200px): max-width: 1200px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\rincones-locales.html:604 - Found fixed width > 300px (800px): max-width: 800px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\rincones-locales.html:756 - Found fixed width > 300px (1200px): max-width: 1200px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\rincones-locales.html:776 - Found fixed width > 300px (800px): max-width: 800px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\rincones-locales.html:919 - Found fixed width > 300px (1200px): max-width: 1200px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\rincones-locales.html:943 - Found fixed width > 300px (800px): max-width: 800px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\rincones-locales.html:997 - Found fixed width > 300px (1200px): max-width: 1200px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\rincones-locales.html:1072 - Found fixed width > 300px (1200px): max-width: 1200px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\rincones-locales.html:1214 - Found fixed width > 300px (1024px): @media (max-width: 1024px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\rincones-locales.html:1234 - Found fixed width > 300px (768px): @media (max-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\rincones-locales.html:1272 - Found fixed width > 300px (480px): @media (max-width: 480px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\rincones-locales.html:1447 - Found fixed width > 300px (768px): @media (max-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\rincones-locales.html:1479 - Found fixed width > 300px (800px): max-width: 800px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\rincones-locales.html:1498 - Found fixed width > 300px (1200px): max-width: 1200px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\rincones-locales.html:1554 - Found fixed width > 300px (768px): @media (max-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\tourOperadora.html:40 - Found fixed width > 300px (1200px): max-width: 1200px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\tourOperadora.html:284 - Found fixed width > 300px (600px): max-width: 600px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\tourOperadora.html:302 - Found fixed width > 300px (1200px): max-width: 1200px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\tourOperadora.html:457 - Found fixed width > 300px (768px): @media (max-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\tourOperadora.html:479 - Found fixed width > 300px (1200px): max-width: 1200px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\tourOperadora.html:780 - Found fixed width > 300px (768px): @media (max-width: 768px) {
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\tourOperadora.html:793 - Found fixed width > 300px (320px): width: 320px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\tourOperadora.html:900 - Found fixed width > 300px (1200px): max-width: 1200px;
+File: c:\Users\jenni\Documents\turismo-app-og\turismo-app\frontend\public\tourOperadora.html:1043 - Found fixed width > 300px (768px): @media (max-width: 768px) {

@@ -1,6 +1,7 @@
 // authMiddleware.js - Versión completa con Super Admin
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const Tourist = require('../models/Tourist');
 
 // Proteger rutas (verificar si está autenticado)
 exports.protect = async (req, res, next) => {
@@ -29,18 +30,25 @@ exports.protect = async (req, res, next) => {
     console.log('Token decodificado:', decoded);
     
     // 3) Verificar si el usuario aún existe
-    const currentUser = await User.findById(decoded.id);
+    let currentUser = await User.findById(decoded.id);
+    let isPartnerUser = false;
+    
+    if (!currentUser) {
+      currentUser = await Tourist.findById(decoded.id);
+      isPartnerUser = true;
+    }
+    
     console.log('Usuario encontrado:', currentUser ? currentUser.email : 'Usuario no encontrado');
     
     if (!currentUser) {
       return res.status(401).json({
         status: 'error',
-        message: 'El usuario ya no existe'
+        message: 'El usuario ya no existe en el sistema'
       });
     }
     
-    // 4) Verificar si el usuario está activo
-    if (!currentUser.activo) {
+    // 4) Verificar si el usuario está activo (solo para usuarios locales, los turistas podrían no tener esta opción)
+    if (!isPartnerUser && currentUser.activo === false) {
       return res.status(401).json({
         status: 'error',
         message: 'Tu cuenta ha sido desactivada'

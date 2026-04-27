@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear Anuncio - Dirección de Turismo</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Mapbox GL JS -->
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css' rel='stylesheet' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js'></script>
     <style>
         * {
             margin: 0;
@@ -29,15 +33,15 @@
             position: fixed;
             height: 100vh;
             overflow-y: auto;
-            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
             z-index: 1000;
             transition: transform 0.3s ease;
         }
 
         .sidebar-header {
             padding: 2rem 1.5rem;
-            background: rgba(0,0,0,0.1);
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            background: rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .logo {
@@ -56,8 +60,8 @@
 
         .user-info {
             padding: 1.5rem;
-            background: rgba(0,0,0,0.1);
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            background: rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .user-avatar {
@@ -70,7 +74,7 @@
             justify-content: center;
             font-size: 1.5rem;
             margin-bottom: 1rem;
-            border: 3px solid rgba(255,255,255,0.2);
+            border: 3px solid rgba(255, 255, 255, 0.2);
         }
 
         .user-name {
@@ -119,12 +123,12 @@
         }
 
         .menu-link:hover {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.1);
             padding-left: 2rem;
         }
 
         .menu-link.active {
-            background: rgba(255,255,255,0.15);
+            background: rgba(255, 255, 255, 0.15);
             border-left: 4px solid #4CAF50;
         }
 
@@ -147,7 +151,7 @@
             background: white;
             padding: 1.5rem 2rem;
             margin: -2rem -2rem 2rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -181,7 +185,7 @@
         .form-container {
             background: white;
             border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
             overflow: hidden;
         }
 
@@ -305,6 +309,7 @@
                 opacity: 0;
                 transform: translateY(10px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -373,14 +378,16 @@
         }
 
         /* Checkbox and Radio Groups */
-        .checkbox-group, .radio-group {
+        .checkbox-group,
+        .radio-group {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1rem;
             margin-top: 0.5rem;
         }
 
-        .checkbox-item, .radio-item {
+        .checkbox-item,
+        .radio-item {
             display: flex;
             align-items: center;
             gap: 0.5rem;
@@ -391,7 +398,8 @@
             cursor: pointer;
         }
 
-        .checkbox-item:hover, .radio-item:hover {
+        .checkbox-item:hover,
+        .radio-item:hover {
             background: #e9ecef;
         }
 
@@ -461,7 +469,7 @@
             position: relative;
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
         }
 
         .image-preview img {
@@ -560,7 +568,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0, 0, 0, 0.5);
             z-index: 9999;
             justify-content: center;
             align-items: center;
@@ -588,8 +596,13 @@
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         /* Success Message */
@@ -662,7 +675,8 @@
                 grid-template-columns: 1fr;
             }
 
-            .checkbox-group, .radio-group {
+            .checkbox-group,
+            .radio-group {
                 grid-template-columns: 1fr;
             }
 
@@ -695,282 +709,281 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0, 0, 0, 0.5);
             z-index: 999;
         }
 
         .overlay.active {
             display: block;
         }
+
         /* 🌿 FORMULARIOS - Para el checkbox ecológico */
-.eco-section {
-    background: linear-gradient(135deg, #e8f5e8 0%, #f0f9f0 100%);
-    border: 2px solid #27ae60;
-    border-radius: 12px;
-    padding: 20px;
-    margin: 15px 0;
-    position: relative;
-    overflow: hidden;
-}
+        .eco-section {
+            background: linear-gradient(135deg, #e8f5e8 0%, #f0f9f0 100%);
+            border: 2px solid #27ae60;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+            position: relative;
+            overflow: hidden;
+        }
 
-.eco-section::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"><path d="M20 5C15 5 10 10 15 15C20 20 25 15 30 15C35 15 35 25 30 25C25 25 20 30 15 25C10 20 15 15 10 15C5 15 5 5 10 5C15 5 20 5 20 5Z" fill="%2327ae6020"/></svg>') repeat;
-    opacity: 0.1;
-    pointer-events: none;
-}
+        .eco-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"><path d="M20 5C15 5 10 10 15 15C20 20 25 15 30 15C35 15 35 25 30 25C25 25 20 30 15 25C10 20 15 15 10 15C5 15 5 5 10 5C15 5 20 5 20 5Z" fill="%2327ae6020"/></svg>') repeat;
+            opacity: 0.1;
+            pointer-events: none;
+        }
 
-.eco-checkbox {
-    position: relative;
-    z-index: 1;
-}
+        .eco-checkbox {
+            position: relative;
+            z-index: 1;
+        }
 
-.eco-label {
-    display: flex;
-    align-items: flex-start;
-    gap: 15px;
-    cursor: pointer;
-    color: #2c3e50;
-    font-weight: 500;
-    transition: all 0.3s ease;
-}
+        .eco-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            cursor: pointer;
+            color: #2c3e50;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
 
-.eco-label:hover {
-    color: #27ae60;
-    transform: translateY(-2px);
-}
+        .eco-label:hover {
+            color: #27ae60;
+            transform: translateY(-2px);
+        }
 
-.eco-icon {
-    color: #27ae60;
-    font-size: 24px;
-    margin-top: 3px;
-    transition: all 0.3s ease;
-}
+        .eco-icon {
+            color: #27ae60;
+            font-size: 24px;
+            margin-top: 3px;
+            transition: all 0.3s ease;
+        }
 
-.eco-text {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
+        .eco-text {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
 
-.eco-text strong {
-    font-size: 16px;
-    color: #27ae60;
-}
+        .eco-text strong {
+            font-size: 16px;
+            color: #27ae60;
+        }
 
-.eco-text small {
-    color: #7f8c8d;
-    font-size: 13px;
-    line-height: 1.4;
-    font-weight: normal;
-}
+        .eco-text small {
+            color: #7f8c8d;
+            font-size: 13px;
+            line-height: 1.4;
+            font-weight: normal;
+        }
 
-.eco-checkbox input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-    accent-color: #27ae60;
-}
+        .eco-checkbox input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            accent-color: #27ae60;
+        }
 
-.eco-checkbox input[type="checkbox"]:checked + .eco-label .eco-icon {
-    color: #27ae60;
-    transform: scale(1.2);
-    text-shadow: 0 0 10px rgba(39, 174, 96, 0.3);
-}
+        .eco-checkbox input[type="checkbox"]:checked+.eco-label .eco-icon {
+            color: #27ae60;
+            transform: scale(1.2);
+            text-shadow: 0 0 10px rgba(39, 174, 96, 0.3);
+        }
 
-/* Responsive móviles */
-@media (max-width: 768px) {
-    .eco-section {
-        padding: 15px;
-        margin: 10px 0;
-    }
-    
-    .eco-label {
-        gap: 10px;
-    }
-    
-    .eco-icon {
-        font-size: 20px;
-    }
-}
+        /* Responsive móviles */
+        @media (max-width: 768px) {
+            .eco-section {
+                padding: 15px;
+                margin: 10px 0;
+            }
 
+            .eco-label {
+                gap: 10px;
+            }
 
-
-/* 🎨 AGREGAR ESTO AL FINAL DE LA SECCIÓN <style> EN crear-anuncio.html */
-
-/* Estilos para radio buttons */
-.radio-group {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.radio-option {
-    display: flex;
-    align-items: flex-start;
-    padding: 15px;
-    border: 2px solid #e0e0e0;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    background: white;
-}
-
-.radio-option:hover {
-    border-color: #27ae60;
-    background-color: #f8f9fa;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-.radio-option input[type="radio"] {
-    display: none;
-}
-
-.radio-custom {
-    width: 20px;
-    height: 20px;
-    border: 2px solid #ddd;
-    border-radius: 50%;
-    margin-right: 15px;
-    margin-top: 2px;
-    position: relative;
-    background: white;
-    transition: all 0.3s ease;
-}
-
-.radio-option input[type="radio"]:checked + .radio-custom {
-    border-color: #27ae60;
-    background: #27ae60;
-}
-
-.radio-option input[type="radio"]:checked + .radio-custom::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: white;
-}
-
-.radio-option input[type="radio"]:checked ~ .radio-content {
-    color: #27ae60;
-}
-
-.radio-content strong {
-    display: block;
-    margin-bottom: 5px;
-    color: #333;
-    font-size: 16px;
-}
-
-.radio-content p {
-    margin: 0;
-    color: #666;
-    font-size: 14px;
-}
-
-/* Estilos para servicios modernos */
-.modern-services {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 12px;
-    margin-top: 15px;
-}
-
-.modern-services .checkbox-item {
-    padding: 12px 15px;
-    border: 2px solid #e0e0e0;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-    background: white;
-}
-
-.modern-services .checkbox-item:hover {
-    border-color: #27ae60;
-    background-color: #f8f9fa;
-    transform: translateY(-1px);
-}
-
-.modern-services .checkbox-item input[type="checkbox"]:checked + label {
-    color: #27ae60;
-    font-weight: 600;
-}
-
-.modern-services .checkbox-item:has(input:checked) {
-    border-color: #27ae60;
-    background-color: #f0f8f0;
-}
-
-/* Estilos para checkbox ecológico */
-.eco-checkbox {
-    background: linear-gradient(135deg, #f0f8f0 0%, #e8f5e8 100%);
-    border: 2px solid #4CAF50;
-    border-radius: 12px;
-    padding: 20px;
-    margin: 15px 0;
-}
-
-.eco-label {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    margin: 0;
-}
-
-.eco-icon {
-    font-size: 24px;
-    color: #4CAF50;
-    margin-right: 15px;
-}
-
-.eco-text {
-    display: flex;
-    flex-direction: column;
-}
-
-.eco-text strong {
-    color: #2E7D32;
-    font-size: 16px;
-    margin-bottom: 4px;
-}
-
-.eco-text small {
-    color: #4CAF50;
-    font-size: 13px;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .modern-services {
-        grid-template-columns: 1fr;
-    }
-    
-    .radio-option {
-        padding: 12px;
-    }
-    
-    .radio-content strong {
-        font-size: 15px;
-    }
-    
-    .radio-content p {
-        font-size: 13px;
-    }
-}
+            .eco-icon {
+                font-size: 20px;
+            }
+        }
 
 
 
+        /* 🎨 AGREGAR ESTO AL FINAL DE LA SECCIÓN <style> EN crear-anuncio.html */
+
+        /* Estilos para radio buttons */
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: flex-start;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .radio-option:hover {
+            border-color: #27ae60;
+            background-color: #f8f9fa;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .radio-option input[type="radio"] {
+            display: none;
+        }
+
+        .radio-custom {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ddd;
+            border-radius: 50%;
+            margin-right: 15px;
+            margin-top: 2px;
+            position: relative;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        .radio-option input[type="radio"]:checked+.radio-custom {
+            border-color: #27ae60;
+            background: #27ae60;
+        }
+
+        .radio-option input[type="radio"]:checked+.radio-custom::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: white;
+        }
+
+        .radio-option input[type="radio"]:checked~.radio-content {
+            color: #27ae60;
+        }
+
+        .radio-content strong {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .radio-content p {
+            margin: 0;
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Estilos para servicios modernos */
+        .modern-services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .modern-services .checkbox-item {
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .modern-services .checkbox-item:hover {
+            border-color: #27ae60;
+            background-color: #f8f9fa;
+            transform: translateY(-1px);
+        }
+
+        .modern-services .checkbox-item input[type="checkbox"]:checked+label {
+            color: #27ae60;
+            font-weight: 600;
+        }
+
+        .modern-services .checkbox-item:has(input:checked) {
+            border-color: #27ae60;
+            background-color: #f0f8f0;
+        }
+
+        /* Estilos para checkbox ecológico */
+        .eco-checkbox {
+            background: linear-gradient(135deg, #f0f8f0 0%, #e8f5e8 100%);
+            border: 2px solid #4CAF50;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .eco-label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            margin: 0;
+        }
+
+        .eco-icon {
+            font-size: 24px;
+            color: #4CAF50;
+            margin-right: 15px;
+        }
+
+        .eco-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .eco-text strong {
+            color: #2E7D32;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .eco-text small {
+            color: #4CAF50;
+            font-size: 13px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .modern-services {
+                grid-template-columns: 1fr;
+            }
+
+            .radio-option {
+                padding: 12px;
+            }
+
+            .radio-content strong {
+                font-size: 15px;
+            }
+
+            .radio-content p {
+                font-size: 13px;
+            }
+        }
     </style>
 </head>
+
 <body>
     <!-- Mobile Menu Toggle -->
     <button class="mobile-menu-toggle" id="mobileMenuToggle">
@@ -1112,7 +1125,7 @@
                     <!-- Section 1: Información Básica -->
                     <div class="form-section active" id="section1">
                         <h3 class="section-title">Información Básica</h3>
-                        
+
                         <div class="form-row">
                             <div class="form-group">
                                 <label class="form-label">
@@ -1129,7 +1142,8 @@
                                     Descripción <span class="required">*</span>
                                 </label>
                                 <textarea class="form-control" id="descripcion" name="descripcion" required></textarea>
-                                <span class="form-hint">Describa detalladamente su servicio (mínimo 50 caracteres)</span>
+                                <span class="form-hint">Describa detalladamente su servicio (mínimo 50
+                                    caracteres)</span>
                             </div>
                         </div>
 
@@ -1138,7 +1152,8 @@
                                 <label class="form-label">
                                     Precio <span class="required">*</span>
                                 </label>
-                                <input type="number" class="form-control" id="precio" name="precio" min="0" step="0.01" required>
+                                <input type="number" class="form-control" id="precio" name="precio" min="0" step="0.01"
+                                    required>
                                 <span class="form-hint" id="priceHint">Precio por noche en MXN</span>
                             </div>
 
@@ -1146,7 +1161,8 @@
                                 <label class="form-label">
                                     Teléfono de Contacto <span class="required">*</span>
                                 </label>
-                                <input type="tel" class="form-control" id="telefono" name="telefono" pattern="[0-9]{10}" required>
+                                <input type="tel" class="form-control" id="telefono" name="telefono" pattern="[0-9]{10}"
+                                    required>
                                 <span class="form-hint">10 dígitos sin espacios ni guiones</span>
                             </div>
                         </div>
@@ -1163,7 +1179,8 @@
                                 <label class="form-label">
                                     Sitio Web
                                 </label>
-                                <input type="url" class="form-control" id="sitioWeb" name="sitioWeb" placeholder="https://ejemplo.com">
+                                <input type="url" class="form-control" id="sitioWeb" name="sitioWeb"
+                                    placeholder="https://ejemplo.com">
                             </div>
                         </div>
 
@@ -1202,8 +1219,21 @@
                                 <label class="form-label">
                                     Código Postal
                                 </label>
-                                <input type="text" class="form-control" id="codigoPostal" name="codigoPostal" pattern="[0-9]{5}">
+                                <input type="text" class="form-control" id="codigoPostal" name="codigoPostal"
+                                    pattern="[0-9]{5}">
                             </div>
+                        </div>
+
+                        <!-- 🗺️ NUEVO MAPA MAPBOX -->
+                        <div class="form-group mapbox-container" style="margin-top: 20px;">
+                            <label class="form-label">Ubicación en el Mapa</label>
+                            <span class="form-hint">Mueve el mapa o arrastra el marcador para establecer la ubicación
+                                exacta.</span>
+                            <div id="map"
+                                style="width: 100%; height: 350px; border-radius: 8px; border: 1px solid #ccc; margin-top: 10px;">
+                            </div>
+                            <input type="hidden" id="lat" name="lat">
+                            <input type="hidden" id="lng" name="lng">
                         </div>
                     </div>
 
@@ -1215,7 +1245,7 @@
                     <!-- Section 3: Imágenes -->
                     <div class="form-section" id="section3">
                         <h3 class="section-title">Imágenes</h3>
-                        
+
                         <div class="form-group">
                             <label class="form-label">
                                 Agregar Imágenes
@@ -1223,12 +1253,14 @@
                             <div class="image-upload-container" id="imageUploadContainer">
                                 <i class="fas fa-cloud-upload-alt upload-icon"></i>
                                 <p class="upload-text">Arrastra imágenes aquí o haz clic para seleccionar</p>
-                                <button type="button" class="upload-button" onclick="document.getElementById('imageInput').click()">
+                                <button type="button" class="upload-button"
+                                    onclick="document.getElementById('imageInput').click()">
                                     Seleccionar Imágenes
                                 </button>
                                 <input type="file" id="imageInput" multiple accept="image/*" style="display: none;">
                             </div>
-                            <span class="form-hint">Puedes subir hasta 10 imágenes (JPG, PNG, máximo 5MB cada una)</span>
+                            <span class="form-hint">Puedes subir hasta 10 imágenes (JPG, PNG, máximo 5MB cada
+                                una)</span>
                         </div>
 
                         <div class="image-preview-container" id="imagePreviewContainer"></div>
@@ -1237,7 +1269,7 @@
                     <!-- Section 4: Confirmar -->
                     <div class="form-section" id="section4">
                         <h3 class="section-title">Confirmar Información</h3>
-                        
+
                         <div id="confirmationSummary">
                             <!-- El resumen se generará dinámicamente -->
                         </div>
@@ -1249,12 +1281,12 @@
                             <i class="fas fa-arrow-left"></i>
                             Anterior
                         </button>
-                        
+
                         <button type="button" class="btn btn-primary" id="btnNext">
                             Siguiente
                             <i class="fas fa-arrow-right"></i>
                         </button>
-                        
+
                         <button type="submit" class="btn btn-success" id="btnSubmit" style="display: none;">
                             <i class="fas fa-check"></i>
                             Crear Anuncio
@@ -1277,22 +1309,22 @@
         // Variables globales
         const userData = JSON.parse(localStorage.getItem('userData')) || {};
         const authToken = localStorage.getItem('authToken');
-     const baseURL = (() => {
-    const hostname = window.location.hostname;
-    
-    console.log('🌐 Hostname detectado:', hostname);
-    
-    if (hostname === 'localhost' || hostname === '127.0.0.1') {
-        console.log('🛠️ Modo desarrollo detectado');
-        return 'http://localhost:5000/api';
-    }
-    
-    console.log('🚀 Modo producción detectado');
-    return `${window.location.protocol}//${window.location.host}/api`;
-})();
+        const baseURL = (() => {
+            const hostname = window.location.hostname;
 
-console.log('✅ BaseURL configurado:', baseURL);
-        
+            console.log('🌐 Hostname detectado:', hostname);
+
+            if (hostname === 'localhost' || hostname === '127.0.0.1') {
+                console.log('🛠️ Modo desarrollo detectado');
+                return 'http://localhost:5000/api';
+            }
+
+            console.log('🚀 Modo producción detectado');
+            return `${window.location.protocol}//${window.location.host}/api`;
+        })();
+
+        console.log('✅ BaseURL configurado:', baseURL);
+
         // Estado del formulario
         let currentStep = 1;
         const totalSteps = 4;
@@ -1365,18 +1397,18 @@ console.log('✅ BaseURL configurado:', baseURL);
         // Actualizar información del usuario
         document.getElementById('userName').textContent = userData.nombre || 'Administrador';
         document.getElementById('userRole').textContent = userData.role === 'admin' ? 'Administrador' : 'Usuario';
-        
+
         // Iniciales para avatar
         const initials = userData.nombre ? userData.nombre.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() : 'AD';
         document.getElementById('userAvatar').innerHTML = `<span>${initials}</span>`;
 
         // Toggle mobile menu
-        mobileMenuToggle.addEventListener('click', function() {
+        mobileMenuToggle.addEventListener('click', function () {
             sidebar.classList.toggle('active');
             overlay.classList.toggle('active');
         });
 
-        overlay.addEventListener('click', function() {
+        overlay.addEventListener('click', function () {
             sidebar.classList.remove('active');
             overlay.classList.remove('active');
         });
@@ -1385,25 +1417,25 @@ console.log('✅ BaseURL configurado:', baseURL);
         function customizeInterface() {
             // Actualizar colores
             document.documentElement.style.setProperty('--form-color', config.color);
-            
+
             // Actualizar header del formulario
             document.getElementById('formHeader').style.background = config.color;
             document.getElementById('formTitle').textContent = config.title;
             document.getElementById('formDescription').textContent = config.description;
-            
+
             // Actualizar página
             document.getElementById('pageTitle').textContent = config.title;
             document.getElementById('breadcrumbCurrent').textContent = config.title;
-            
+
             // Actualizar hint del precio
             document.getElementById('priceHint').textContent = config.priceLabel + ' en MXN';
-            
+
             // Actualizar paso 2
             document.getElementById('step2Label').textContent = config.step2Title;
-            
+
             // Generar campos específicos para el paso 2
             generateStep2Fields();
-            
+
             // Ocultar items del menú que no corresponden
             customizeMenu();
         }
@@ -1433,8 +1465,8 @@ console.log('✅ BaseURL configurado:', baseURL);
         function generateStep2Fields() {
             const section2 = document.getElementById('section2');
             let fieldsHTML = `<h3 class="section-title">${config.step2Title}</h3>`;
-            
-            switch(businessType) {
+
+            switch (businessType) {
                 case 'hotel':
                     fieldsHTML += `
                         <div class="form-row">
@@ -1508,9 +1540,9 @@ console.log('✅ BaseURL configurado:', baseURL);
                         </div>
                     `;
                     break;
-                    
-               case 'cabana':
-    fieldsHTML += `
+
+                case 'cabana':
+                    fieldsHTML += `
         <!-- SECCIÓN NUEVA: Tipo de Cabaña -->
         <div class="form-section">
             <h3><i class="fas fa-home"></i> Tipo de Alojamiento</h3>
@@ -1740,8 +1772,8 @@ console.log('✅ BaseURL configurado:', baseURL);
             </div>
         </div>
     `;
-    break;
-                    
+                    break;
+
                 case 'airbnb':
                     fieldsHTML += `
                         <div class="form-row">
@@ -1871,7 +1903,7 @@ console.log('✅ BaseURL configurado:', baseURL);
                         </div>
                     `;
                     break;
-                    
+
                 case 'touroperadora':
                     fieldsHTML += `
                         <div class="form-group">
@@ -1951,7 +1983,7 @@ console.log('✅ BaseURL configurado:', baseURL);
                         </div>
                     `;
                     break;
-                    
+
                 case 'guiaturistica':
                     fieldsHTML += `
                         <div class="form-row">
@@ -2044,12 +2076,12 @@ console.log('✅ BaseURL configurado:', baseURL);
                     `;
                     break;
             }
-            
+
             section2.innerHTML = fieldsHTML;
         }
 
         // Funciones para agregar elementos dinámicos
-        window.addTour = function() {
+        window.addTour = function () {
             const container = document.getElementById('toursContainer');
             const tourItem = container.querySelector('.tour-item').cloneNode(true);
             // Limpiar valores
@@ -2059,7 +2091,7 @@ console.log('✅ BaseURL configurado:', baseURL);
             container.appendChild(tourItem);
         };
 
-        window.addIdioma = function() {
+        window.addIdioma = function () {
             const container = document.getElementById('idiomasContainer');
             const idiomaRow = container.querySelector('.form-row').cloneNode(true);
             container.appendChild(idiomaRow);
@@ -2074,15 +2106,15 @@ console.log('✅ BaseURL configurado:', baseURL);
                 if (currentStep < totalSteps) {
                     // Guardar datos del paso actual
                     saveStepData();
-                    
+
                     // Marcar paso actual como completado
                     document.getElementById(`step${currentStep}`).classList.add('completed');
                     document.getElementById(`step${currentStep}`).classList.remove('active');
-                    
+
                     // Avanzar al siguiente paso
                     currentStep++;
                     document.getElementById(`step${currentStep}`).classList.add('active');
-                    
+
                     // Actualizar vista
                     updateStepView();
                 }
@@ -2104,19 +2136,19 @@ console.log('✅ BaseURL configurado:', baseURL);
             document.querySelectorAll('.form-section').forEach(section => {
                 section.classList.remove('active');
             });
-            
+
             // Mostrar sección actual
             document.getElementById(`section${currentStep}`).classList.add('active');
-            
+
             // Actualizar barra de progreso
             const progressPercentage = ((currentStep - 1) / (totalSteps - 1)) * 100;
             document.getElementById('progressLine').style.width = progressPercentage + '%';
-            
+
             // Actualizar botones de navegación
             document.getElementById('btnPrevious').style.display = currentStep > 1 ? 'flex' : 'none';
             document.getElementById('btnNext').style.display = currentStep < totalSteps ? 'flex' : 'none';
             document.getElementById('btnSubmit').style.display = currentStep === totalSteps ? 'flex' : 'none';
-            
+
             // Si es el último paso, generar resumen
             if (currentStep === totalSteps) {
                 generateSummary();
@@ -2128,7 +2160,7 @@ console.log('✅ BaseURL configurado:', baseURL);
             const currentSection = document.getElementById(`section${currentStep}`);
             const requiredFields = currentSection.querySelectorAll('[required]');
             let isValid = true;
-            
+
             requiredFields.forEach(field => {
                 if (!field.value.trim()) {
                     field.classList.add('error');
@@ -2137,7 +2169,7 @@ console.log('✅ BaseURL configurado:', baseURL);
                     field.classList.remove('error');
                 }
             });
-            
+
             // Validaciones específicas
             if (currentStep === 1) {
                 // Validar teléfono
@@ -2147,7 +2179,7 @@ console.log('✅ BaseURL configurado:', baseURL);
                     isValid = false;
                     showError('El teléfono debe tener 10 dígitos');
                 }
-                
+
                 // Validar descripción mínima
                 const descripcion = document.getElementById('descripcion');
                 if (descripcion.value.length < 50) {
@@ -2156,7 +2188,7 @@ console.log('✅ BaseURL configurado:', baseURL);
                     showError('La descripción debe tener al menos 50 caracteres');
                 }
             }
-            
+
             return isValid;
         }
 
@@ -2164,7 +2196,7 @@ console.log('✅ BaseURL configurado:', baseURL);
         function saveStepData() {
             const currentSection = document.getElementById(`section${currentStep}`);
             const inputs = currentSection.querySelectorAll('input, textarea, select');
-            
+
             inputs.forEach(input => {
                 if (input.type === 'checkbox') {
                     if (input.checked) {
@@ -2182,7 +2214,7 @@ console.log('✅ BaseURL configurado:', baseURL);
         function generateSummary() {
             const summaryContainer = document.getElementById('confirmationSummary');
             let summaryHTML = '<div style="background: #f8f9fa; padding: 2rem; border-radius: 10px;">';
-            
+
             // Información básica
             summaryHTML += '<h4 style="margin-bottom: 1rem; color: #2c3e50;">Información General</h4>';
             summaryHTML += '<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 2rem;">';
@@ -2191,17 +2223,17 @@ console.log('✅ BaseURL configurado:', baseURL);
             summaryHTML += `<div><strong>Teléfono:</strong> ${document.getElementById('telefono').value}</div>`;
             summaryHTML += `<div><strong>Ciudad:</strong> ${document.getElementById('ciudad').value}</div>`;
             summaryHTML += '</div>';
-            
+
             // Descripción
             summaryHTML += '<h4 style="margin-bottom: 0.5rem; color: #2c3e50;">Descripción</h4>';
             summaryHTML += `<p style="margin-bottom: 2rem;">${document.getElementById('descripcion').value}</p>`;
-            
+
             // Imágenes
             if (selectedImages.length > 0) {
                 summaryHTML += '<h4 style="margin-bottom: 1rem; color: #2c3e50;">Imágenes</h4>';
                 summaryHTML += `<p>Se cargarán ${selectedImages.length} imagen(es)</p>`;
             }
-            
+
             summaryHTML += '</div>';
             summaryContainer.innerHTML = summaryHTML;
         }
@@ -2234,23 +2266,23 @@ console.log('✅ BaseURL configurado:', baseURL);
         function handleFiles(files) {
             const maxFiles = 10;
             const maxSize = 5 * 1024 * 1024; // 5MB
-            
+
             Array.from(files).forEach(file => {
                 if (selectedImages.length >= maxFiles) {
                     showError(`Máximo ${maxFiles} imágenes permitidas`);
                     return;
                 }
-                
+
                 if (!file.type.startsWith('image/')) {
                     showError('Solo se permiten archivos de imagen');
                     return;
                 }
-                
+
                 if (file.size > maxSize) {
                     showError('El archivo no debe superar 5MB');
                     return;
                 }
-                
+
                 selectedImages.push(file);
                 displayImagePreview(file);
             });
@@ -2272,7 +2304,7 @@ console.log('✅ BaseURL configurado:', baseURL);
             reader.readAsDataURL(file);
         }
 
-        window.removeImage = function(index) {
+        window.removeImage = function (index) {
             selectedImages.splice(index, 1);
             updateImagePreviews();
         };
@@ -2287,26 +2319,26 @@ console.log('✅ BaseURL configurado:', baseURL);
         // Envío del formulario
         document.getElementById('createForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-            
+
             if (!validateCurrentStep()) {
                 return;
             }
-            
+
             // Guardar datos del último paso
             saveStepData();
-            
+
             // Mostrar loading
             document.getElementById('loadingOverlay').classList.add('active');
-            
+
             try {
                 // Preparar datos según el tipo de negocio
                 const submitData = prepareSubmitData();
-                
+
                 // Agregar imágenes
                 selectedImages.forEach((image, index) => {
                     formData.append(`imagen${index}`, image);
                 });
-                
+
                 // Enviar a la API
                 const response = await fetch(baseURL + config.endpoint, {
                     method: 'POST',
@@ -2315,9 +2347,9 @@ console.log('✅ BaseURL configurado:', baseURL);
                     },
                     body: submitData
                 });
-                
+
                 const data = await response.json();
-                
+
                 if (data.status === 'success') {
                     showSuccess('¡Anuncio creado exitosamente!');
                     setTimeout(() => {
@@ -2326,7 +2358,7 @@ console.log('✅ BaseURL configurado:', baseURL);
                 } else {
                     throw new Error(data.message || 'Error al crear el anuncio');
                 }
-                
+
             } catch (error) {
                 console.error('Error:', error);
                 showError(error.message || 'Error al crear el anuncio');
@@ -2345,7 +2377,9 @@ console.log('✅ BaseURL configurado:', baseURL);
                     direccion: formData.get('direccion'),
                     ciudad: formData.get('ciudad'),
                     estado: formData.get('estado'),
-                    codigoPostal: formData.get('codigoPostal')
+                    codigoPostal: formData.get('codigoPostal'),
+                    lat: formData.get('lat') ? parseFloat(formData.get('lat')) : undefined,
+                    lng: formData.get('lng') ? parseFloat(formData.get('lng')) : undefined
                 },
                 contacto: {
                     telefono: formData.get('telefono'),
@@ -2353,7 +2387,7 @@ console.log('✅ BaseURL configurado:', baseURL);
                     sitioWeb: formData.get('sitioWeb')
                 }
             };
-            
+
             // Obtener servicios seleccionados
             const servicios = [];
             formData.forEach((value, key) => {
@@ -2362,9 +2396,9 @@ console.log('✅ BaseURL configurado:', baseURL);
                 }
             });
             data.servicios = servicios;
-            
+
             // Agregar campos específicos según tipo
-            switch(businessType) {
+            switch (businessType) {
                 case 'hotel':
                     data.capacidad = {
                         habitaciones: parseInt(formData.get('habitaciones')),
@@ -2372,7 +2406,7 @@ console.log('✅ BaseURL configurado:', baseURL);
                     };
                     data.esEcologico = formData.get('esEcologico') === 'true';
                     break;
-                    
+
                 case 'cabana':
                     data.capacidad = {
                         huespedes: parseInt(formData.get('huespedes')),
@@ -2387,7 +2421,7 @@ console.log('✅ BaseURL configurado:', baseURL);
                     data.esEcologico = formData.get('esEcologico') === 'true';
 
                     break;
-                    
+
                 case 'airbnb':
                     data.tipoPropiedad = formData.get('tipoPropiedad');
                     data.capacidad = {
@@ -2405,10 +2439,14 @@ console.log('✅ BaseURL configurado:', baseURL);
                         estanciaMinima: parseInt(formData.get('estanciaMinima')),
                         cancelacion: formData.get('cancelacion')
                     };
+                    data.ubicacion.coordenadas = {
+                        latitud: formData.get('lat') ? parseFloat(formData.get('lat')) : undefined,
+                        longitud: formData.get('lng') ? parseFloat(formData.get('lng')) : undefined
+                    };
                     data.precioPorNoche = data.precio;
                     delete data.precio;
                     break;
-                    
+
                 case 'touroperadora':
                     // Recopilar tours
                     const tours = [];
@@ -2427,10 +2465,10 @@ console.log('✅ BaseURL configurado:', baseURL);
                     });
                     data.tours = tours;
                     break;
-                    
+
                 case 'guiaturistica':
                     data.apellidos = formData.get('apellidos');
-                    
+
                     // Especialidades
                     const especialidades = [];
                     formData.forEach((value, key) => {
@@ -2439,7 +2477,7 @@ console.log('✅ BaseURL configurado:', baseURL);
                         }
                     });
                     data.especialidades = especialidades;
-                    
+
                     // Idiomas
                     const idiomas = [];
                     const idiomaSelects = document.getElementsByName('idioma[]');
@@ -2451,22 +2489,22 @@ console.log('✅ BaseURL configurado:', baseURL);
                         });
                     });
                     data.idiomas = idiomas;
-                    
+
                     // Tarifas
                     data.tarifas = {
                         porHora: parseFloat(formData.get('tarifaPorHora')) || parseFloat(formData.get('precio')),
                         medioDia: parseFloat(formData.get('tarifaMedioDia')),
                         diaCompleto: parseFloat(formData.get('tarifaDiaCompleto'))
                     };
-                    
+
                     // Ciudades de operación
                     const ciudades = formData.get('ciudadesOperacion').split(',').map(c => c.trim());
                     data.ubicacion.ciudadesOperacion = ciudades;
-                    
+
                     delete data.precio;
                     break;
             }
-            
+
             return JSON.stringify(data);
         }
 
@@ -2500,235 +2538,291 @@ console.log('✅ BaseURL configurado:', baseURL);
         document.head.appendChild(style);
 
         // Inicializar
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             customizeInterface();
+            initMapbox();
         });
 
-// 🔧 AGREGAR ESTO AL FINAL DEL JAVASCRIPT EN crear-anuncio.html
+        // 🗺️ Configuración e Inicialización de Mapbox
+        function initMapbox() {
+            mapboxgl.accessToken = 'pk.eyJ1IjoiZGFuaWVsMTIzMiIsImEiOiJjbWlnb2R3MW4wM21nM2VwcmZ3ZnIxd3QzIn0.zyMq4wzSi9Zi7CuWo6oDCQ';
 
-// Funcionalidad para manejar el tipo de alojamiento de cabañas
-function setupCabanaTypeHandling() {
-    const tipoAlojamiento = document.querySelectorAll('input[name="tipoAlojamiento"]');
-    const capacidadIndividual = document.getElementById('capacidadIndividual');
-    const capacidadConjunto = document.getElementById('capacidadConjunto');
-    
-    if (!tipoAlojamiento.length) return; // Solo ejecutar si estamos en cabañas
-    
-    tipoAlojamiento.forEach(radio => {
-        radio.addEventListener('change', function() {
-            if (this.value === 'individual') {
-                // Mostrar campos para cabaña individual
-                capacidadIndividual.style.display = 'block';
-                capacidadConjunto.style.display = 'none';
-                
-                // Hacer campos requeridos
-                setFieldRequired('huespedes', true);
-                setFieldRequired('habitaciones', true);
-                setFieldRequired('totalCabanas', false);
-                setFieldRequired('cabanasDisponibles', false);
-                
-            } else if (this.value === 'conjunto') {
-                // Mostrar campos para conjunto de cabañas
-                capacidadIndividual.style.display = 'none';
-                capacidadConjunto.style.display = 'block';
-                
-                // Hacer campos requeridos
-                setFieldRequired('huespedes', false);
-                setFieldRequired('habitaciones', false);
-                setFieldRequired('totalCabanas', true);
-                setFieldRequired('cabanasDisponibles', true);
-                
-                // Auto-completar cabañas disponibles cuando cambie el total
-                setupAutoCompleteDisponibles();
-            }
-        });
-    });
-}
+            // Coordenadas default: Jalpan de Serra
+            const defaultLng = -99.4752;
+            const defaultLat = 21.2185;
 
-// Función auxiliar para cambiar campos requeridos
-function setFieldRequired(fieldName, required) {
-    const field = document.querySelector(`[name="${fieldName}"]`);
-    if (field) {
-        field.required = required;
-        const label = document.querySelector(`label[for="${fieldName}"], label[class*="${fieldName}"]`);
-        if (label) {
-            const requiredSpan = label.querySelector('.required');
-            if (required && !requiredSpan) {
-                label.innerHTML += ' <span class="required">*</span>';
-            } else if (!required && requiredSpan) {
-                requiredSpan.remove();
-            }
-        }
-    }
-}
-
-// Auto-completar cabañas disponibles
-function setupAutoCompleteDisponibles() {
-    const totalCabanasField = document.querySelector('[name="totalCabanas"]');
-    const disponiblesField = document.querySelector('[name="cabanasDisponibles"]');
-    
-    if (totalCabanasField && disponiblesField) {
-        totalCabanasField.addEventListener('input', function() {
-            const total = parseInt(this.value) || 0;
-            disponiblesField.max = total;
-            
-            // Si no hay valor en disponibles, poner el total
-            if (!disponiblesField.value && total > 0) {
-                disponiblesField.value = total;
-            }
-            
-            // Si el valor actual es mayor al total, ajustarlo
-            if (parseInt(disponiblesField.value) > total) {
-                disponiblesField.value = total;
-            }
-        });
-        
-        disponiblesField.addEventListener('input', function() {
-            const total = parseInt(totalCabanasField.value) || 0;
-            const disponibles = parseInt(this.value) || 0;
-            
-            if (disponibles > total) {
-                this.value = total;
-            }
-        });
-    }
-}
-
-// Modificar la función de envío para manejar los nuevos campos
-function updateSubmitFormForCabanas() {
-    const originalSubmitForm = window.submitForm;
-    
-    window.submitForm = async function(event) {
-        event.preventDefault();
-        
-        const formData = new FormData(event.target);
-        const data = {};
-        
-        // Procesar campos básicos
-        for (let [key, value] of formData.entries()) {
-            if (key === 'servicios') {
-                if (!data.servicios) data.servicios = [];
-                data.servicios.push(value);
-            } else {
-                data[key] = value;
-            }
-        }
-        
-        // 🆕 PROCESAMIENTO ESPECIAL PARA CABAÑAS
-        if (businessType === 'cabana') {
-            const tipoAlojamiento = document.querySelector('input[name="tipoAlojamiento"]:checked')?.value;
-            
-            // Configurar campos según el tipo
-            data.caracteristicas = {
-                metrosCuadrados: data.metrosCuadrados ? parseInt(data.metrosCuadrados) : undefined,
-                tipoPropiedad: data.tipoPropiedad || 'cabana',
-                esConjunto: tipoAlojamiento === 'conjunto',
-                amoblada: true
-            };
-            
-            // Configurar capacidad
-            if (tipoAlojamiento === 'individual') {
-                data.capacidad = {
-                    huespedes: parseInt(data.huespedes) || 1,
-                    habitaciones: parseInt(data.habitaciones) || 1,
-                    camas: parseInt(data.camas) || 1
-                };
-                
-                data.individual = {
-                    disponible: document.getElementById('disponibleIndividual')?.checked || true
-                };
-                
-                data.conjunto = {
-                    totalCabanas: 1,
-                    cabanasDisponibles: data.individual.disponible ? 1 : 0
-                };
-                
-            } else if (tipoAlojamiento === 'conjunto') {
-                data.capacidad = {
-                    huespedes: parseInt(data.huespedesPorCabana) || 4,
-                    habitaciones: parseInt(data.habitacionesPorCabana) || 2,
-                    camas: parseInt(data.habitacionesPorCabana) || 2
-                };
-                
-                data.conjunto = {
-                    totalCabanas: parseInt(data.totalCabanas) || 2,
-                    cabanasDisponibles: parseInt(data.cabanasDisponibles) || 0
-                };
-                
-                data.individual = {
-                    disponible: true // No aplica para conjuntos
-                };
-            }
-            
-            // Configurar contacto con horario
-            data.contacto = {
-                telefono: data.telefono || '',
-                email: data.email || '',
-                horario: data.horario || ''
-            };
-            
-            // Campo ecológico
-            data.esEcologico = document.getElementById('esEcologicoCabana')?.checked || false;
-            
-            // Limpiar campos que no necesitamos en el payload
-            delete data.tipoAlojamiento;
-            delete data.huespedes;
-            delete data.habitaciones;
-            delete data.camas;
-            delete data.totalCabanas;
-            delete data.cabanasDisponibles;
-            delete data.huespedesPorCabana;
-            delete data.habitacionesPorCabana;
-            delete data.metrosCuadrados;
-            delete data.tipoPropiedad;
-            delete data.telefono;
-            delete data.email;
-            delete data.horario;
-            delete data.disponibleIndividual;
-        }
-        
-        // Llamar a la función original con los datos procesados
-        try {
-            showLoading();
-            
-            const response = await fetch(`${baseURL}${config.endpoint}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${authToken}`
-                },
-                body: JSON.stringify(data)
+            const map = new mapboxgl.Map({
+                container: 'map',
+                style: 'mapbox://styles/mapbox/streets-v11',
+                center: [defaultLng, defaultLat],
+                zoom: 14
             });
-            
-            const result = await response.json();
-            
-            if (result.status === 'success') {
-                showSuccess(`${config.title} creado exitosamente`);
-                setTimeout(() => {
-                    window.location.href = `mis-anuncios.html?tipo=${businessType}`;
-                }, 2000);
-            } else {
-                showError(result.message || 'Error al crear el anuncio');
-            }
-            
-        } catch (error) {
-            console.error('Error:', error);
-            showError('Error de conexión. Intenta nuevamente.');
-        } finally {
-            hideLoading();
-        }
-    };
-}
 
-// Ejecutar cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', function() {
-    // Configurar funcionalidad solo si estamos en tipo cabaña
-    if (businessType === 'cabana') {
-        setupCabanaTypeHandling();
-        updateSubmitFormForCabanas();
-    }
-});
+            map.addControl(new mapboxgl.NavigationControl());
+
+            const marker = new mapboxgl.Marker({
+                draggable: true,
+                color: config.color || "#27ae60"
+            })
+                .setLngLat([defaultLng, defaultLat])
+                .addTo(map);
+
+            // Al inicio, setea los inputs ocultos
+            document.getElementById('lng').value = defaultLng;
+            document.getElementById('lat').value = defaultLat;
+
+            function onDragEnd() {
+                const lngLat = marker.getLngLat();
+                document.getElementById('lng').value = lngLat.lng;
+                document.getElementById('lat').value = lngLat.lat;
+            }
+
+            marker.on('dragend', onDragEnd);
+
+            map.on('click', (e) => {
+                marker.setLngLat([e.lngLat.lng, e.lngLat.lat]);
+                document.getElementById('lng').value = e.lngLat.lng;
+                document.getElementById('lat').value = e.lngLat.lat;
+            });
+
+            // Solucionar bug visual de mapbox en contenedores ocultos o resize
+            setTimeout(() => map.resize(), 500);
+
+            // Re-render map when its section becomes visible
+            document.getElementById('btnNext').addEventListener('click', () => {
+                setTimeout(() => map.resize(), 100);
+            });
+            document.getElementById('btnPrevious').addEventListener('click', () => {
+                setTimeout(() => map.resize(), 100);
+            });
+        }
+
+        // 🔧 AGREGAR ESTO AL FINAL DEL JAVASCRIPT EN crear-anuncio.html
+
+        // Funcionalidad para manejar el tipo de alojamiento de cabañas
+        function setupCabanaTypeHandling() {
+            const tipoAlojamiento = document.querySelectorAll('input[name="tipoAlojamiento"]');
+            const capacidadIndividual = document.getElementById('capacidadIndividual');
+            const capacidadConjunto = document.getElementById('capacidadConjunto');
+
+            if (!tipoAlojamiento.length) return; // Solo ejecutar si estamos en cabañas
+
+            tipoAlojamiento.forEach(radio => {
+                radio.addEventListener('change', function () {
+                    if (this.value === 'individual') {
+                        // Mostrar campos para cabaña individual
+                        capacidadIndividual.style.display = 'block';
+                        capacidadConjunto.style.display = 'none';
+
+                        // Hacer campos requeridos
+                        setFieldRequired('huespedes', true);
+                        setFieldRequired('habitaciones', true);
+                        setFieldRequired('totalCabanas', false);
+                        setFieldRequired('cabanasDisponibles', false);
+
+                    } else if (this.value === 'conjunto') {
+                        // Mostrar campos para conjunto de cabañas
+                        capacidadIndividual.style.display = 'none';
+                        capacidadConjunto.style.display = 'block';
+
+                        // Hacer campos requeridos
+                        setFieldRequired('huespedes', false);
+                        setFieldRequired('habitaciones', false);
+                        setFieldRequired('totalCabanas', true);
+                        setFieldRequired('cabanasDisponibles', true);
+
+                        // Auto-completar cabañas disponibles cuando cambie el total
+                        setupAutoCompleteDisponibles();
+                    }
+                });
+            });
+        }
+
+        // Función auxiliar para cambiar campos requeridos
+        function setFieldRequired(fieldName, required) {
+            const field = document.querySelector(`[name="${fieldName}"]`);
+            if (field) {
+                field.required = required;
+                const label = document.querySelector(`label[for="${fieldName}"], label[class*="${fieldName}"]`);
+                if (label) {
+                    const requiredSpan = label.querySelector('.required');
+                    if (required && !requiredSpan) {
+                        label.innerHTML += ' <span class="required">*</span>';
+                    } else if (!required && requiredSpan) {
+                        requiredSpan.remove();
+                    }
+                }
+            }
+        }
+
+        // Auto-completar cabañas disponibles
+        function setupAutoCompleteDisponibles() {
+            const totalCabanasField = document.querySelector('[name="totalCabanas"]');
+            const disponiblesField = document.querySelector('[name="cabanasDisponibles"]');
+
+            if (totalCabanasField && disponiblesField) {
+                totalCabanasField.addEventListener('input', function () {
+                    const total = parseInt(this.value) || 0;
+                    disponiblesField.max = total;
+
+                    // Si no hay valor en disponibles, poner el total
+                    if (!disponiblesField.value && total > 0) {
+                        disponiblesField.value = total;
+                    }
+
+                    // Si el valor actual es mayor al total, ajustarlo
+                    if (parseInt(disponiblesField.value) > total) {
+                        disponiblesField.value = total;
+                    }
+                });
+
+                disponiblesField.addEventListener('input', function () {
+                    const total = parseInt(totalCabanasField.value) || 0;
+                    const disponibles = parseInt(this.value) || 0;
+
+                    if (disponibles > total) {
+                        this.value = total;
+                    }
+                });
+            }
+        }
+
+        // Modificar la función de envío para manejar los nuevos campos
+        function updateSubmitFormForCabanas() {
+            const originalSubmitForm = window.submitForm;
+
+            window.submitForm = async function (event) {
+                event.preventDefault();
+
+                const formData = new FormData(event.target);
+                const data = {};
+
+                // Procesar campos básicos
+                for (let [key, value] of formData.entries()) {
+                    if (key === 'servicios') {
+                        if (!data.servicios) data.servicios = [];
+                        data.servicios.push(value);
+                    } else {
+                        data[key] = value;
+                    }
+                }
+
+                // 🆕 PROCESAMIENTO ESPECIAL PARA CABAÑAS
+                if (businessType === 'cabana') {
+                    const tipoAlojamiento = document.querySelector('input[name="tipoAlojamiento"]:checked')?.value;
+
+                    // Configurar campos según el tipo
+                    data.caracteristicas = {
+                        metrosCuadrados: data.metrosCuadrados ? parseInt(data.metrosCuadrados) : undefined,
+                        tipoPropiedad: data.tipoPropiedad || 'cabana',
+                        esConjunto: tipoAlojamiento === 'conjunto',
+                        amoblada: true
+                    };
+
+                    // Configurar capacidad
+                    if (tipoAlojamiento === 'individual') {
+                        data.capacidad = {
+                            huespedes: parseInt(data.huespedes) || 1,
+                            habitaciones: parseInt(data.habitaciones) || 1,
+                            camas: parseInt(data.camas) || 1
+                        };
+
+                        data.individual = {
+                            disponible: document.getElementById('disponibleIndividual')?.checked || true
+                        };
+
+                        data.conjunto = {
+                            totalCabanas: 1,
+                            cabanasDisponibles: data.individual.disponible ? 1 : 0
+                        };
+
+                    } else if (tipoAlojamiento === 'conjunto') {
+                        data.capacidad = {
+                            huespedes: parseInt(data.huespedesPorCabana) || 4,
+                            habitaciones: parseInt(data.habitacionesPorCabana) || 2,
+                            camas: parseInt(data.habitacionesPorCabana) || 2
+                        };
+
+                        data.conjunto = {
+                            totalCabanas: parseInt(data.totalCabanas) || 2,
+                            cabanasDisponibles: parseInt(data.cabanasDisponibles) || 0
+                        };
+
+                        data.individual = {
+                            disponible: true // No aplica para conjuntos
+                        };
+                    }
+
+                    // Configurar contacto con horario
+                    data.contacto = {
+                        telefono: data.telefono || '',
+                        email: data.email || '',
+                        horario: data.horario || ''
+                    };
+
+                    // Campo ecológico
+                    data.esEcologico = document.getElementById('esEcologicoCabana')?.checked || false;
+
+                    // Limpiar campos que no necesitamos en el payload
+                    delete data.tipoAlojamiento;
+                    delete data.huespedes;
+                    delete data.habitaciones;
+                    delete data.camas;
+                    delete data.totalCabanas;
+                    delete data.cabanasDisponibles;
+                    delete data.huespedesPorCabana;
+                    delete data.habitacionesPorCabana;
+                    delete data.metrosCuadrados;
+                    delete data.tipoPropiedad;
+                    delete data.telefono;
+                    delete data.email;
+                    delete data.horario;
+                    delete data.disponibleIndividual;
+                }
+
+                // Llamar a la función original con los datos procesados
+                try {
+                    showLoading();
+
+                    const response = await fetch(`${baseURL}${config.endpoint}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${authToken}`
+                        },
+                        body: JSON.stringify(data)
+                    });
+
+                    const result = await response.json();
+
+                    if (result.status === 'success') {
+                        showSuccess(`${config.title} creado exitosamente`);
+                        setTimeout(() => {
+                            window.location.href = `mis-anuncios.html?tipo=${businessType}`;
+                        }, 2000);
+                    } else {
+                        showError(result.message || 'Error al crear el anuncio');
+                    }
+
+                } catch (error) {
+                    console.error('Error:', error);
+                    showError('Error de conexión. Intenta nuevamente.');
+                } finally {
+                    hideLoading();
+                }
+            };
+        }
+
+        // Ejecutar cuando el DOM esté listo
+        document.addEventListener('DOMContentLoaded', function () {
+            // Configurar funcionalidad solo si estamos en tipo cabaña
+            if (businessType === 'cabana') {
+                setupCabanaTypeHandling();
+                updateSubmitFormForCabanas();
+            }
+        });
 
     </script>
 </body>
+
 </html>

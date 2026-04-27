@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,20 +12,21 @@
         .form-container {
             background: linear-gradient(135deg, #27ae60, #2ecc71);
         }
-        
+
         .cabana-icon {
             color: #27ae60;
         }
-        
+
         .btn-primary {
             background: linear-gradient(135deg, #27ae60, #2ecc71);
         }
-        
+
         .btn-primary:hover {
             background: linear-gradient(135deg, #2ecc71, #27ae60);
         }
     </style>
 </head>
+
 <body>
     <div class="admin-layout">
         <!-- Sidebar -->
@@ -38,7 +40,7 @@
                     <i class="fas fa-times"></i>
                 </button>
             </div>
-            
+
             <nav class="sidebar-nav">
                 <ul class="nav-list">
                     <li class="nav-item">
@@ -86,7 +88,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="user-info">
                     <div class="user-avatar" id="userAvatar">
                         <span>AD</span>
@@ -135,7 +137,7 @@
                                 <i class="fas fa-info-circle"></i>
                                 Información Básica
                             </h3>
-                            
+
                             <div class="form-row">
                                 <div class="form-group">
                                     <label class="form-label">
@@ -151,7 +153,8 @@
                                     <label class="form-label">
                                         Descripción <span class="required">*</span>
                                     </label>
-                                    <textarea class="form-control" id="descripcion" name="descripcion" rows="4" required></textarea>
+                                    <textarea class="form-control" id="descripcion" name="descripcion" rows="4"
+                                        required></textarea>
                                     <span class="form-hint">Describe tu cabaña y sus características especiales</span>
                                 </div>
                             </div>
@@ -163,9 +166,44 @@
                                     </label>
                                     <div class="input-group">
                                         <span class="input-prefix">$</span>
-                                        <input type="number" class="form-control" id="precio" name="precio" min="0" step="0.01" required>
+                                        <input type="number" class="form-control" id="precio" name="precio" min="0"
+                                            step="0.01" required>
                                     </div>
                                     <span class="form-hint">Precio en pesos mexicanos</span>
+                                </div>
+                            </div>
+
+                            <div class="form-row" style="margin-top: 2rem;">
+                                <div class="form-group full-width">
+                                    <label class="form-label"
+                                        style="font-size: 1.1rem; border-bottom: 2px solid var(--primary-color); padding-bottom: 0.5rem; margin-bottom: 1rem;"><i
+                                            class="fas fa-home"></i> Tipo de Alojamiento</label>
+                                    <div class="radio-group" style="display: flex; gap: 20px;">
+                                        <label class="radio-option"
+                                            style="flex: 1; border: 1px solid #ddd; padding: 15px; border-radius: 8px; cursor: pointer;">
+                                            <input type="radio" name="tipoAlojamiento" value="individual"
+                                                id="tipoIndividual" checked>
+                                            <div class="radio-content" style="margin-top: 10px;">
+                                                <strong>Cabaña Individual</strong>
+                                                <p style="color: #666; font-size: 0.9em; margin-top: 5px;">Una sola
+                                                    cabaña para rentar</p>
+                                            </div>
+                                        </label>
+
+                                        <label class="radio-option"
+                                            style="flex: 1; border: 1px solid #ddd; padding: 15px; border-radius: 8px; cursor: pointer;">
+                                            <input type="radio" name="tipoAlojamiento" value="conjunto"
+                                                id="tipoConjunto">
+                                            <div class="radio-content" style="margin-top: 10px;">
+                                                <strong>Conjunto de Cabañas</strong>
+                                                <p style="color: #666; font-size: 0.9em; margin-top: 5px;">Varias
+                                                    cabañas en el mismo lugar</p>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <span class="form-hint" style="margin-top: 0.5rem; display: block;">Si seleccionas
+                                        Conjunto, podrás agregar detalles y fotos específicos para cada cabaña
+                                        subordinada al final de este formulario.</span>
                                 </div>
                             </div>
                         </div>
@@ -176,21 +214,23 @@
                                 <i class="fas fa-users"></i>
                                 Capacidad y Características
                             </h3>
-                            
+
                             <div class="form-row">
                                 <div class="form-group">
                                     <label class="form-label">
                                         Máximo de Huéspedes <span class="required">*</span>
                                     </label>
-                                    <input type="number" class="form-control" id="huespedes" name="huespedes" min="1" required>
+                                    <input type="number" class="form-control" id="huespedes" name="huespedes" min="1"
+                                        required>
                                     <span class="form-hint">Número máximo de personas</span>
                                 </div>
-                                
+
                                 <div class="form-group">
                                     <label class="form-label">
                                         Número de Habitaciones <span class="required">*</span>
                                     </label>
-                                    <input type="number" class="form-control" id="habitaciones" name="habitaciones" min="1" required>
+                                    <input type="number" class="form-control" id="habitaciones" name="habitaciones"
+                                        min="1" required>
                                     <span class="form-hint">Habitaciones disponibles</span>
                                 </div>
                             </div>
@@ -203,12 +243,13 @@
                                     <input type="number" class="form-control" id="camas" name="camas" min="1">
                                     <span class="form-hint">Total de camas disponibles</span>
                                 </div>
-                                
+
                                 <div class="form-group">
                                     <label class="form-label">
                                         Metros Cuadrados
                                     </label>
-                                    <input type="number" class="form-control" id="metrosCuadrados" name="metrosCuadrados" min="1">
+                                    <input type="number" class="form-control" id="metrosCuadrados"
+                                        name="metrosCuadrados" min="1">
                                     <span class="form-hint">Área total de la cabaña</span>
                                 </div>
                             </div>
@@ -220,7 +261,7 @@
                                 <i class="fas fa-map-marker-alt"></i>
                                 Ubicación
                             </h3>
-                            
+
                             <div class="form-row">
                                 <div class="form-group full-width">
                                     <label class="form-label">
@@ -230,7 +271,7 @@
                                     <span class="form-hint">Dirección exacta de la cabaña</span>
                                 </div>
                             </div>
-                            
+
                             <div class="form-row">
                                 <div class="form-group">
                                     <label class="form-label">
@@ -238,7 +279,7 @@
                                     </label>
                                     <input type="text" class="form-control" id="ciudad" name="ciudad" required>
                                 </div>
-                                
+
                                 <div class="form-group">
                                     <label class="form-label">
                                         Estado <span class="required">*</span>
@@ -246,7 +287,7 @@
                                     <input type="text" class="form-control" id="estado" name="estado" required>
                                 </div>
                             </div>
-                            
+
                             <div class="form-row">
                                 <div class="form-group">
                                     <label class="form-label">
@@ -263,7 +304,7 @@
                                 <i class="fas fa-phone"></i>
                                 Información de Contacto
                             </h3>
-                            
+
                             <div class="form-row">
                                 <div class="form-group">
                                     <label class="form-label">
@@ -272,7 +313,7 @@
                                     <input type="tel" class="form-control" id="telefono" name="telefono" required>
                                     <span class="form-hint">Número de contacto principal</span>
                                 </div>
-                                
+
                                 <div class="form-group">
                                     <label class="form-label">
                                         Email <span class="required">*</span>
@@ -281,7 +322,7 @@
                                     <span class="form-hint">Correo electrónico de contacto</span>
                                 </div>
                             </div>
-                            
+
                             <div class="form-row">
                                 <div class="form-group">
                                     <label class="form-label">
@@ -290,7 +331,7 @@
                                     <input type="url" class="form-control" id="sitioWeb" name="sitioWeb">
                                     <span class="form-hint">URL de tu sitio web (opcional)</span>
                                 </div>
-                                
+
                                 <div class="form-group">
                                     <label class="form-label">
                                         Horario de Atención
@@ -307,7 +348,7 @@
                                 <i class="fas fa-concierge-bell"></i>
                                 Servicios Disponibles
                             </h3>
-                            
+
                             <div class="services-grid">
                                 <div class="service-item" data-service="wifi">
                                     <input type="checkbox" id="wifi" name="servicios" value="wifi">
@@ -316,15 +357,16 @@
                                         <span>WiFi Gratuito</span>
                                     </label>
                                 </div>
-                                
+
                                 <div class="service-item" data-service="estacionamiento">
-                                    <input type="checkbox" id="estacionamiento" name="servicios" value="estacionamiento">
+                                    <input type="checkbox" id="estacionamiento" name="servicios"
+                                        value="estacionamiento">
                                     <label for="estacionamiento">
                                         <i class="fas fa-parking"></i>
                                         <span>Estacionamiento</span>
                                     </label>
                                 </div>
-                                
+
                                 <div class="service-item" data-service="cocina">
                                     <input type="checkbox" id="cocina" name="servicios" value="cocina">
                                     <label for="cocina">
@@ -332,7 +374,7 @@
                                         <span>Cocina Equipada</span>
                                     </label>
                                 </div>
-                                
+
                                 <div class="service-item" data-service="asador">
                                     <input type="checkbox" id="asador" name="servicios" value="asador">
                                     <label for="asador">
@@ -340,7 +382,7 @@
                                         <span>Asador/BBQ</span>
                                     </label>
                                 </div>
-                                
+
                                 <div class="service-item" data-service="jacuzzi">
                                     <input type="checkbox" id="jacuzzi" name="servicios" value="jacuzzi">
                                     <label for="jacuzzi">
@@ -348,7 +390,7 @@
                                         <span>Jacuzzi</span>
                                     </label>
                                 </div>
-                                
+
                                 <div class="service-item" data-service="chimenea">
                                     <input type="checkbox" id="chimenea" name="servicios" value="chimenea">
                                     <label for="chimenea">
@@ -356,7 +398,7 @@
                                         <span>Chimenea</span>
                                     </label>
                                 </div>
-                                
+
                                 <div class="service-item" data-service="jardin">
                                     <input type="checkbox" id="jardin" name="servicios" value="jardin">
                                     <label for="jardin">
@@ -364,7 +406,7 @@
                                         <span>Jardín</span>
                                     </label>
                                 </div>
-                                
+
                                 <div class="service-item" data-service="terraza">
                                     <input type="checkbox" id="terraza" name="servicios" value="terraza">
                                     <label for="terraza">
@@ -375,13 +417,211 @@
                             </div>
                         </div>
 
+                        <!-- Políticas y Horarios -->
+                        <div class="form-section">
+                            <h3 class="section-title">
+                                <i class="fas fa-clock"></i>
+                                Políticas y Horarios
+                            </h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Hora de Check-in</label>
+                                    <input type="time" class="form-control" id="checkIn" name="checkIn" value="15:00">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Hora de Check-out</label>
+                                    <input type="time" class="form-control" id="checkOut" name="checkOut" value="12:00">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Política de Cancelación</label>
+                                    <select class="form-control" id="cancelacion" name="cancelacion">
+                                        <option value="moderada">Moderada — Hasta 5 días antes</option>
+                                        <option value="flexible">Flexible — Hasta 24h antes</option>
+                                        <option value="estricta">Estricta — Sin reembolso</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Horario de Recepción</label>
+                                    <input type="text" class="form-control" id="recepcion" name="recepcion"
+                                        placeholder="Ej: 24 horas, 8:00 - 22:00">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Reglas Adicionales</label>
+                                    <textarea class="form-control" id="reglasAdicionales" name="reglasAdicionales"
+                                        placeholder="Ej: No fumar, No mascotas" style="min-height:80px"></textarea>
+                                    <span class="form-hint">Separa cada regla con una coma</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Instalaciones -->
+                        <div class="form-section">
+                            <h3 class="section-title">
+                                <i class="fas fa-building"></i>
+                                Instalaciones
+                            </h3>
+                            <div class="services-grid">
+                                <div class="service-item" data-instalacion="piscina"><input type="checkbox"
+                                        id="inst_piscina" name="instalaciones" value="piscina"><label
+                                        for="inst_piscina"><i class="fas fa-swimming-pool"></i>
+                                        <span>Piscina</span></label></div>
+                                <div class="service-item" data-instalacion="areas_verdes"><input type="checkbox"
+                                        id="inst_areas_verdes" name="instalaciones" value="areas_verdes"><label
+                                        for="inst_areas_verdes"><i class="fas fa-tree"></i> <span>Áreas
+                                            Verdes</span></label></div>
+                                <div class="service-item" data-instalacion="asadores"><input type="checkbox"
+                                        id="inst_asadores" name="instalaciones" value="asadores"><label
+                                        for="inst_asadores"><i class="fas fa-fire"></i> <span>Asadores /
+                                            BBQ</span></label></div>
+                                <div class="service-item" data-instalacion="gimnasio"><input type="checkbox"
+                                        id="inst_gimnasio" name="instalaciones" value="gimnasio"><label
+                                        for="inst_gimnasio"><i class="fas fa-dumbbell"></i>
+                                        <span>Gimnasio</span></label></div>
+                                <div class="service-item" data-instalacion="sala_estar"><input type="checkbox"
+                                        id="inst_sala_estar" name="instalaciones" value="sala_estar"><label
+                                        for="inst_sala_estar"><i class="fas fa-couch"></i> <span>Sala de
+                                            Estar</span></label></div>
+                                <div class="service-item" data-instalacion="terraza"><input type="checkbox"
+                                        id="inst_terraza" name="instalaciones" value="terraza"><label
+                                        for="inst_terraza"><i class="fas fa-umbrella-beach"></i>
+                                        <span>Terraza</span></label></div>
+                                <div class="service-item" data-instalacion="jardin"><input type="checkbox"
+                                        id="inst_jardin" name="instalaciones" value="jardin"><label for="inst_jardin"><i
+                                            class="fas fa-seedling"></i> <span>Jardín</span></label></div>
+                                <div class="service-item" data-instalacion="area_juegos"><input type="checkbox"
+                                        id="inst_area_juegos" name="instalaciones" value="area_juegos"><label
+                                        for="inst_area_juegos"><i class="fas fa-child"></i> <span>Área de
+                                            Juegos</span></label></div>
+                                <div class="service-item" data-instalacion="fogata"><input type="checkbox"
+                                        id="inst_fogata" name="instalaciones" value="fogata"><label for="inst_fogata"><i
+                                            class="fas fa-fire-alt"></i> <span>Fogata</span></label></div>
+                                <div class="service-item" data-instalacion="mirador"><input type="checkbox"
+                                        id="inst_mirador" name="instalaciones" value="mirador"><label
+                                        for="inst_mirador"><i class="fas fa-binoculars"></i>
+                                        <span>Mirador</span></label></div>
+                            </div>
+                        </div>
+
+                        <!-- Accesibilidad -->
+                        <div class="form-section">
+                            <h3 class="section-title">
+                                <i class="fas fa-wheelchair"></i>
+                                Accesibilidad
+                            </h3>
+                            <div class="services-grid">
+                                <div class="service-item" data-accesibilidad="rampas"><input type="checkbox"
+                                        id="acc_rampas" name="accesibilidad_items" value="rampas"><label
+                                        for="acc_rampas"><i class="fas fa-wheelchair"></i> <span>Rampas de
+                                            acceso</span></label></div>
+                                <div class="service-item" data-accesibilidad="plantaBaja"><input type="checkbox"
+                                        id="acc_plantaBaja" name="accesibilidad_items" value="plantaBaja"><label
+                                        for="acc_plantaBaja"><i class="fas fa-building"></i> <span>Habitaciones en
+                                            planta baja</span></label></div>
+                                <div class="service-item" data-accesibilidad="banoAdaptado"><input type="checkbox"
+                                        id="acc_banoAdaptado" name="accesibilidad_items" value="banoAdaptado"><label
+                                        for="acc_banoAdaptado"><i class="fas fa-restroom"></i> <span>Baño
+                                            adaptado</span></label></div>
+                                <div class="service-item" data-accesibilidad="elevador"><input type="checkbox"
+                                        id="acc_elevador" name="accesibilidad_items" value="elevador"><label
+                                        for="acc_elevador"><i class="fas fa-sort"></i> <span>Elevador</span></label>
+                                </div>
+                                <div class="service-item" data-accesibilidad="senalizacionBraille"><input
+                                        type="checkbox" id="acc_senalizacionBraille" name="accesibilidad_items"
+                                        value="senalizacionBraille"><label for="acc_senalizacionBraille"><i
+                                            class="fas fa-braille"></i> <span>Señalización Braille</span></label></div>
+                            </div>
+                        </div>
+
+                        <!-- Distancias -->
+                        <div class="form-section">
+                            <h3 class="section-title">
+                                <i class="fas fa-route"></i>
+                                Distancias a Puntos Clave
+                            </h3>
+                            <span class="form-hint">Indica la distancia aproximada (ej: 500m, 2 km, 15 min
+                                caminando)</span>
+
+                            <h4 style="margin-top:20px; color:#555;"><i class="fas fa-tree"></i> Naturaleza y Cultura
+                            </h4>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label"><i class="fas fa-landmark"></i> Centro Histórico</label>
+                                    <input type="text" class="form-control" id="dist_centroHistorico"
+                                        name="dist_centroHistorico" placeholder="Ej: 500m">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label"><i class="fas fa-church"></i> Misiones</label>
+                                    <input type="text" class="form-control" id="dist_misiones" name="dist_misiones"
+                                        placeholder="Ej: 1 km">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label"><i class="fas fa-leaf"></i> Atractivo Natural</label>
+                                    <input type="text" class="form-control" id="dist_naturaleza" name="dist_naturaleza"
+                                        placeholder="Ej: 3 km">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label"><i class="fas fa-map-signs"></i> Zona Turística</label>
+                                    <input type="text" class="form-control" id="dist_zonaTuristica"
+                                        name="dist_zonaTuristica" placeholder="Ej: 200m">
+                                </div>
+                            </div>
+
+                            <h4 style="margin-top:20px; color:#555;"><i class="fas fa-car"></i> Transporte (Opcional)
+                            </h4>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label"><i class="fas fa-bus"></i> Terminal de Autobuses</label>
+                                    <input type="text" class="form-control" id="dist_terminalAutobuses"
+                                        name="dist_terminalAutobuses" placeholder="Ej: 2 km">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label"><i class="fas fa-plane"></i> Aeropuerto</label>
+                                    <input type="text" class="form-control" id="dist_aeropuerto" name="dist_aeropuerto"
+                                        placeholder="Ej: 45 km">
+                                </div>
+                            </div>
+
+                            <h4 style="margin-top:20px; color:#555;"><i class="fas fa-map-marker-alt"></i> Puntos de
+                                Interés Adicionales</h4>
+                            <div id="puntosExtraContainer"></div>
+                            <button type="button" id="btnAddPuntoExtra"
+                                style="margin-top: 10px; background: transparent; border: 1px dashed #ccc; padding: 10px; border-radius: 6px; cursor: pointer; color: #555; width: 100%; transition: all 0.3s;"
+                                onmouseover="this.style.background='#f9f9f9'"
+                                onmouseout="this.style.background='transparent'">
+                                <i class="fas fa-plus"></i> Añadir otro punto de interés
+                            </button>
+                        </div>
+
+                        <!-- Detalles de Cabañas Individuales (Sólo si es Conjunto) -->
+                        <div class="form-section" id="seccionDetallesCabanas" style="display: none;">
+                            <h3 class="section-title">
+                                <i class="fas fa-home"></i>
+                                Detalles de Cabañas Individuales
+                            </h3>
+                            <p class="form-hint" style="margin-bottom: 1rem;">Agrega los detalles e imagen de cada
+                                cabaña que forma parte de este conjunto.</p>
+
+                            <div id="subCabanasContainer"></div>
+
+                            <button type="button" id="btnAddSubCabana"
+                                style="margin-top: 10px; background: transparent; border: 1px dashed #ccc; padding: 10px; border-radius: 6px; cursor: pointer; color: #555; width: 100%; transition: all 0.3s;"
+                                onmouseover="this.style.background='#f9f9f9'"
+                                onmouseout="this.style.background='transparent'">
+                                <i class="fas fa-plus"></i> Añadir información de otra cabaña
+                            </button>
+                        </div>
+
                         <!-- Características Ecológicas -->
                         <div class="form-section">
                             <h3 class="section-title">
                                 <i class="fas fa-leaf"></i>
                                 Características Ecológicas
                             </h3>
-                            
+
                             <div class="form-row">
                                 <div class="form-group">
                                     <div class="checkbox-group">
@@ -402,7 +642,7 @@
                                 <i class="fas fa-save"></i>
                                 Actualizar Cabaña
                             </button>
-                            
+
                             <a href="cabanas-admin.html" class="btn btn-secondary">
                                 <i class="fas fa-times"></i>
                                 Cancelar
@@ -419,21 +659,21 @@
 
     <script src="js/auth.js"></script>
     <script>
-    const baseURL = (() => {
-    const hostname = window.location.hostname;
-    
-    console.log('🌐 Hostname detectado:', hostname);
-    
-    if (hostname === 'localhost' || hostname === '127.0.0.1') {
-        console.log('🛠️ Modo desarrollo detectado');
-        return 'http://localhost:5000/api';
-    }
-    
-    console.log('🚀 Modo producción detectado');
-    return `${window.location.protocol}//${window.location.host}/api`;
-})();
+        const baseURL = (() => {
+            const hostname = window.location.hostname;
 
-console.log('✅ BaseURL configurado:', baseURL);
+            console.log('🌐 Hostname detectado:', hostname);
+
+            if (hostname === 'localhost' || hostname === '127.0.0.1') {
+                console.log('🛠️ Modo desarrollo detectado');
+                return 'http://localhost:5000/api';
+            }
+
+            console.log('🚀 Modo producción detectado');
+            return `${window.location.protocol}//${window.location.host}/api`;
+        })();
+
+        console.log('✅ BaseURL configurado:', baseURL);
         const authToken = localStorage.getItem('authToken');
         let cabanaId = null;
 
@@ -454,7 +694,7 @@ console.log('✅ BaseURL configurado:', baseURL);
         const loadingOverlay = document.getElementById('loadingOverlay');
 
         // Event Listeners
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             loadUserData();
             loadUserCabana();
             setupEventListeners();
@@ -482,6 +722,113 @@ console.log('✅ BaseURL configurado:', baseURL);
 
             // Service selection
             setupServiceSelection();
+
+            // Puntos extra button
+            const btnAddPuntoExtra = document.getElementById('btnAddPuntoExtra');
+            if (btnAddPuntoExtra) {
+                btnAddPuntoExtra.addEventListener('click', () => addPuntoExtraDynamic());
+            }
+
+            // Sub Cabañas button
+            // Modificación: Escuchar cambios en los radio buttons de tipo de alojamiento
+            const radiosTipoAlojamiento = document.querySelectorAll('input[name="tipoAlojamiento"]');
+            radiosTipoAlojamiento.forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    const seccionDetalles = document.getElementById('seccionDetallesCabanas');
+                    if (e.target.value === 'conjunto') {
+                        seccionDetalles.style.display = 'block';
+                    } else {
+                        seccionDetalles.style.display = 'none';
+                    }
+                });
+            });
+
+            const btnAddSubCabana = document.getElementById('btnAddSubCabana');
+            if (btnAddSubCabana) {
+                btnAddSubCabana.addEventListener('click', () => addSubCabanaDynamic());
+            }
+        }
+
+        let subCabanaCounter = 0;
+        function addSubCabanaDynamic(data = {}) {
+            const container = document.getElementById('subCabanasContainer');
+            if (!container) return;
+            subCabanaCounter++;
+
+            const div = document.createElement('div');
+            div.className = 'sub-cabana-item';
+            div.style.border = '1px solid #e0e0e0';
+            div.style.padding = '15px';
+            div.style.marginBottom = '15px';
+            div.style.borderRadius = '8px';
+            div.style.background = '#fafafa';
+            div.style.position = 'relative';
+
+            const imgSrc = data.imagen ? data.imagen : '';
+            const imgPreview = imgSrc ? `<img src="${imgSrc}" style="max-height: 100px; border-radius: 8px; margin-top: 10px; display: block;">` : '';
+
+            div.innerHTML = `
+                <button type="button" class="btn-remove-subcabana" style="position: absolute; top: 10px; right: 10px; background: #ff4d4f; color: white; border: none; border-radius: 50%; width: 30px; height: 30px; cursor: pointer;"><i class="fas fa-times"></i></button>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Nombre de Cabaña</label>
+                        <input type="text" class="form-control sub-cabana-nombre" placeholder="Ej: Cabaña del Lago" value="${data.nombre || ''}">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label class="form-label">Descripción</label>
+                        <textarea class="form-control sub-cabana-desc" rows="2" placeholder="Describe esta cabaña">${data.descripcion || ''}</textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Huéspedes</label>
+                        <input type="number" min="1" class="form-control sub-cabana-huespedes" value="${data.capacidad?.huespedes || ''}">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Habitaciones</label>
+                        <input type="number" min="1" class="form-control sub-cabana-hab" value="${data.capacidad?.habitaciones || ''}">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Camas</label>
+                        <input type="number" min="0" class="form-control sub-cabana-camas" value="${data.capacidad?.camas || ''}">
+                    </div>
+                </div>
+                <div class="form-row" style="margin-bottom: 0;">
+                    <div class="form-group">
+                        <label class="form-label">Imagen representativa (Opcional)</label>
+                        <input type="file" class="form-control sub-cabana-file" accept="image/*">
+                        <input type="hidden" class="sub-cabana-imagen-url" value="${imgSrc}">
+                        ${imgPreview}
+                    </div>
+                </div>
+            `;
+
+            div.querySelector('.btn-remove-subcabana').addEventListener('click', () => div.remove());
+            container.appendChild(div);
+        }
+
+        function addPuntoExtraDynamic(nombre = '', distancia = '') {
+            const container = document.getElementById('puntosExtraContainer');
+            if (!container) return;
+            const row = document.createElement('div');
+            row.className = 'form-row';
+            row.innerHTML = `
+                <div class="form-group" style="flex: 1;">
+                    <label class="form-label">Nombre del Lugar</label>
+                    <input type="text" class="form-control punto-extra-nombre" placeholder="Ej: Cueva del Agua" value="${nombre}">
+                </div>
+                <div class="form-group" style="flex: 1;">
+                    <label class="form-label">Distancia</label>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="text" class="form-control punto-extra-dist" placeholder="Ej: 15 min caminando" value="${distancia}">
+                        <button type="button" class="btn-remove-punto" style="background:#ff4d4f; color:white; border:none; border-radius:4px; padding:0 15px; cursor:pointer;"><i class="fas fa-trash"></i></button>
+                    </div>
+                </div>
+            `;
+            row.querySelector('.btn-remove-punto').addEventListener('click', () => row.remove());
+            container.appendChild(row);
         }
 
         function setupServiceSelection() {
@@ -504,12 +851,12 @@ console.log('✅ BaseURL configurado:', baseURL);
         async function loadUserData() {
             try {
                 const userData = JSON.parse(localStorage.getItem('userData') || '{}');
-                
+
                 if (userData.nombre) {
                     document.getElementById('userName').textContent = userData.nombre;
-                    document.getElementById('userRole').textContent = 
+                    document.getElementById('userRole').textContent =
                         userData.role === 'admin' ? 'Administrador' : 'Usuario';
-                    
+
                     const initials = userData.nombre.split(' ')
                         .map(n => n[0]).join('').substring(0, 2).toUpperCase();
                     document.getElementById('userAvatar').innerHTML = `<span>${initials}</span>`;
@@ -522,15 +869,15 @@ console.log('✅ BaseURL configurado:', baseURL);
         async function loadUserCabana() {
             try {
                 showLoading();
-                
+
                 const response = await fetch(`${baseURL}/cabanas/mis-cabanas`, {
                     headers: {
                         'Authorization': `Bearer ${authToken}`
                     }
                 });
-                
+
                 const data = await response.json();
-                
+
                 if (data.status === 'success' && data.data.cabanas.length > 0) {
                     const cabana = data.data.cabanas[0];
                     cabanaId = cabana._id;
@@ -556,9 +903,9 @@ console.log('✅ BaseURL configurado:', baseURL);
                         'Authorization': `Bearer ${authToken}`
                     }
                 });
-                
+
                 const data = await response.json();
-                
+
                 if (data.status === 'success') {
                     const cabana = data.data.cabana;
                     populateForm(cabana);
@@ -576,19 +923,30 @@ console.log('✅ BaseURL configurado:', baseURL);
             document.getElementById('nombre').value = cabana.nombre || '';
             document.getElementById('descripcion').value = cabana.descripcion || '';
             document.getElementById('precio').value = cabana.precio || '';
-            
+
             // Capacidad
             if (cabana.capacidad) {
                 document.getElementById('huespedes').value = cabana.capacidad.huespedes || cabana.capacidad.personasMax || '';
                 document.getElementById('habitaciones').value = cabana.capacidad.habitaciones || '';
                 document.getElementById('camas').value = cabana.capacidad.camas || '';
             }
-            
+
             // Características específicas de cabañas
             if (cabana.caracteristicas) {
                 document.getElementById('metrosCuadrados').value = cabana.caracteristicas.metrosCuadrados || '';
+
+                // Tipo de alojamiento (Individual o Conjunto)
+                const isConjunto = cabana.caracteristicas.esConjunto;
+                const tipoIndividual = document.getElementById('tipoIndividual');
+                const tipoConjunto = document.getElementById('tipoConjunto');
+
+                if (isConjunto && tipoConjunto) {
+                    tipoConjunto.checked = true;
+                } else if (tipoIndividual) {
+                    tipoIndividual.checked = true;
+                }
             }
-            
+
             // Ubicación
             if (cabana.ubicacion) {
                 document.getElementById('direccion').value = cabana.ubicacion.direccion || '';
@@ -596,7 +954,7 @@ console.log('✅ BaseURL configurado:', baseURL);
                 document.getElementById('estado').value = cabana.ubicacion.estado || '';
                 document.getElementById('codigoPostal').value = cabana.ubicacion.codigoPostal || '';
             }
-            
+
             // Contacto
             if (cabana.contacto) {
                 document.getElementById('telefono').value = cabana.contacto.telefono || '';
@@ -604,47 +962,156 @@ console.log('✅ BaseURL configurado:', baseURL);
                 document.getElementById('sitioWeb').value = cabana.contacto.sitioWeb || '';
                 document.getElementById('horario').value = cabana.contacto.horario || '';
             }
-            
+
             // Servicios
             if (cabana.servicios && Array.isArray(cabana.servicios)) {
                 cabana.servicios.forEach(servicio => {
                     const checkbox = document.getElementById(servicio);
                     const serviceItem = document.querySelector(`[data-service="${servicio}"]`);
-                    
+
                     if (checkbox && serviceItem) {
                         checkbox.checked = true;
                         serviceItem.classList.add('selected');
                     }
                 });
             }
-            
+
+            // Políticas y Horarios
+            if (cabana.politicas) {
+                if (cabana.politicas.checkIn) document.getElementById('checkIn').value = cabana.politicas.checkIn;
+                if (cabana.politicas.checkOut) document.getElementById('checkOut').value = cabana.politicas.checkOut;
+                if (cabana.politicas.cancelacion) document.getElementById('cancelacion').value = cabana.politicas.cancelacion;
+                if (cabana.politicas.recepcion) document.getElementById('recepcion').value = cabana.politicas.recepcion;
+                if (cabana.politicas.reglasAdicionales && cabana.politicas.reglasAdicionales.length > 0) {
+                    document.getElementById('reglasAdicionales').value = cabana.politicas.reglasAdicionales.join(', ');
+                }
+            }
+
+            // Instalaciones
+            if (cabana.instalaciones && cabana.instalaciones.length > 0) {
+                cabana.instalaciones.forEach(inst => {
+                    const cb = document.getElementById('inst_' + inst);
+                    const item = document.querySelector(`[data-instalacion="${inst}"]`);
+                    if (cb && item) { cb.checked = true; item.classList.add('selected'); }
+                });
+            }
+
+            // Accesibilidad
+            if (cabana.accesibilidad) {
+                ['rampas', 'plantaBaja', 'banoAdaptado', 'elevador', 'senalizacionBraille'].forEach(key => {
+                    if (cabana.accesibilidad[key]) {
+                        const cb = document.getElementById('acc_' + key);
+                        const item = document.querySelector(`[data-accesibilidad="${key}"]`);
+                        if (cb && item) { cb.checked = true; item.classList.add('selected'); }
+                    }
+                });
+            }
+
+            // Distancias
+            if (cabana.distancias) {
+                if (cabana.distancias.centroHistorico) document.getElementById('dist_centroHistorico').value = cabana.distancias.centroHistorico;
+                if (cabana.distancias.terminalAutobuses) document.getElementById('dist_terminalAutobuses').value = cabana.distancias.terminalAutobuses;
+                if (cabana.distancias.aeropuerto) document.getElementById('dist_aeropuerto').value = cabana.distancias.aeropuerto;
+                if (cabana.distancias.zonaTuristica) document.getElementById('dist_zonaTuristica').value = cabana.distancias.zonaTuristica;
+
+                if (cabana.distancias.misiones) document.getElementById('dist_misiones').value = cabana.distancias.misiones;
+                if (cabana.distancias.naturaleza) document.getElementById('dist_naturaleza').value = cabana.distancias.naturaleza;
+
+                const container = document.getElementById('puntosExtraContainer');
+                if (container) {
+                    container.innerHTML = '';
+                    if (cabana.distancias.puntosExtra && cabana.distancias.puntosExtra.length > 0) {
+                        cabana.distancias.puntosExtra.forEach(punto => addPuntoExtraDynamic(punto.nombre, punto.distancia));
+                    }
+                }
+            }
+
             // Características ecológicas
             if (cabana.esEcologico) {
                 document.getElementById('esEcologico').checked = true;
+            }
+
+            // Sub Cabañas (Conjunto)
+            if (cabana.caracteristicas?.esConjunto) {
+                const seccionDetalles = document.getElementById('seccionDetallesCabanas');
+                if (seccionDetalles) seccionDetalles.style.display = 'block';
+                const container = document.getElementById('subCabanasContainer');
+                if (container) {
+                    container.innerHTML = '';
+                    if (cabana.detallesCabanas && cabana.detallesCabanas.length > 0) {
+                        cabana.detallesCabanas.forEach(detalle => addSubCabanaDynamic(detalle));
+                    } else {
+                        // Iniciar con un formulario vacío si no hay detalles existentes
+                        addSubCabanaDynamic();
+                    }
+                }
             }
         }
 
         async function handleFormSubmit(e) {
             e.preventDefault();
-            
+
             try {
                 showLoading();
-                
+
                 const formData = new FormData(updateForm);
-                
+
                 // Recopilar servicios seleccionados
                 const servicios = [];
                 document.querySelectorAll('input[name="servicios"]:checked').forEach(checkbox => {
                     servicios.push(checkbox.value);
                 });
-                
+
+                // 🆕 Upload imágenes de sub-cabañas y procesar detallesCabanas
+                const detallesCabanas = [];
+                const subCabanaItems = document.querySelectorAll('.sub-cabana-item');
+
+                for (const item of subCabanaItems) {
+                    const nombre = item.querySelector('.sub-cabana-nombre').value;
+                    const descripcion = item.querySelector('.sub-cabana-desc').value;
+                    const huespedes = parseInt(item.querySelector('.sub-cabana-huespedes').value) || 1;
+                    const habitaciones = parseInt(item.querySelector('.sub-cabana-hab').value) || 1;
+                    const camas = parseInt(item.querySelector('.sub-cabana-camas').value) || 0;
+
+                    let imagenUrl = item.querySelector('.sub-cabana-imagen-url').value;
+                    const fileInput = item.querySelector('.sub-cabana-file');
+
+                    if (fileInput && fileInput.files.length > 0) {
+                        try {
+                            const imgFormData = new FormData();
+                            imgFormData.append('images', fileInput.files[0]);
+
+                            const uploadRes = await fetch(`${baseURL}/cabanas/${cabanaId}/images/upload`, {
+                                method: 'POST',
+                                headers: { 'Authorization': `Bearer ${authToken}` },
+                                body: imgFormData
+                            });
+                            const uploadData = await uploadRes.json();
+                            if (uploadData.status === 'success' && uploadData.data.nuevasImagenes.length > 0) {
+                                imagenUrl = uploadData.data.nuevasImagenes[0];
+                            }
+                        } catch (err) {
+                            console.error('Error subiendo imagen de sub-cabaña:', err);
+                        }
+                    }
+
+                    if (nombre || descripcion) {
+                        detallesCabanas.push({
+                            nombre,
+                            descripcion,
+                            capacidad: { huespedes, habitaciones, camas },
+                            imagen: imagenUrl
+                        });
+                    }
+                }
+
                 // Preparar datos para envío
                 const updateData = {
                     // Información básica
                     nombre: formData.get('nombre'),
                     descripcion: formData.get('descripcion'),
                     precio: parseFloat(formData.get('precio')),
-                    
+
                     // Capacidad
                     capacidad: {
                         huespedes: parseInt(formData.get('huespedes')),
@@ -652,12 +1119,16 @@ console.log('✅ BaseURL configurado:', baseURL);
                         habitaciones: parseInt(formData.get('habitaciones')),
                         camas: parseInt(formData.get('camas') || 0)
                     },
-                    
+
                     // Características específicas de cabañas
                     caracteristicas: {
-                        metrosCuadrados: parseInt(formData.get('metrosCuadrados') || 0)
+                        metrosCuadrados: parseInt(formData.get('metrosCuadrados') || 0),
+                        esConjunto: document.querySelector('input[name="tipoAlojamiento"]:checked')?.value === 'conjunto'
                     },
-                    
+
+                    // 🆕 Detalles individuales (Conjuntos)
+                    detallesCabanas: detallesCabanas.length > 0 ? detallesCabanas : undefined,
+
                     // Ubicación
                     ubicacion: {
                         direccion: formData.get('direccion'),
@@ -665,7 +1136,7 @@ console.log('✅ BaseURL configurado:', baseURL);
                         estado: formData.get('estado'),
                         codigoPostal: formData.get('codigoPostal')
                     },
-                    
+
                     // Contacto
                     contacto: {
                         telefono: formData.get('telefono'),
@@ -673,16 +1144,51 @@ console.log('✅ BaseURL configurado:', baseURL);
                         sitioWeb: formData.get('sitioWeb'),
                         horario: formData.get('horario')
                     },
-                    
+
                     // Servicios
                     servicios: servicios,
-                    
+
                     // Ecológico
-                    esEcologico: formData.get('esEcologico') === 'true'
+                    esEcologico: formData.get('esEcologico') === 'true',
+
+                    // Políticas y Horarios
+                    politicas: {
+                        checkIn: formData.get('checkIn') || '15:00',
+                        checkOut: formData.get('checkOut') || '12:00',
+                        cancelacion: formData.get('cancelacion') || 'moderada',
+                        recepcion: formData.get('recepcion') || '',
+                        reglasAdicionales: (formData.get('reglasAdicionales') || '').split(',').map(r => r.trim()).filter(r => r)
+                    },
+
+                    // Instalaciones
+                    instalaciones: Array.from(document.querySelectorAll('input[name="instalaciones"]:checked')).map(cb => cb.value),
+
+                    // Accesibilidad
+                    accesibilidad: {
+                        rampas: document.getElementById('acc_rampas')?.checked || false,
+                        plantaBaja: document.getElementById('acc_plantaBaja')?.checked || false,
+                        banoAdaptado: document.getElementById('acc_banoAdaptado')?.checked || false,
+                        elevador: document.getElementById('acc_elevador')?.checked || false,
+                        senalizacionBraille: document.getElementById('acc_senalizacionBraille')?.checked || false
+                    },
+
+                    // Distancias
+                    distancias: {
+                        centroHistorico: formData.get('dist_centroHistorico') || '',
+                        terminalAutobuses: formData.get('dist_terminalAutobuses') || '',
+                        aeropuerto: formData.get('dist_aeropuerto') || '',
+                        zonaTuristica: formData.get('dist_zonaTuristica') || '',
+                        misiones: formData.get('dist_misiones') || '',
+                        naturaleza: formData.get('dist_naturaleza') || '',
+                        puntosExtra: Array.from(document.querySelectorAll('#puntosExtraContainer .form-row')).map(row => ({
+                            nombre: row.querySelector('.punto-extra-nombre').value,
+                            distancia: row.querySelector('.punto-extra-dist').value
+                        })).filter(p => p.nombre || p.distancia)
+                    }
                 };
-                
+
                 console.log('Datos a enviar:', updateData);
-                
+
                 // Enviar actualización
                 const response = await fetch(`${baseURL}/cabanas/editar/${cabanaId}`, {
                     method: 'PATCH',
@@ -692,12 +1198,12 @@ console.log('✅ BaseURL configurado:', baseURL);
                     },
                     body: JSON.stringify(updateData)
                 });
-                
+
                 const data = await response.json();
-                
+
                 if (data.status === 'success') {
                     showSuccess('¡Cabaña actualizada exitosamente!');
-                    
+
                     // Actualizar datos en localStorage si es necesario
                     setTimeout(() => {
                         window.location.href = 'cabanas-admin.html';
@@ -705,7 +1211,7 @@ console.log('✅ BaseURL configurado:', baseURL);
                 } else {
                     throw new Error(data.message || 'Error al actualizar la cabaña');
                 }
-                
+
             } catch (error) {
                 console.error('Error:', error);
                 showError(error.message || 'Error al actualizar la cabaña');
@@ -727,7 +1233,7 @@ console.log('✅ BaseURL configurado:', baseURL);
             const successText = document.getElementById('successText');
             successText.textContent = message;
             successMessage.style.display = 'flex';
-            
+
             setTimeout(() => {
                 successMessage.style.display = 'none';
             }, 5000);
@@ -737,11 +1243,12 @@ console.log('✅ BaseURL configurado:', baseURL);
             const errorText = document.getElementById('errorText');
             errorText.textContent = message;
             errorMessage.style.display = 'flex';
-            
+
             setTimeout(() => {
                 errorMessage.style.display = 'none';
             }, 5000);
         }
     </script>
 </body>
+
 </html>
