@@ -123,9 +123,25 @@ function renderPage(tipo) {
     const rating = d.calificacion?.promedio || 0;
     const reviews = d.calificacion?.totalReviews || d.calificacion?.numeroReviews || 0;
 
-    let metaHTML = `<span><i class="fas fa-map-marker-alt"></i> ${ciudad}</span>`;
-    if (tel) metaHTML += `<span><i class="fas fa-phone"></i> ${tel}</span>`;
+    let metaHTML = `<span style="font-weight: 600; display: inline-flex; align-items: center; gap: 6px;"><i class="fas fa-map-marker-alt" style="color: #666;"></i> ${ciudad}</span>`;
+    if (tel) metaHTML += `<span style="font-weight: 600; display: inline-flex; align-items: center; gap: 6px;"><i class="fas fa-phone-alt" style="color: #666;"></i> ${tel}</span>`;
     if (rating > 0) metaHTML += `<span class="rating-stars">${'★'.repeat(Math.round(rating))}${'☆'.repeat(5 - Math.round(rating))} <span class="count">${rating.toFixed(1)} (${reviews})</span></span>`;
+    
+    // Social / Contact Buttons in Header
+    let socialHTML = `<div style="display: flex; gap: 8px; margin-left: 10px;">`;
+    if (d.reservaciones?.whatsapp || (d.contacto?.whatsapp)) {
+        const waNumber = (d.reservaciones?.whatsapp || d.contacto?.whatsapp).replace(/\D/g, '');
+        socialHTML += `<a href="https://wa.me/${waNumber}" target="_blank" style="width: 32px; height: 32px; border-radius: 50%; background: #25D366; color: white; display: flex; align-items: center; justify-content: center; text-decoration: none;"><i class="fab fa-whatsapp"></i></a>`;
+    }
+    if (d.contacto?.redesSociales?.facebook) {
+        socialHTML += `<a href="${d.contacto.redesSociales.facebook}" target="_blank" style="width: 32px; height: 32px; border-radius: 50%; background: #1877F2; color: white; display: flex; align-items: center; justify-content: center; text-decoration: none;"><i class="fab fa-facebook-f"></i></a>`;
+    }
+    if (d.contacto?.sitioWeb) {
+        socialHTML += `<a href="${d.contacto.sitioWeb}" target="_blank" style="width: 32px; height: 32px; border-radius: 50%; background: #e5e7eb; color: #4b5563; display: flex; align-items: center; justify-content: center; text-decoration: none;"><i class="fas fa-link"></i></a>`;
+    }
+    socialHTML += `</div>`;
+    
+    metaHTML += socialHTML;
     meta.innerHTML = metaHTML;
 
     // About
@@ -540,7 +556,7 @@ function renderPage(tipo) {
     }
 
     // Contact
-    const contactHTML = document.getElementById('contactContainer');
+    const contactHTML = document.getElementById('topContactContainer');
     let cHTML = '';
     if (d.contacto?.telefono) cHTML += `<a href="tel:${d.contacto.telefono}" class="contact-btn phone"><i class="fas fa-phone"></i><div><div class="contact-type">Teléfono</div><div class="contact-value">${d.contacto.telefono}</div></div></a>`;
     if (d.contacto?.email) cHTML += `<a href="mailto:${d.contacto.email}" class="contact-btn email"><i class="fas fa-envelope"></i><div><div class="contact-type">Email</div><div class="contact-value">${d.contacto.email}</div></div></a>`;

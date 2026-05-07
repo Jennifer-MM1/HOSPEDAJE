@@ -924,50 +924,112 @@
             z-index: 2;
         }
 
-        .gastronomy-section {
-            text-align: center;
-            color: white;
+                .services-slider {
+            position: relative;
+            min-height: 400px; 
+            width: 100%;
         }
 
-        .gastronomy-title {
+        .service-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            transform: translateY(20px) scale(0.98);
+        }
+
+        .service-slide.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+            z-index: 2;
+        }
+
+        .services-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            position: relative;
+            z-index: 3;
+        }
+
+        .service-btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            background: transparent;
+            cursor: pointer;
+            transition: var(--transition);
+            padding: 0;
+        }
+
+        .service-btn.active {
+            background: white;
+            border-color: white;
+            transform: scale(1.2);
+            box-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+
+        .gastronomy-title, .lodging-title {
             font-family: var(--font-display);
             font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 600;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.3);
+            color: white;
         }
 
-        .gastronomy-description {
+        .gastronomy-description, .lodging-description {
             font-size: 1.25rem;
-            margin-bottom: 3rem;
+            margin-bottom: 2.5rem;
             opacity: 0.95;
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
             line-height: 1.7;
+            color: white;
         }
 
-        .gastronomy-button {
-            background: var(--restaurant);
-            color: white;
-            padding: 1.25rem 3rem;
+        .gastronomy-button, .lodging-button {
+            padding: 1.25rem 2.5rem;
             border: none;
             border-radius: var(--radius-full);
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 600;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
             gap: 1rem;
             transition: var(--transition);
-            box-shadow: 0 10px 30px rgba(245, 158, 11, 0.3);
             text-transform: uppercase;
             letter-spacing: 1px;
             position: relative;
             overflow: hidden;
+            color: white;
+            margin-top: auto;
         }
 
-        .gastronomy-button::before {
+        .gastronomy-button {
+            background: var(--restaurant);
+            box-shadow: 0 10px 30px rgba(245, 158, 11, 0.3);
+        }
+
+        .lodging-button {
+            background: var(--cafe);
+            box-shadow: 0 10px 30px rgba(6, 182, 212, 0.3);
+        }
+
+        .gastronomy-button::before, .lodging-button::before {
             content: '';
             position: absolute;
             top: 0;
@@ -978,7 +1040,7 @@
             transition: left 0.5s;
         }
 
-        .gastronomy-button:hover::before {
+        .gastronomy-button:hover::before, .lodging-button:hover::before {
             left: 100%;
         }
 
@@ -986,6 +1048,12 @@
             transform: translateY(-3px);
             box-shadow: 0 15px 40px rgba(245, 158, 11, 0.4);
             background: #e69500;
+        }
+
+        .lodging-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(6, 182, 212, 0.4);
+            background: #059bb5;
         }
 
         /* ===== MAP SECTION ===== */
@@ -1682,7 +1750,7 @@
 
             <div class="bento-grid" data-aos="fade-up" data-aos-delay="200">
                 <div class="bento-item bento-large" onclick="window.location.href='rincones-locales.html#corazon'">
-                    <img src="/img_jalpan/6 Plazoleta.jpg" alt="Plazoleta" loading="lazy">
+                    <img src="/img_jalpan/6_Plazoleta_opt.jpg" alt="Plazoleta" loading="lazy">
                     <div class="bento-overlay">
                         <h3>El Corazón Decorado</h3>
                         <p>Nuestra plazoleta llena de color y tradición</p>
@@ -1984,19 +2052,40 @@
         }
     </style>
 
-    <!-- Sección Gastronomía -->
-    <section class="stats">
+        <!-- Sección Servicios y Destacados (Gastronomía y Hospedaje) -->
+    <section class="stats" id="services-section">
         <div class="stats-container">
-            <div class="gastronomy-section">
-                <h2 class="gastronomy-title">Gastronomía de Jalpan</h2>
-                <p class="gastronomy-description">
-                    Descubre los sabores auténticos de la Sierra Gorda. Desde platillos tradicionales
-                    hasta propuestas gastronómicas innovadoras que honran nuestras raíces culinarias.
-                </p>
-                <a href="https://restaurante-web-production-721f.up.railway.app/" class="gastronomy-button">
-                    <i class="fas fa-utensils"></i>
-                    Explorar Restaurantes
-                </a>
+            <div class="services-slider">
+                <!-- Slide Gastronomía -->
+                <div class="service-slide active">
+                    <h2 class="gastronomy-title">Gastronomía de Jalpan</h2>
+                    <p class="gastronomy-description">
+                        Descubre los sabores auténticos de la Sierra Gorda. Desde platillos tradicionales
+                        hasta propuestas gastronómicas innovadoras que honran nuestras raíces culinarias.
+                    </p>
+                    <a href="https://restaurante-web-production-721f.up.railway.app/" class="gastronomy-button">
+                        <i class="fas fa-utensils"></i>
+                        Explorar Restaurantes
+                    </a>
+                </div>
+                
+                <!-- Slide Hospedaje -->
+                <div class="service-slide">
+                    <h2 class="lodging-title">Hospedaje en Jalpan</h2>
+                    <p class="lodging-description">
+                        Encuentra el lugar perfecto para descansar. Desde acogedoras cabañas rodeadas de naturaleza
+                        hasta cómodos hoteles en el centro de nuestro Pueblo Mágico.
+                    </p>
+                    <a href="hospedaje.html" class="lodging-button">
+                        <i class="fas fa-bed"></i>
+                        Explorar Hospedaje
+                    </a>
+                </div>
+            </div>
+            
+            <div class="services-controls">
+                <button class="service-btn active" onclick="goToServiceSlide(0)" aria-label="Ver Gastronomía"></button>
+                <button class="service-btn" onclick="goToServiceSlide(1)" aria-label="Ver Hospedaje"></button>
             </div>
         </div>
     </section>
@@ -2371,6 +2460,44 @@
                 easing: 'ease-out-cubic' // Easing curve
             });
         });
+    </script>
+
+    <script>
+        // Slider de Servicios (Gastronomía/Hospedaje)
+        let currentServiceSlide = 0;
+        const serviceSlides = document.querySelectorAll('.service-slide');
+        const serviceBtns = document.querySelectorAll('.service-btn');
+        let serviceInterval;
+
+        function goToServiceSlide(index) {
+            serviceSlides.forEach((slide, i) => {
+                if (i === index) {
+                    slide.classList.add('active');
+                    serviceBtns[i].classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                    serviceBtns[i].classList.remove('active');
+                }
+            });
+            currentServiceSlide = index;
+            resetServiceInterval();
+        }
+
+        function nextServiceSlide() {
+            currentServiceSlide = (currentServiceSlide + 1) % serviceSlides.length;
+            goToServiceSlide(currentServiceSlide);
+        }
+
+        function resetServiceInterval() {
+            clearInterval(serviceInterval);
+            if (serviceSlides.length > 1) {
+                serviceInterval = setInterval(nextServiceSlide, 6000);
+            }
+        }
+
+        if (serviceSlides.length > 0) {
+            resetServiceInterval();
+        }
     </script>
 </body>
 

@@ -1531,3 +1531,10 @@ body {
   line-height: 1.3;
   text-shadow: 0 1px 6px rgba(0, 0, 0, .4);
 }
+ @ m e d i a   ( m a x - w i d t h :   7 6 8 p x )   { 
+         . t o p - c a r d s - g r i d   { 
+                 g r i d - t e m p l a t e - c o l u m n s :   1 f r   ! i m p o r t a n t ; 
+         } 
+ } 
+  
+ 

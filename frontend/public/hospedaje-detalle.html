@@ -78,50 +78,63 @@
     <!-- Main Content -->
     <div id="mainContent" style="display:none">
 
-        <!-- Hero Section -->
-        <section class="hero-section" data-aos="fade-in" data-aos-duration="1200">
-            <div class="hero-gallery">
-                <img id="heroImage" class="hero-image" src="" alt="Imagen principal">
-                <div class="hero-overlay"></div>
-                <button class="hero-nav-btn hero-prev" onclick="changeSlide(-1)"><i
-                        class="fas fa-chevron-left"></i></button>
-                <button class="hero-nav-btn hero-next" onclick="changeSlide(1)"><i
-                        class="fas fa-chevron-right"></i></button>
-                <div class="hero-counter" id="heroCounter"></div>
-                <div class="hero-thumbnails" id="heroThumbnails"></div>
-            </div>
-
-            <!-- Info Card Overlay -->
-            <div class="info-card-overlay">
-                <div class="tipo-badge" id="tipoBadge"></div>
-                <div class="hospedaje-name-row">
-                    <h1 id="hospedajeName"></h1>
-                    <div class="con-like" id="favBtnContainer" style="display:none" title="Agregar a favoritos">
-                        <input class="like" type="checkbox" id="favCheckbox" title="like">
-                        <div class="checkmark">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="outline" viewBox="0 0 24 24">
-                                <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z"></path>
-                            </svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="filled" viewBox="0 0 24 24">
-                                <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z"></path>
-                            </svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" class="celebrate">
-                                <polygon class="poly" points="10,10 20,20"></polygon>
-                                <polygon class="poly" points="10,50 20,50"></polygon>
-                                <polygon class="poly" points="20,80 30,70"></polygon>
-                                <polygon class="poly" points="90,10 80,20"></polygon>
-                                <polygon class="poly" points="90,50 80,50"></polygon>
-                                <polygon class="poly" points="80,80 70,70"></polygon>
-                            </svg>
-                        </div>
+        <!-- Header Info Layout -->
+        <div class="header-info-section" data-aos="fade-down" style="max-width: 1200px; margin: 90px auto 20px; padding: 0 2rem;">
+            <div class="tipo-badge" id="tipoBadge" style="margin-bottom: 10px;"></div>
+            <div class="hospedaje-name-row" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px;">
+                <h1 id="hospedajeName" style="font-size: 2.2rem; font-weight: 800; color: #1a1a2e; margin: 0;"></h1>
+                <div class="con-like" id="favBtnContainer" style="display:none" title="Agregar a favoritos">
+                    <input class="like" type="checkbox" id="favCheckbox" title="like">
+                    <div class="checkmark">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="outline" viewBox="0 0 24 24">
+                            <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z"></path>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="filled" viewBox="0 0 24 24">
+                            <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z"></path>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" class="celebrate">
+                            <polygon class="poly" points="10,10 20,20"></polygon>
+                            <polygon class="poly" points="10,50 20,50"></polygon>
+                            <polygon class="poly" points="20,80 30,70"></polygon>
+                            <polygon class="poly" points="90,10 80,20"></polygon>
+                            <polygon class="poly" points="90,50 80,50"></polygon>
+                            <polygon class="poly" points="80,80 70,70"></polygon>
+                        </svg>
                     </div>
                 </div>
-                <div class="info-meta" id="infoMeta"></div>
+            </div>
+            <div class="info-meta" id="infoMeta" style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap; font-size: 0.95rem; color: #555;">
+            </div>
+        </div>
+
+        <!-- Gallery Section -->
+        <section class="gallery-section" data-aos="fade-in" data-aos-duration="1200" style="max-width: 1200px; margin: 0 auto 30px; padding: 0 2rem;">
+            <div class="hero-gallery" style="border-radius: 16px; overflow: hidden; position: relative; height: 500px; box-shadow: 0 8px 25px rgba(0,0,0,0.1);">
+                <img id="heroImage" class="hero-image" src="" alt="Imagen principal" style="width: 100%; height: 100%; object-fit: cover;">
+                <div class="hero-overlay" style="background: linear-gradient(to top, rgba(0,0,0,0.5), transparent); position: absolute; inset: 0; pointer-events: none;"></div>
+                <button class="hero-nav-btn hero-prev" onclick="changeSlide(-1)"><i class="fas fa-chevron-left"></i></button>
+                <button class="hero-nav-btn hero-next" onclick="changeSlide(1)"><i class="fas fa-chevron-right"></i></button>
+                <div class="hero-counter" id="heroCounter" style="position: absolute; bottom: 20px; left: 20px; background: rgba(0,0,0,0.6); color: white; padding: 5px 12px; border-radius: 15px; font-size: 0.9rem;"></div>
+                <div class="hero-thumbnails" id="heroThumbnails" style="position: absolute; bottom: 20px; right: 20px; display: flex; gap: 10px;"></div>
             </div>
         </section>
 
+        <!-- Two-column Header Grid for About and Contact -->
+        <div class="top-cards-grid" data-aos="fade-up" style="max-width: 1200px; margin: 0 auto 30px; padding: 0 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+            <!-- About Card -->
+            <div class="detail-section" style="margin-bottom: 0;">
+                <h3 class="section-title"><i class="fas fa-info-circle" style="color: #3b82f6;"></i> Sobre el establecimiento</h3>
+                <p class="about-text" id="aboutText"></p>
+            </div>
+            <!-- Contact Card -->
+            <div class="detail-section" style="margin-bottom: 0;">
+                <h3 class="section-title"><i class="fas fa-id-card-alt" style="color: #3b82f6;"></i> Contacto</h3>
+                <div id="topContactContainer"></div>
+            </div>
+        </div>
+
         <!-- Back Bar -->
-        <div class="back-bar">
+        <div class="back-bar" style="margin-top: 0; padding-top: 0;">
             <a id="backBtn" href="hoteles.html" class="back-btn"><i class="fas fa-arrow-left"></i> Volver al listado</a>
         </div>
 
@@ -129,11 +142,7 @@
         <div class="detail-container">
             <!-- Main Column -->
             <div class="main-column">
-                <!-- About -->
-                <div class="detail-section" data-aos="fade-up">
-                    <h3 class="section-title"><i class="fas fa-info-circle"></i> Sobre el establecimiento</h3>
-                    <p class="about-text" id="aboutText"></p>
-                </div>
+                <!-- Removed About since it was moved above -->
 
                 <!-- Check-in / Check-out -->
                 <div class="detail-section" data-aos="fade-up" data-aos-delay="100">
@@ -292,11 +301,7 @@
                     <div class="reservations-content" id="reservationsContainer"></div>
                 </div>
 
-                <!-- Contact -->
-                <div class="sidebar-card">
-                    <h3 class="section-title"><i class="fas fa-phone-alt"></i> Contacto</h3>
-                    <div id="contactContainer"></div>
-                </div>
+                <!-- Removed Contact since it was moved above -->
 
                 <!-- Promociones (Nuevo) -->
                 <div class="sidebar-card promotions-card" id="promotionsSection" style="display:none; padding: 0; overflow: hidden; position: relative; border: 1px solid #eee; border-radius: 12px; margin-bottom: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); background-color: #fff;">

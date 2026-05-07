@@ -681,13 +681,100 @@
         }
 
         @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
 
-            100% {
-                transform: rotate(360deg);
-            }
+        /* Skeleton Loading State */
+        .skeleton-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding: 0 0.5rem;
+        }
+
+        .skeleton-header h2 {
+            font-size: 1.8rem;
+            color: #111827;
+            font-weight: 700;
+        }
+
+        .skeleton-header span {
+            color: #6b7280;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .skeleton-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f3f4f6;
+        }
+
+        .skeleton-img {
+            height: 250px;
+            background: linear-gradient(90deg, #f0f0f0 25%, #f8f8f8 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: skeleton-loading 1.5s infinite linear;
+        }
+
+        .skeleton-content {
+            padding: 1.5rem;
+        }
+
+        .skeleton-line {
+            height: 12px;
+            background: linear-gradient(90deg, #f0f0f0 25%, #f8f8f8 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: skeleton-loading 1.5s infinite linear;
+            border-radius: 6px;
+            margin-bottom: 0.8rem;
+        }
+
+        .skeleton-line.title {
+            height: 20px;
+            width: 50%;
+            margin-bottom: 1.5rem;
+        }
+
+        .skeleton-line.desc {
+            width: 100%;
+        }
+
+        .skeleton-line.desc.short {
+            width: 80%;
+            margin-bottom: 1.5rem;
+        }
+
+        .skeleton-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .skeleton-line.footer-line {
+            width: 40%;
+            height: 20px;
+            margin-bottom: 0;
+        }
+
+        .skeleton-btn {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(90deg, #f0f0f0 25%, #f8f8f8 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: skeleton-loading 1.5s infinite linear;
+            border-radius: 50%;
+        }
+
+        @keyframes skeleton-loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
         }
 
         .empty-state {
@@ -1845,10 +1932,91 @@
         </div>
 
         <!-- Loading State -->
-        <div class="loading" id="loadingState">
-            <i class="fas fa-spinner"></i>
-            <h3>Cargando alojamientos...</h3>
-            <p>Por favor espera mientras obtenemos la información</p>
+        <div id="loadingState" style="width: 100%; padding: 2rem 0;">
+            <div class="skeleton-header">
+                <h2>Establecimientos Disponibles</h2>
+                <span>Cargando...</span>
+            </div>
+            <div class="cabanas-grid">
+                <!-- Skeleton Card 1 -->
+                <div class="skeleton-card">
+                    <div class="skeleton-img"></div>
+                    <div class="skeleton-content">
+                        <div class="skeleton-line title"></div>
+                        <div class="skeleton-line desc"></div>
+                        <div class="skeleton-line desc short"></div>
+                        <div class="skeleton-footer">
+                            <div class="skeleton-line footer-line"></div>
+                            <div class="skeleton-btn"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Skeleton Card 2 -->
+                <div class="skeleton-card">
+                    <div class="skeleton-img"></div>
+                    <div class="skeleton-content">
+                        <div class="skeleton-line title"></div>
+                        <div class="skeleton-line desc"></div>
+                        <div class="skeleton-line desc short"></div>
+                        <div class="skeleton-footer">
+                            <div class="skeleton-line footer-line"></div>
+                            <div class="skeleton-btn"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Skeleton Card 3 -->
+                <div class="skeleton-card">
+                    <div class="skeleton-img"></div>
+                    <div class="skeleton-content">
+                        <div class="skeleton-line title"></div>
+                        <div class="skeleton-line desc"></div>
+                        <div class="skeleton-line desc short"></div>
+                        <div class="skeleton-footer">
+                            <div class="skeleton-line footer-line"></div>
+                            <div class="skeleton-btn"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Skeleton Card 4 -->
+                <div class="skeleton-card">
+                    <div class="skeleton-img"></div>
+                    <div class="skeleton-content">
+                        <div class="skeleton-line title"></div>
+                        <div class="skeleton-line desc"></div>
+                        <div class="skeleton-line desc short"></div>
+                        <div class="skeleton-footer">
+                            <div class="skeleton-line footer-line"></div>
+                            <div class="skeleton-btn"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Skeleton Card 5 -->
+                <div class="skeleton-card">
+                    <div class="skeleton-img"></div>
+                    <div class="skeleton-content">
+                        <div class="skeleton-line title"></div>
+                        <div class="skeleton-line desc"></div>
+                        <div class="skeleton-line desc short"></div>
+                        <div class="skeleton-footer">
+                            <div class="skeleton-line footer-line"></div>
+                            <div class="skeleton-btn"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Skeleton Card 6 -->
+                <div class="skeleton-card">
+                    <div class="skeleton-img"></div>
+                    <div class="skeleton-content">
+                        <div class="skeleton-line title"></div>
+                        <div class="skeleton-line desc"></div>
+                        <div class="skeleton-line desc short"></div>
+                        <div class="skeleton-footer">
+                            <div class="skeleton-line footer-line"></div>
+                            <div class="skeleton-btn"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Cabins Grid -->

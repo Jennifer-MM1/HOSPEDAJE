@@ -1482,6 +1482,32 @@
             padding: 0 2rem;
         }
 
+        .back-btn-container {
+            text-align: left;
+            margin-bottom: 1.5rem;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--gray-600);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-md);
+            background: white;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .back-btn:hover {
+            color: var(--primary);
+            background: var(--gray-50);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
         .gallery-title {
             font-family: var(--font-display);
             font-size: clamp(2.5rem, 4vw, 3.5rem);
@@ -1638,6 +1664,11 @@
     </header>
     <div class="gallery-page">
         <div class="gallery-header" data-aos="fade-up">
+            <div class="back-btn-container">
+                <a href="index.html" class="back-btn">
+                    <i class="fas fa-arrow-left"></i> Regresar
+                </a>
+            </div>
             <h1 class="gallery-title">Rincones Locales</h1>
             <p class="gallery-subtitle">Explora la belleza y autenticidad visual de cada rincón de nuestro Pueblo Mágico.</p>
         </div>
@@ -1647,7 +1678,7 @@
             <h2 class="gallery-section-title">El Corazón Decorado</h2>
             <div class="masonry-grid">
                 <div class="masonry-item masonry-large">
-                    <img src="/img_jalpan/6 Plazoleta.jpg" alt="Plazoleta principal" loading="lazy">
+                    <img src="/img_jalpan/6_Plazoleta_opt.jpg" alt="Plazoleta principal" loading="lazy">
                 </div>
                 <div class="masonry-item">
                     <img src="/img_jalpan/jalpan_1.jpg" alt="Misión desde la plaza" loading="lazy">
